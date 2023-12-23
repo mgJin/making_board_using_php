@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>회원가입</title>
+</head>
+<body>
+    
+    <?php
+        //필수인 것들 비었을 때의 메시지
+        $NameMsg = $IDMsg = $PWMsg = $EmailMsg = "" ;
+        $dbconnect = true;
+        //비어있는지와 제대로 입력되었는지 유효성검사(id, 이름, pw, email 은 필수)(gender와 birth는 선택)
+        //더 제대로 된 검증이 필요한듯?
+        
+        if($_SERVER["REQUEST_METHOD"] == "POST"){
+            if(empty($_POST["id"])){
+                $IDMsg = "ID를 입력해주세요";
+                $dbconnect = false;
+            }else{
+                $id = $_POST["id"];
+            }
+
+            if(empty($_POST["name"])){
+                $NameMsg = "이름을 입력해주세요";
+                $dbconnect = false;
+            }else{
+                $name = $_POST["name"];
+            }
+
+            if(empty($_POST["password"])){
+                $PWMsg = "패스워드를 입력해주세요";
+                $dbconnect = false;
+            }else{
+                $password = $_POST["password"];
+            }
+            
+            if(empty($_POST["email"])){
+                $EmailMsg = "이메일을 입력해주세요";
+                $dbconnect = false;
+            }else{
+                $email = $_POST["email"];
+                var_dump($email);
+                if(!filter_var($email, FILTER_VALIDATE_EMAIL)){
+                    $EmailMsg = "이메일을 정확하게 입력해 주세요";
+                }
+            }
+            
+            if(empty($_POST["gender"])){
+                $gender = null;
+            }else{
+                $gender = $_POST["gender"];
+            };
+            if(empty($_POST["birth"])){
+                $birth = null;
+            }else{
+                $birth = $_POST["birth"];
+            };
+            
+            //입력한 값들이 문제가 없다면 dbconnect = true;
+            //db랑 연결 시작(insert)
+            if($dbconnect = true){
+                $servername = "localhost";
+                $dbname = "phpboard";
+                $user = "test1";
+                $password = "1111";
+
+                try{
+                    $connect = new PDO("mysql:host=$servername;dbname=$dbname",$user,$password);
+                    $connect -> setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
+                    echo "서버 연결 성공"."<br>";
+                }catch(PDOException $exc){
+                    echo "서버 연결 실패 이유 :".$exc->getMessage();
+                }
+                
+                try{
+                    $connect -> beginTransaction();
+                    $connect ->exec("INSERT INTO member(id,name,password,gender,birth,email) Values('$id','$name','$password','$gender','$birth','$email')");
+                    $connect ->commit();
+                    echo "성공";
+                }catch(PDOException $ex){
+                    echo "실패 ". $ex->getMessage();
+                }
+                    }
+                    
+                }
+    ?>
+    <?php 
+        var_dump($_REQUEST)."<br>";
+    ?>
+    <form action = "<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method = "post">
+        ID : <input type = "text" name="id">
+        <?php echo $IDMsg;?>
+        이름 : <input type = "text" name = "name">
+        <?php echo $NameMsg;?>
+        PW : <input type = "password" name= "password">
+        <?php echo $PWMsg;?>
+        Gender : <input type= "radio" name= "gender" value="male">남자
+                 <input type= "radio" name= "gender" value="female">여자
+        birth : <input type = "date" name= "birth">
+        <br>
+        email : <input type = "text" name="email">
+        <?php echo $EmailMsg;?>
+        <input type="submit">
+    </form>
+
+    
+</body>
+</html>
