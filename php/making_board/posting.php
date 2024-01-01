@@ -30,7 +30,7 @@
                     $sql = 
                     "INSERT INTO board
                         set title = '$title',
-                            text = '$tertxt',
+                            text = '$text',
                             created = '$date',
                             writer = '1'
                     ";
