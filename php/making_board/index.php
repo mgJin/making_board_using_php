@@ -30,12 +30,16 @@
         $dbname = "phpboard";
         try{
             $connect = mysqli_connect($servername,$dbuser,$password,$dbname);
-            $sql = 
+            $viewsql = 
                 "SELECT id,title 
                     FROM (SELECT @ROWN:=@ROWN+1 AS rown,id,title 
                             FROM board,(SELECT @ROWN:=0) TEMP) ROWBOARD 
                     WHERE rown>='$MIN' AND rown<='$MAX'";
-            $results = $connect->query($sql);
+            //전체 개수 조회 (검색추가 하려면 여기서 IF 로 분기태우자)
+            $countsql = 
+                "SELECT COUNT(id) FROM BOARD";
+            $results = $connect->query($viewsql);
+            $count_results = $connect->query($countsql);
             // var_dump($results->fetch_all(MYSQLI_ASSOC));
         }catch(mysqli_sql_exception $ex){
             echo "디비실패".$ex->getMessage();
@@ -46,14 +50,26 @@
     <?php
     //반복문으로 a 태그 여러개  띄우기(done)
     //a태그 부분 좀 더 깔끔하게 안될까?
+    //세로로 배열필요
     foreach($results as $result){
         $baseurl = "http://localhost:3000/view_board.php";
         $url = $baseurl ."?id=".$result["id"];
     ?>
     <a href=<?php echo $url ?>><?php echo $result["title"] ?></a>
     <?php } ?>
+    <!-- 이제 페이지 넘기는 것을 만들 차례-->
+    <!-- get으로 page를 넘기면 된다-->
+    
     <a href = <?php echo htmlspecialchars($_SERVER["PHP_SELF"])."?page=1";?>>2</a>
-    <?php ?>
+    <?php 
+    //최대 5까지만 뜨게 하고 > 로 이동가능하게
+        $count = $count_results->fetch_row();
+        echo "현재 전체 개수는 : ".$count[0];
+        if($count>=5){
+
+        }
+    ?>
+    
 
 </body>
 </html>
