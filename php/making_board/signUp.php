@@ -6,7 +6,7 @@
     <title>회원가입</title>
 </head>
 <body>
-    
+    <!--유저 생성 권한만 있는 슈퍼유저가 필요할 듯? -->
     <?php
         //필수인 것들 비었을 때의 메시지
         $NameMsg = $IDMsg = $PWMsg = $EmailMsg = "" ;
@@ -85,18 +85,18 @@
                     if(!empty($birth)){
                     $connect ->exec(
                         "INSERT INTO member
-                            set id='$id',
+                            set user_id = '$id',
+                                user_pw = '$password',
                                 name = '$name',
-                                password = '$password',
                                 gender = '$gender',
                                 birth = '$birth',
                                 email = '$email'");
                     }else{
                     $connect ->exec(
                         "INSERT INTO member
-                            set id='$id',
+                            set user_id = '$id',
+                                user_pw = '$password',
                                 name = '$name',
-                                password = '$password',
                                 gender = '$gender',
                                 birth = NULL,
                                 email = '$email'");
@@ -119,6 +119,7 @@
     <?php 
         var_dump($_REQUEST)."<br>";
     ?>
+    <!--gender 의 datatype :  enum('male','female') -->
     <form action = "<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method = "post">
         ID : <input type = "text" name="id">
         <?php echo $IDMsg;?>
@@ -126,8 +127,8 @@
         <?php echo $NameMsg;?>
         PW : <input type = "password" name= "password">
         <?php echo $PWMsg;?>
-        Gender : <input type= "radio" name= "gender" value="male">남자
-                 <input type= "radio" name= "gender" value="female">여자
+        Gender : <input type= "radio" name= "gender" value="1">남자
+                 <input type= "radio" name= "gender" value="2">여자
         birth : <input type = "date" name= "birth">
         <br>
         email : <input type = "text" name="email">
