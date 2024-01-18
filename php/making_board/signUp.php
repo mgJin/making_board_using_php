@@ -102,6 +102,7 @@
                                 email = '$email'");
                     }
                     $connect ->commit();
+                    //권한 부여
                     $connect ->exec("CREATE USER '$id'@'localhost' IDENTIFIED BY '$password'");
                     $connect ->exec("GRANT ALL PRIVILEGES ON phpboard.board To '$id'@'localhost'");
                     $connect ->exec("GRANT UPDATE,DELETE ON phpboard.member TO '$id'@'localhost'");

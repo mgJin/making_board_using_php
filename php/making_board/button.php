@@ -10,8 +10,7 @@
 <body>
     <?php
         session_start();
-        print_r($_POST);
-        echo $_SESSION["userPK"];
+        var_dump($_SESSION["userPK"]);
     ?>
     <button onclick="location.href='add_member.php'">회원가입</button>
 </body>

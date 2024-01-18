@@ -13,28 +13,11 @@
         $userID = $_POST["userid"];
         $userPW = $_POST["userpw"];
      //DB 연결시작
-        $servername = "localhost";
-        $dbname = "phpboard";
-        $user = "test1";
-        $password = "1111";
-        try{
-            $connect = new PDO("mysql:host=$servername;dbname=$dbname",$user,$password);
-            $connect->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
-        }catch(PDOException $ex){
-            echo "DB연결실패".$ex->getMessage();
-        }
+        require_once('dbconnect_root.php');
+            //로그인 성공 시 connect 도 userid 로 된 것을 만들어서 전역변수처럼?
+            //원래 실험하고 싶었던 것은 여기서 connect를 만들고 다른 곳에서 전역변수처럼 사용할 수 있나?
 
-        //exists 로 받아서 있으면 1, 없으면 0으로 결과나옴
-        //근데 이런 방식으로 하면 pk 넘겨 받을 때 한번더 질의 해야하니깐 그냥 바로 pk 받아서 없으면 로그인 안되는 식으로
-        // $sql = "SELECT EXISTS(SELECT * FROM member Where user_id = '$userID' and user_pw = '$userPW')as exist";
-        // try{
-        //     $stmt = $connect->query($sql);
-        //     $result = $stmt->fetch(PDO::FETCH_ASSOC);
-        // }catch(PDOException $ex){
-        //     echo "결과전송실패".$ex->getMessage();
-        // }
-
-        $sql = "SELECT user_pk FROM member WHERE user_id = '$userID' and user_pw = '$userPW'";
+        $sql = "SELECT user_pk,user_id,user_pw FROM member WHERE user_id = '$userID' and user_pw = '$userPW'";
         try{
             $stmt = $connect->query($sql);
             $result = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -44,8 +27,9 @@
         }
         if(isset($result["user_pk"])){
             session_start();
-            $_SESSION['userPK'] = $result["user_pk"]; //사용자의 pk session에 묶어서 넘김
-            header("Location: http://localhost:3000/button.php");
+            $_SESSION["is_login"] = True;
+            $_SESSION["user"] = $result; //사용자의 정보 session에 묶어서 넘김
+            header("Location: http://localhost:3000/view_all_board.php");
         }else{
            echo "<script>alert('ID와 PW를 다시 확인해 주세요')</script>";
         

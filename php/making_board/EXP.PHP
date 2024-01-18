@@ -6,11 +6,14 @@
     <title>Document</title>
 </head>
 <body>
-    <?php 
-        $jump = "1";
+    <?php         
+        session_start();
+        require_once('dbconnect_user.php');
+        $connect = dbconnect($_SESSION['user']);
+        $sql = "SELECT * FROM board";
+        $result = $connect->query($sql);
+        var_dump($result->fetch_all(MYSQLI_ASSOC));
     ?>
-    <?php 
-        echo $jump+1;
-    ?>
+   
 </body>
 </html>
