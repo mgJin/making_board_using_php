@@ -12,16 +12,17 @@
     <?php
     //페이지가 2까지밖에 없는데 3으로 넘어오면(url에 적어서) 최대페이지로 넘어가게 하면 된다.   
     //dbuser 가 현재 사용중인 client의 id로 
-
+    session_start();
+    include_once('log_inout_button.php');
     $currentpage = 1; //현재 페이지와 맨 처음 들어왔을 때 보여지는 페이지
-    $DIVIDENUM = 3; //한 번에 몇 개의 게시글이 보여지는 가
+    $DIVIDENUM = 1; //한 번에 몇 개의 게시글이 보여지는 가
     if (isset($_GET["page"])) {
         $currentpage = $_GET["page"];
     }
    
     //db 연결
     $servername = "localhost";
-    $dbuser = "root"; //client user 로 바꿀 필요있음
+    $dbuser = "root"; //공용 유저로 바꿀 필요있음
     $password = "9094";
     $dbname = "phpboard";
     //전체 게시판 개수 조회
@@ -78,7 +79,7 @@
     <!-- 이제 페이지 넘기기-->
     <?php
     
-    $BARRANGE = 5; //한 번에 보여줄 BARNUMBER의 개수
+    $BARRANGE = 2; //한 번에 보여줄 BARNUMBER의 개수
     
     if(!($MAXBOARD%$DIVIDENUM===0)){
         $MAXNUM+=1;
@@ -92,7 +93,7 @@
     $SHARE = (int)($CALNUM / $BARRANGE);
     //barnum 보여주는 반복문
     for ($i = 0; $i < $BARRANGE; $i++) {
-        $barnum = 5 * $SHARE + $i + 1;
+        $barnum = $BARRANGE * $SHARE + $i + 1;
         if ($MAXNUM < $barnum) {
             echo "최대값을 넘어가려함";
             break;
@@ -109,6 +110,8 @@
     <a href= <?php echo htmlspecialchars($_SERVER["PHP_SELF"])."?page=".$nextpage;?>>></a>
     <a href= <?php echo htmlspecialchars($_SERVER["PHP_SELF"])."?page=".$MAXNUM?>>>></a>
     <!-- 상수들 합치기 -->
+    <button onclick="location.href='posting.php'">글쓰기</button>
+    
 </body>
 
 </html>

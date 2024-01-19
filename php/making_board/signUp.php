@@ -7,6 +7,7 @@
 </head>
 <body>
     <!--유저 생성 권한만 있는 슈퍼유저가 필요할 듯? -->
+    <!--유저 생성 시 id가 unique 인 동시에 not null 이어야할듯-->
     <?php
         //필수인 것들 비었을 때의 메시지
         $NameMsg = $IDMsg = $PWMsg = $EmailMsg = "" ;

@@ -7,9 +7,17 @@
 </head>
     
 <body>
-    <?php 
+    <!--user_id 를 유니크로 만들고 글을 작성 시 writer 에 user_id를 넣는 식으로 -->
+    <!--로그인을 안하고 들어왔다면 로그인으로 가게하기 -->
+    <?php
+        session_start();
+        if(!(isset($_SESSION["is_loggedin"]) && $_SESSION["is_loggedin"])){
+            echo "<script>alert('로그인을 해주세요');
+            location.href='login.php'</script>";
+        }
+
         $titleMsg = "";
-        
+        //입력검증
         if($_SERVER["REQUEST_METHOD"]=="POST"){
             $dbconnect= true;
             if(!$_POST["title"]){
@@ -20,9 +28,10 @@
             }
             $text = $_POST["text"];
             if($dbconnect){
+                $writer = $_SESSION["user"]["user_id"];
                 $date = date("Y-m-d");
                 $servername = "localhost";
-                $dbuser = "root";//client user 로 바꿀 필요있음
+                $dbuser = "root";//퍼블릭 유저로 바꾸기
                 $password = "9094";
                 $dbname = "phpboard";
                 try{
@@ -32,11 +41,12 @@
                         set title = '$title',
                             text = '$text',
                             created = '$date',
-                            writer = '1'
+                            writer = '$writer'
                     ";
                     $stmt = mysqli_prepare($connect,$sql);
                     $exec = mysqli_stmt_execute($stmt);
-                    echo "디비성공";
+                    echo "<script>alert('글쓰기성공');
+                    location.href='view_all_board.php'</script>";
                 }catch(mysqli_sql_exception $ex){
                     echo "디비실패이유: ".$ex->getMessage();
                 }catch(Exception $ex){
@@ -54,7 +64,7 @@
         제목 : <input type = "text" name = "title">
         <?php echo $titleMsg;?>
         내용 : <input type = "text" name = "text">
-        글쓰기 : <input type = "submit">
+        <input type = "submit" value="글쓰기">
     </form>
 </body>
 </html>
