@@ -70,7 +70,7 @@
     //a태그 부분 좀 더 깔끔하게 안될까?
     //세로로 배열필요
     foreach ($results as $result) {
-        $baseurl = "http://localhost:3000/view_board.php";
+        $baseurl = "http://localhost:3000/index.php";
         $url = $baseurl . "?id=" . $result["id"];
     ?>
         <a href=<?php echo $url ?>><?php echo $result["title"] ?></a>

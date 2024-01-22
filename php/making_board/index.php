@@ -7,6 +7,11 @@
 </head>
 <body>
     <!--권한 제한된 유저를 만들어서 그놈이 보는걸로 -->
+    <?php
+        if($_SERVER["REQUEST_METHOD"]=="post"){
+            echo "1234";
+        }
+    ?>
     <?php 
         session_start();
         
@@ -18,5 +23,15 @@
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
         
     ?>
+    <div>
+        <h2>제목 : <?php echo $result["title"] ?></h2>
+        <span>작성자 : <?php echo $result["writer"]?></span>
+        <br>
+        <span><?php echo $result["text"]?></span>
+    </div>
+    <div>
+        <button>수정</button>
+        <button value="123">삭제</button>
+    </div>
 </body>
 </html>
