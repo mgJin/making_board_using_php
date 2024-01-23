@@ -14,17 +14,19 @@
         
         $sql = "SELECT title,text,writer FROM board WHERE id = $board_id";
         $stmt = $connect->query($sql);
-        $result = $stmt->fetch(PDO::FETCH_ASSOC);
-        
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);    
     ?>
     <?php 
         if(array_key_exists("update",$_POST)){
+
             $beh = "update";
             echo chkbutton($beh,$_POST["$beh"]);
         }else if(array_key_exists("delete",$_POST)){
             $beh = "delete";
             echo chkbutton($beh,$_POST["$beh"]);
         }
+
+        
         function chkbutton(string $beh,string $hangul){
     
             $ev = "var chk= confirm('$hangul 하시겠습니까?');

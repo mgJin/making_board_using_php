@@ -1,7 +1,7 @@
 const button_upd = document.querySelector("#upd");
 const button_del = document.querySelector("#del");
 const btn = document.querySelectorAll(".btn");
-
+//js 로 컨펌만 하고 다시 php 로 보낸다. 그 후 php 에서 해당 유저가 권한이 있는지 확인 후 진행 
 for(let i=0; i<btn.length;i++){
     btn[i].addEventListener("click",crd);
 
