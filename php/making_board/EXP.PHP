@@ -4,31 +4,37 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=, initial-scale=1.0">
     <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
 </head>
 <body>
-    <?php 
-        if(array_key_exists("update",$_POST)){
-            $beh = "update";
-            echo chkbutton($beh,$_POST["$beh"]);
-        }else if(array_key_exists("delete",$_POST)){
-            $beh = "delete";
-            echo chkbutton($beh,$_POST["$beh"]);
-        }
-        function chkbutton(string $beh,string $hangul){
-    
-            $ev = "var chk= confirm('$hangul 하시겠습니까?');
-                   if(chk){
-                    var php = '$beh'+'_board.php';
-                    location = php;}"
-                    ;
-            return "<script>$ev</script>";
-        }
-    ?>
-    <form method="post">
-        <input type="submit" name = "update" value = "수정">
-        <input type="submit" name = "delete" value = "삭제">
+    <!--모달창을 만들자 -->
+    <form id="btn_form">
+        <button class="crdbtn" id="updbtn">수정</button>
+        <button class="crdbtn" id="delbtn">삭제</button>
     </form>
-    
-    <!-- <script src="/js/check.js"></script> -->
+    <script>
+        locrep(msg,function(result){
+                if(result){
+                    window.location.replace("http://www.naver.com");
+                }
+        })
+        $(".crdbtn").on("click",function(event){
+            const beh = event.target.innerText;
+            
+            // let chk = confirm(beh+"하시겠습니까?",function(result){
+            //     if(result){
+            //         window.location.replace("http://www.naver.com");
+            //     }else{
+            //         window.location.replace("http://www.google.com");
+            //     }
+            // });
+            var locrep = function(beh,callback){
+                confirm(beh,function(result){
+                    locrep(result);
+                })
+            }
+        })
+    </script>
+
 </body>
 </html>
