@@ -7,20 +7,28 @@
 </head>
 <body>
     <?php 
-        // if(array_key_exists('button1',$_POST)){
-        //     echo "<script src='/js/check.js'></script>";
-        // }
-        // function exefunction(){
-        //     echo "this is good";
-        //     var_dump($_POST);
-
-        // }
-    ?>
-    <div>
-        <button class="btn" id="upd" value="update">수정</button>
-        <button class="btn" id="del" value="delete">삭제</button>
-    </div>
+        if(array_key_exists("update",$_POST)){
+            $beh = "update";
+            echo chkbutton($beh,$_POST["$beh"]);
+        }else if(array_key_exists("delete",$_POST)){
+            $beh = "delete";
+            echo chkbutton($beh,$_POST["$beh"]);
+        }
+        function chkbutton(string $beh,string $hangul){
     
-    <script src="/js/check.js"></script>
+            $ev = "var chk= confirm('$hangul 하시겠습니까?');
+                   if(chk){
+                    var php = '$beh'+'_board.php';
+                    location = php;}"
+                    ;
+            return "<script>$ev</script>";
+        }
+    ?>
+    <form method="post">
+        <input type="submit" name = "update" value = "수정">
+        <input type="submit" name = "delete" value = "삭제">
+    </form>
+    
+    <!-- <script src="/js/check.js"></script> -->
 </body>
 </html>

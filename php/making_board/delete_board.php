@@ -7,7 +7,7 @@
     <title>Document</title>
 </head>
 <body>
-    
+    <h1>여기는 삭제페이지</h1>
     
 </body>
 </html>
