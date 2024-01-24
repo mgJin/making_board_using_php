@@ -8,6 +8,6 @@
 </head>
 <body>
     <h1>여기는 삭제페이지</h1>
-    
+    <?php var_dump($_POST)?>
 </body>
 </html>

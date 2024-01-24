@@ -5,36 +5,61 @@
     <meta name="viewport" content="width=, initial-scale=1.0">
     <title>Document</title>
     <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+    <style>
+        #modal-overlay{
+            width:100%;
+            height:100%;
+            position:absolute;
+            left:0;
+            top:0;
+            display:none;
+            flex-direction:column;
+            align-items:center;
+            justify-content:center;
+            background:rgba(255,255,255,0.25);
+            backdrop-filter:blur(1.5px)
+        }
+        #modal-window{
+            top:50%;
+            left:50%;
+            width:150px;
+            height:100px;
+            padding:20px;
+            border:1px solid #eee;
+            background-color:rgba(230,230,230,0.7);
+            text-align:center
+        }
+        #chkp{
+            font-size:12px;
+        }
+        .title{
+            padding-left: 10px;
+            display: inline;
+            text-shadow: 1px 1px 2px gray;
+            color: white;
+        }
+        .title h3{
+            display:inline;
+        }
+        .close{
+            display:inline;
+            float: right;
+            padding-right: 1px;
+            cursor: pointer;
+            text-shadow: 1px 1px 2px gray;
+            color: white;
+        }
+        .modal-content{
+            margin-top: 20px;
+            padding: 0px 10px;
+        }
+        
+    </style>
 </head>
 <body>
-    <!--모달창을 만들자 -->
-    <form id="btn_form">
-        <button class="crdbtn" id="updbtn">수정</button>
-        <button class="crdbtn" id="delbtn">삭제</button>
-    </form>
-    <script>
-        locrep(msg,function(result){
-                if(result){
-                    window.location.replace("http://www.naver.com");
-                }
-        })
-        $(".crdbtn").on("click",function(event){
-            const beh = event.target.innerText;
-            
-            // let chk = confirm(beh+"하시겠습니까?",function(result){
-            //     if(result){
-            //         window.location.replace("http://www.naver.com");
-            //     }else{
-            //         window.location.replace("http://www.google.com");
-            //     }
-            // });
-            var locrep = function(beh,callback){
-                confirm(beh,function(result){
-                    locrep(result);
-                })
-            }
-        })
-    </script>
-
+    <?php 
+        $a = "best of best";
+    ?>
+    <button class="dd" value=<?php $a?>></button>
 </body>
 </html>
