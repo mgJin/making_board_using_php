@@ -1,13 +1,14 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<?php 
+    require_once('dbconnect_root.php');
     
-    <title>Document</title>
-</head>
-<body>
-    <h1>여기는 삭제페이지</h1>
-    <?php var_dump($_POST)?>
-</body>
-</html>
+    $board_id = $_POST["id"];
+    $sql = "DELETE FROM board WHERE id = '$board_id'";
+    try{
+        $stmt = $connect->prepare($sql);
+        $stmt->execute();
+        $count = $stmt->rowCount();
+    }catch(PDOException $ex){
+        echo $ex->getMessage();
+    }
+    echo $count;
+?>

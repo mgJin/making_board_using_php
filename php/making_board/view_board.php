@@ -95,6 +95,7 @@
         </div>
     </div>
     <script>
+        //수정을 누르면 수정 페이지가 나오고 거기서 폼 입력받은걸로 해야함
          $(".crdbtn").on("click",function(event){
             $("#chkp")[0].innerText = event.target.innerText + "하시겠습니까?";
             $("#modal-overlay").css({"display":"flex"});
@@ -103,18 +104,40 @@
             e.preventDefault();
             if(bool){
                 let action = chkbeh(e.data.action);
-                let fullURL = action + "_board.php";
-                $.ajax({
-                    type: "POST",
-                    url : fullURL,
-                    data : {id:e.data.id},
-                    success : function(result){
-                        console.log(result);
-                    },
-                    error : function(request,status,error){
-                        console.log(error);
-                    }
-                });
+                console.log(action);
+                if(action==="delete"){
+                    let fullURL = action + "_board.php";
+                    $.ajax({
+                        type: "POST",
+                        url : fullURL,
+                        data : {id:e.data.id},
+                        success : function(result){
+                            let url = "http://localhost:3000/view_all_board.php";
+                            if(result==="1"){
+                                alert(e.data.action+'되었습니다');
+                            }else if(result==="0"){
+                                alert('없는 게시물입니다');
+                            }else{
+                                alert(e.data.action+'실패');
+                            } 
+                            window.location.replace(url);
+                        },
+                        error : function(request,status,error){
+                            console.log(error);
+                        }
+                    });
+                }else if(action==="update"){
+                    let url = "http://localhost:3000/update_form.php";
+                    var id_hidden = $("<input>")
+                                        .attr("type","hidden")
+                                        .attr("name","id")
+                                        .val(e.data.id);
+                    $("#btn-form").append($(id_hidden));
+                    $("#btn-form").attr("method","post");
+                    $("#btn-form").attr("action",url);
+                    $("#btn-form").submit();
+                    // window.location.replace(url);
+                }
             }else{
                 $("#modal-overlay").css({"display":"none"});
             }
