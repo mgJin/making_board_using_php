@@ -51,9 +51,9 @@
             $("#chkp")[0].innerText = event.target.innerText + "하시겠습니까?";
             $("#modal-overlay").css({"display":"flex"});
             $(".chkbtn").on("click",{action:event.target.innerText,id:event.target.value},function(e){ 
-            let bool = chkbool(e.target.value);
+            let chk = chkbool(e.target.value);
             e.preventDefault();
-            if(bool){
+            if(chk){
                 let action = chkbeh(e.data.action);
                 console.log(action);
                 if(action==="delete"){
