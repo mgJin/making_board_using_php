@@ -8,7 +8,7 @@
         <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
     </head>
 <body>
-    <?php include_once '../making_board/front/html/index.html'; ?>
+    <?php include_once '../making_board/front/html/modal.html'; ?>
     <?php
         $titleMsg = "";
         $board_id = $_POST["id"];
