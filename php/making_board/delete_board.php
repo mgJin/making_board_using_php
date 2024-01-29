@@ -1,5 +1,5 @@
 <?php 
-    require_once('dbconnect_root.php');
+    require_once('config.php');
     
     $board_id = $_POST["id"];
     

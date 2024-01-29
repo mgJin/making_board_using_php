@@ -27,10 +27,10 @@
     $dbname = "phpboard";
     //전체 게시판 개수 조회
     try{
-        $connect= mysqli_connect($servername, $dbuser, $password, $dbname);
+        $viewAllBoardConnect= mysqli_connect($servername, $dbuser, $password, $dbname);
         $countsql =
         "SELECT COUNT(id) FROM BOARD";
-        $count_results = $connect->query($countsql);
+        $count_results = $viewAllBoardConnect->query($countsql);
     } catch(mysqli_sql_exception $ex){
         echo "디비실패 ".$ex->getMessage();
     }
@@ -50,7 +50,7 @@
 
     //해당 페이지 게시글 조회
     try {
-        $connect = mysqli_connect($servername, $dbuser, $password, $dbname);
+        $viewAllBoardConnect = mysqli_connect($servername, $dbuser, $password, $dbname);
         $viewsql =
             "SELECT id,title 
                     FROM (SELECT @ROWN:=@ROWN+1 AS rown,id,title 
@@ -58,7 +58,7 @@
                     WHERE rown>='$MINROW' AND rown<='$MAXROW'";
         //전체 개수 조회 (검색추가 하려면 여기서 IF 로 분기태우자)
        
-        $results = $connect->query($viewsql);
+        $results = $viewAllBoardConnect->query($viewsql);
     } catch (mysqli_sql_exception $ex) {
         echo "디비실패" . $ex->getMessage();
     }

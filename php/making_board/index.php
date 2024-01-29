@@ -15,7 +15,7 @@
     <?php 
         session_start();
         
-        require_once('dbconnect_root.php');
+        require_once('config.php');
         $board_id = $_GET["id"];
         
         $sql = "SELECT title,text,writer FROM board WHERE id = $board_id";

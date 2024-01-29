@@ -35,7 +35,7 @@
                 $password = "9094";
                 $dbname = "phpboard";
                 try{
-                    $connect = mysqli_connect($servername,$dbuser,$password,$dbname);
+                    $mysqliconnect = mysqli_connect($servername,$dbuser,$password,$dbname);
                     $sql = 
                     "INSERT INTO board
                         set title = '$title',
@@ -43,7 +43,7 @@
                             created = '$date',
                             writer = '$writer'
                     ";
-                    $stmt = mysqli_prepare($connect,$sql);
+                    $stmt = mysqli_prepare($mysqliconnect,$sql);
                     $exec = mysqli_stmt_execute($stmt);
                     echo "<script>alert('글쓰기성공');
                     location.href='view_all_board.php'</script>";
@@ -53,8 +53,8 @@
                     echo "실패 이유 : ".$ex->getMessage();
                 }
             }
-            // $connect = mysqli_connect($servername,$dbuser,$password,$dbname);
-            // if(!$connect){
+            // $mysqliconnect = mysqli_connect($servername,$dbuser,$password,$dbname);
+            // if(!$mysqliconnect){
             //     die("서버연결실패 : ".mysqli_connect_error());
             // }
             // echo "서버연결성공"."<br>";

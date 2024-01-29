@@ -13,7 +13,7 @@
         $titleMsg = "";
         $board_id = $_POST["id"];
         // 입력검증
-        require_once('dbconnect_root.php');
+        require_once('config.php');
         $sql = "SELECT title,text FROM board WHERE id = '$board_id'";
         try{
             $stmt = $connect->query($sql);

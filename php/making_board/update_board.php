@@ -1,5 +1,5 @@
 <?php 
-    require_once ('dbconnect_root.php');
+    require_once ('config.php');
     $id = $_POST["id"];
     $title = $_POST["title"];
     $text = $_POST["text"];

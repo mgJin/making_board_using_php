@@ -71,9 +71,9 @@
                 $dbpassword = "9094";
 
                 try{
-                    $connect = new PDO("mysql:host=$servername;dbname=$dbname",$user,$dbpassword);
-                    $connect -> setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
-                    $connect ->setAttribute(PDO::ATTR_AUTOCOMMIT,false);
+                    $signUpConnect = new PDO("mysql:host=$servername;dbname=$dbname",$user,$dbpassword);
+                    $signUpConnect -> setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
+                    $signUpConnect ->setAttribute(PDO::ATTR_AUTOCOMMIT,false);
                     echo "서버 연결 성공"."<br>";   
                 }catch(PDOException $exc){
                     echo "서버 연결 실패 이유 :".$exc->getMessage();
@@ -81,10 +81,10 @@
                 //member테이블에 추가, db에 유저추가(권한은 board는 all, member는 update랑 delete)
                 //CREATE USER, GRANT 는 implicit commit 이라 transaction 안에 가두면 에러남
                
-                $connect ->beginTransaction();
+                $signUpConnect ->beginTransaction();
                 try{
                     if(!empty($birth)){
-                    $connect ->exec(
+                    $signUpConnect ->exec(
                         "INSERT INTO member
                             set user_id = '$id',
                                 user_pw = '$password',
@@ -93,7 +93,7 @@
                                 birth = '$birth',
                                 email = '$email'");
                     }else{
-                    $connect ->exec(
+                    $signUpConnect ->exec(
                         "INSERT INTO member
                             set user_id = '$id',
                                 user_pw = '$password',
@@ -102,14 +102,14 @@
                                 birth = NULL,
                                 email = '$email'");
                     }
-                    $connect ->commit();
+                    $signUpConnect ->commit();
                     //권한 부여
-                    $connect ->exec("CREATE USER '$id'@'localhost' IDENTIFIED BY '$password'");
-                    $connect ->exec("GRANT ALL PRIVILEGES ON phpboard.board To '$id'@'localhost'");
-                    $connect ->exec("GRANT UPDATE,DELETE ON phpboard.member TO '$id'@'localhost'");
+                    $signUpConnect ->exec("CREATE USER '$id'@'localhost' IDENTIFIED BY '$password'");
+                    $signUpConnect ->exec("GRANT ALL PRIVILEGES ON phpboard.board To '$id'@'localhost'");
+                    $signUpConnect ->exec("GRANT UPDATE,DELETE ON phpboard.member TO '$id'@'localhost'");
                     echo "유저생성성공";
                 }catch(PDOException $ex){
-                    $connect ->rollBack();
+                    $signUpConnect ->rollBack();
                     echo "유저생성실패 ". $ex->getMessage();
                 }
               
