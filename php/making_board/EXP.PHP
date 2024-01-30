@@ -10,16 +10,18 @@
     <!-- 이제 퍼미션 제대로 작동하는지 확인하면 된다. -->
     
     <?php require('config.php');?>
-    <?php include('EXP2.php');?>
+    <?php include('permission_functions.php');?>
     <?php
         $user_id = "testnewone";
-        $sql = "SELECT user_id,role_id FROM member WHERE user_id = '$user_id' LIMIT 1";
-        $stmt = $connect->prepare($sql);
-        $stmt->execute();
-        $result = $stmt->fetch(PDO::FETCH_ASSOC);
-
-        // var_dump($result);
-        get_all_permissions($result);
+        $role_id = getRoleId($connect,$user_id);
+        
+        $permissionsArray = getRolesPermissions($connect,$role_id);
+        
+        if(canUpdateUser($permissionsArray)){
+            echo "성공";
+        }else{
+            echo "한 번 더";
+        }
     ?>
     <?php 
         //퍼미션을 가져오는 함수를 만들자 

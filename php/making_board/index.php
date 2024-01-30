@@ -6,32 +6,22 @@
     <title>게시글 보기</title>
 </head>
 <body>
-    <!--권한 제한된 유저를 만들어서 그놈이 보는걸로 -->
-    <?php
-        if($_SERVER["REQUEST_METHOD"]=="post"){
-            echo "1234";
-        }
-    ?>
     <?php 
-        session_start();
+        // require('config.php');
         
-        require_once('config.php');
-        $board_id = $_GET["id"];
-        
-        $sql = "SELECT title,text,writer FROM board WHERE id = $board_id";
-        $stmt = $connect->query($sql);
-        $result = $stmt->fetch(PDO::FETCH_ASSOC);
-        
+        // function getRoleId($connect){
+            
+        //     $user_id = "testnewone";
+            
+        //     $sql = "SELECT role_id FROM member WHERE user_id = :user_id LIMIT 1";
+        //     $stmt = $connect->prepare($sql);
+            
+        //     $stmt->bindParam(':user_id',$user_id);
+        //     $stmt->execute();
+        //     $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        //     var_dump($result);
+        // }
+        // getRoleId($connect);
     ?>
-    <div>
-        <h2>제목 : <?php echo $result["title"] ?></h2>
-        <span>작성자 : <?php echo $result["writer"]?></span>
-        <br>
-        <span><?php echo $result["text"]?></span>
-    </div>
-    <div>
-        <button>수정</button>
-        <button value="123">삭제</button>
-    </div>
 </body>
 </html>
