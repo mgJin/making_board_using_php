@@ -6,14 +6,22 @@ function run($url,$routes){
     $path = $url['path'];
     $path = substr($path,1);
     $path = explode("/",$path);
-    var_dump($path);
+    // var_dump($path);
     foreach($path as $p){
+        // echo $p;
+        if(array_key_exists($p,$routes)===true){
+            break;
+        }
         if (array_key_exists($p,$routes)===false){
             return;
         }
     }
-
-    $callback = $routes[$path];
+    foreach($path as $p){
+        $routes =$routes[$p];
+    }
+    $callback = $routes;
+    
+    // $callback = $routes['login']['aa'];
     $params = [];
     if(!empty($url['query'])){
         parse_str($url['query'],$params);
