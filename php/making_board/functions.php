@@ -7,16 +7,17 @@ function run($url,$routes){
     $path = substr($path,1);
     $path = explode("/",$path);
     // var_dump($path);
+    
+    
     foreach($path as $p){
-        // echo $p;
-        if(array_key_exists($p,$routes)===true){
-            break;
-        }
-        if (array_key_exists($p,$routes)===false){
+        if(gettype($routes)!="array"){
+            echo "없는 페이지";
             return;
         }
-    }
-    foreach($path as $p){
+        if(array_key_exists($p,$routes)===false){
+            echo "없는 페이지";
+            return;
+        }
         $routes =$routes[$p];
     }
     $callback = $routes;

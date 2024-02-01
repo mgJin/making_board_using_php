@@ -22,7 +22,7 @@
    
     //db 연결
     $servername = "localhost";
-    $dbuser = "root"; //공용 유저로 바꿀 필요있음
+    $dbuser = "root"; 
     $password = "9094";
     $dbname = "phpboard";
     //전체 게시판 개수 조회
@@ -35,10 +35,14 @@
         echo "디비실패 ".$ex->getMessage();
     }
     $count = $count_results->fetch_row();
+    
     //게시판 글 수를 한번에 보여줘야할 수로 나누어서 maxbar 계산
-    $MAXBOARD = (int)$count[0]; //전체 게시판 글 수
-    $MAXNUM = (int)($MAXBOARD / $DIVIDENUM); //표시되어야 할 barnum의 최대 개수
-    $CALNUM = $currentpage - 1;//계산에서는 현재 페이지에서 -1 을 뺀 숫자를 이용
+    //전체 게시판 글 수
+    $MAXBOARD = (int)$count[0]; 
+    //표시되어야 할 barnum의 최대 개수
+    $MAXNUM = (int)($MAXBOARD / $DIVIDENUM); 
+    //계산에서는 현재 페이지에서 -1 을 뺀 숫자를 이용
+    $CALNUM = $currentpage - 1;
     if($MAXNUM < $currentpage){
         $CALNUM = $MAXNUM-1;
     }
@@ -106,8 +110,8 @@
 
     <!-- 화살표로 숫자넘어가기 필요-->
     <a href= <?php echo htmlspecialchars($_SERVER["PHP_SELF"])."?page=1";?>><<</a>
-    <a href= <?php echo htmlspecialchars($_SERVER["PHP_SELF"])."?page=".$prevpage;?>><</a>
-    <a href= <?php echo htmlspecialchars($_SERVER["PHP_SELF"])."?page=".$nextpage;?>>></a>
+    <a href= <?php echo "http://localhost:3000/board"."?page=".$prevpage;?>><</a>
+    <a href= <?php echo "http://localhost:3000/board"."?page=".$nextpage;?>>></a>
     <a href= <?php echo htmlspecialchars($_SERVER["PHP_SELF"])."?page=".$MAXNUM?>>>></a>
     <!-- 상수들 합치기 -->
     <button onclick="location.href='posting.php'">글쓰기</button>
