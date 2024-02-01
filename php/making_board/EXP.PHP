@@ -1,13 +1,25 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <form method="POST" action="http://localhost:3000/login/bb">
-        <input type="submit" value="클릭">
-    </form>
-</body>
-</html>
+<?php 
+    return [
+        '' => function (){
+            echo '<h1>home page</h1>';
+        },
+        'login' => [
+            '' =>function (){
+                echo "로그인 안의 것";
+            },
+            'aa' =>function(){
+                // require_once('EXP.PHP');
+            },
+            'bb' =>function(){
+                // require_once('EXP2.php');
+            }
+        ]
+        ,
+        'board' =>[
+            '' =>function(){
+                require_once('view_all_board.php');
+            }
+        ]
+       
+    ];
+?>

@@ -1,13 +1,34 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <h1>
-        HERE IS EXP2!!
-    </h1>
-</body>
-</html>
+<?php 
+    
+
+    return [ (object)array(
+
+        'path' => '/',
+        'source' =>function(){
+            echo "첫페이지";
+        },
+        'children' =>[
+            (object)array(
+                'path' =>'login',
+                'source'=>function(){
+                    echo "login페이지";
+                },
+                'children' =>[
+                    (object)array(
+                        'path' =>'aa',
+                        'source' =>function(){
+                            echo "aa페이지";
+                        }
+                    )
+                ]
+                    ),
+            (object)array(
+                'path' =>'main',
+                'source' =>function(){
+                    echo "main페이지";
+                },
+            )
+        ]
+    )
+    ]
+?>
