@@ -27,6 +27,20 @@
                 'source' =>function(){
                     echo "main페이지";
                 },
+                'children' =>[
+                    (object)array(
+                        'path' =>'cc',
+                        'source' =>function(){
+                            echo "cc페이지";
+                        }
+                    ),
+                    (object)array(
+                        'path' =>'dd',
+                        'source' =>function(){
+                            echo "dd페이지";
+                        }
+                    )
+                ]
             )
         ]
     )

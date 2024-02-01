@@ -8,8 +8,10 @@ function run($url,$routes){
     $path = explode("/",$path);
     // var_dump($path);
     // var_dump($routes[0]->{'children'});
-    
+    //   /main/dd 라고 가정, path 에는 / , main, dd 가 들어가 있다
+    $result = (object)array();
     foreach($path as $p){
+        $pass = false;
         // if(gettype($routes)!="array"){
         //     echo "없는 페이지";
         //     return;
@@ -18,8 +20,20 @@ function run($url,$routes){
         //     echo "없는 페이지";
         //     return;
         // }
-        $routes =$routes[$p];
+        foreach($routes as $route){
+            if($route->{'path'}==$p){
+                $pass= true;
+                continue;        
+            }
+        }
+        if((!(end($path)==$p))&&$pass){
+            $routes = $route->{'children'};
+        }else if((end($path)==$p)&&$pass){
+            $result = $route;
+        }
     }
+    $callback = $result->{'source'};
+    $callback();
     // $callback = $routes;
     
     // // $callback = $routes['login']['aa'];
