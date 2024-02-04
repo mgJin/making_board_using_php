@@ -1,25 +1,23 @@
 <?php 
     return [
-        '' => function (){
+        '/' => function (){
             echo '<h1>home page</h1>';
         },
-        'login' => [
-            '' =>function (){
-                echo "로그인 안의 것";
-            },
-            'aa' =>function(){
-                require_once('EXP.PHP');
-            },
-            'bb' =>function(){
-                require_once('EXP2.php');
-            }
-        ]
+        '/login' => function(){
+            include('login.php');
+        }
         ,
-        'board' =>[
-            '' =>function(){
-                require_once('view_all_board.php');
-            }
-        ]
-       
+        '/board' => function(){
+            echo '<h1>board page</h1>';
+        },
+        '/exp1' =>function(){
+            include('EXP.php');
+        },
+        '/exp2' =>function(){
+            include('EXP2.php');
+        },
+        '/exp3' =>function(){
+            include('EXP3.php');
+        }
     ];
 ?>
