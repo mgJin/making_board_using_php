@@ -5,10 +5,9 @@
         },
         '/login' => function(){
             include('login.php');
-        }
-        ,
+        },
         '/board' => function(){
-            echo '<h1>board page</h1>';
+            include('view_all_board.php');
         },
         '/exp1' =>function(){
             include('EXP.php');
