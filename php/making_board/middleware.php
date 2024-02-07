@@ -10,11 +10,12 @@
             // 로그인이 필요한지 (이거 로그인도 막고 있음)
             if(isset($_POST['cud-action'])){
                 session_start();
-                var_dump($_SESSION);
+                
                 if(!(isset($_SESSION['is_loggedin']))){
-                    echo "<script>alert('로그인이 필요합니다')</script>"; //현재페이지로 다시 이동
+                    //현재페이지로 다시 이동
                     
                     $result = false;
+                    echo json_encode($result,JSON_PRETTY_PRINT|JSON_UNESCAPED_UNICODE);
                     return $result;
                 }
 
@@ -23,12 +24,13 @@
                 $role_id = getRoleId($connect,$user_id);
                 
                 $permissionsArray = getRolesPermissions($connect,$role_id);
-                var_dump($permissionsArray);
+                
                 if(in_array($_POST['cud-action'],$permissionsArray)){
                     $result = true;
-                    
+                    echo json_encode($result,JSON_PRETTY_PRINT|JSON_UNESCAPED_UNICODE);
                 }else{
                     $result = false;
+                    echo json_encode($result,JSON_PRETTY_PRINT|JSON_UNESCAPED_UNICODE);
                 }
 
             }
