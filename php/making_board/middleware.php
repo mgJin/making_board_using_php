@@ -15,7 +15,8 @@
                     //현재페이지로 다시 이동
                     
                     $result = false;
-                    echo json_encode($result,JSON_PRETTY_PRINT|JSON_UNESCAPED_UNICODE);
+                    $echoresult = ["mwResponse"=>$result];
+                    echo json_encode($echoresult,JSON_PRETTY_PRINT|JSON_UNESCAPED_UNICODE);
                     return $result;
                 }
 
@@ -27,10 +28,12 @@
                 
                 if(in_array($_POST['cud-action'],$permissionsArray)){
                     $result = true;
-                    echo json_encode($result,JSON_PRETTY_PRINT|JSON_UNESCAPED_UNICODE);
+                    $echoresult = ["mwResponse"=>$result];
+                    echo json_encode($echoresult,JSON_PRETTY_PRINT|JSON_UNESCAPED_UNICODE);
                 }else{
                     $result = false;
-                    echo json_encode($result,JSON_PRETTY_PRINT|JSON_UNESCAPED_UNICODE);
+                    $echoresult = ["mwResponse"=>$result];
+                    echo json_encode($echoresult,JSON_PRETTY_PRINT|JSON_UNESCAPED_UNICODE);
                 }
 
             }
