@@ -1,11 +1,17 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <h1>EXP3 here</h1>
-</body>
-</html>
+<?php 
+    // $route = '~^/board$~';
+    // $url = '/board';
+    // if(preg_match($route,$url,$match)){
+    //     var_dump($match);
+    // }
+
+    // $a = ["aa"=>"bb","cc"=>"dd"];
+    // foreach($a as $b=>$c){
+    //     var_dump($b);
+    // }
+    // echo "Dddd";
+    // // echo "<Br>";
+    // echo "dfdfd";
+    echo "<script>alert('dd')</script>";
+?>
+

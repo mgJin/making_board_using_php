@@ -9,6 +9,9 @@
         '/board' => function(){
             include('view_all_board.php');
         },
+        '/board/([0-9]+)'=>function($var){
+           include('view_board.php');
+        },
         '/exp1' =>function(){
             include('EXP.php');
         },

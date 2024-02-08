@@ -13,11 +13,17 @@
     <!--삭제 버튼 누를 때 권한 확인 필요-->
     <!--게시판 아이디 없이 들어오면 전체 게시판으로 -->
     <?php 
-        require_once('config.php');
-        $board_id = $_GET["id"];
+        global $connect;
+        //$var 는 route에서 받은 것
+        $board_id = $var;
         $sql = "SELECT title,text,writer FROM board WHERE id = $board_id";
         $stmt = $connect->query($sql);
-        $result = $stmt->fetch(PDO::FETCH_ASSOC);    
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        if(!$result){
+            //error 띄우기(404)
+            echo "<h1>404 NOT FOUND</h1>";
+            return;
+        }
     ?>
    
     <div>
