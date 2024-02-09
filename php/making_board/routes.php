@@ -12,6 +12,9 @@
         '/board/([0-9]+)'=>function($var){
            include('view_board.php');
         },
+        '/board/([0-9]+)/delete'=>function($var){
+            include('delete_board.php');
+        },
         '/exp1' =>function(){
             include('EXP.php');
         },

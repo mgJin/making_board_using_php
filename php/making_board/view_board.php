@@ -13,6 +13,9 @@
     <!--삭제 버튼 누를 때 권한 확인 필요-->
     <!--게시판 아이디 없이 들어오면 전체 게시판으로 -->
     <?php 
+        include_once('../making_board/front/html/modal.html');
+    ?>
+    <?php 
         global $connect;
         //$var 는 route에서 받은 것
         $board_id = $var;
@@ -36,21 +39,7 @@
         <button class="crdbtn" id="updbtn" value=<?php echo $board_id?>>수정</button>
         <button class="crdbtn" id="delbtn" value=<?php echo $board_id?>>삭제</button>
     
-    <div id="modal-overlay">
-        <div id="modal-window">
-            <div class="title">
-                <h3>확인창</h3>
-            </div>
-            <div class="close">x</div>
-            <div class="modal-content">
-                <p id="chkp"></p>
-                <form id="btn-form">
-                    <button class="chkbtn" value=true>확인</button>
-                    <button class="chkbtn" value=false>취소</button>
-                </form>
-            </div>
-        </div>
-    </div>
+    
     <script>
         //수정을 누르면 수정 페이지가 나오고 거기서 폼 입력받은걸로 해야함
          $(".crdbtn").on("click",function(event){
@@ -62,36 +51,49 @@
             if(chk){
                 let action = chkbeh(e.data.action);
                 console.log(action);
+                let board_id = <?php echo $var?>;
+                const baseURL = "http://localhost:3000/board";
+                const boardURL = baseURL + "/" + board_id;
                 if(action==="delete"){
-                    let fullURL = action + "_board.php";
+                    let fullURL = boardURL + "/" + action;
                     $.ajax({
                         type: "POST",
                         url : fullURL,
-                        data : {id:e.data.id},
+                        data : {
+                                'cud-action' : 'delete-board'
+                               },
                         success : function(result){
-                            let url = "http://localhost:3000/view_all_board.php";
-                            if(result==="1"){
-                                alert(e.data.action+'되었습니다');
-                            }else if(result==="0"){
-                                alert('없는 게시물입니다');
+                            let r = result.replace(/}{/g,',');
+                            console.log(r);
+                            let rp = JSON.parse(r);
+                            const {mwResponse,serverResponse,exMsg} = rp;
+                            console.log(mwResponse,serverResponse);
+                            if(!mwResponse){
+                                alert("권한이 없습니다.");
+                                window.location.replace(boardURL);
                             }else{
-                                alert(e.data.action+'실패');
-                            } 
-                            window.location.replace(url);
+                                if(!serverResponse){
+                                    console.log("문제 : " +exMsg);
+                                    alert('서버 문제');
+                                }else{
+                                    alert(event.target.innerText+"되었습니다.");
+                                    window.location.replace(baseURL);
+                                }
+                            }
                         },
                         error : function(request,status,error){
                             console.log(error);
                         }
                     });
                 }else if(action==="update"){
-                    let url = "http://localhost:3000/update_form.php";
+                    let fullURL = baseURL + action;
                     var id_hidden = $("<input>")
                                         .attr("type","hidden")
                                         .attr("name","id")
                                         .val(e.data.id);
                     $("#btn-form").append($(id_hidden));
                     $("#btn-form").attr("method","post");
-                    $("#btn-form").attr("action",url);
+                    $("#btn-form").attr("action",fullURL);
                     $("#btn-form").submit();
                     // window.location.replace(url);
                 }

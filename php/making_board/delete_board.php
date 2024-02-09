@@ -1,7 +1,7 @@
 <?php 
-    require_once('config.php');
+    global $connect;
     
-    $board_id = $_POST["id"];
+    $board_id = $var;
     
     $sql = "DELETE FROM board WHERE id = '$board_id'";
     try{
@@ -9,7 +9,15 @@
         $stmt->execute();
         $count = $stmt->rowCount();
     }catch(PDOException $ex){
-        echo $ex->getMessage();
+        
+        $resultArray = array(
+            'serverResponse' =>false,
+            'exMsg' => $ex->getMessage()
+        );
+        echo json_encode($resultArray,JSON_PRETTY_PRINT|JSON_UNESCAPED_UNICODE);
     }
-    echo $count;
+    $resultArray= array(
+        'serverResponse'=>true
+    );
+    echo json_encode($resultArray,JSON_PRETTY_PRINT|JSON_UNESCAPED_UNICODE);
 ?>
