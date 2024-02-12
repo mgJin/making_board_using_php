@@ -1,14 +1,15 @@
 <?php 
     return [
-        '/' => function (){
-            echo '<h1>home page</h1>';
-        },
-        '/login' => function(){
-            include('login.php');
-        },
-        '/board' => function(){
-            include('view_all_board.php');
-        },
+        '/' => [
+            'get'=> function (){
+                echo '<h1>home page</h1>';
+            }
+        ],
+        '/board' => [
+            'get'=> function(){
+                include('view_all_board.php');
+            }
+        ],
         '/board/([0-9]+)'=>[
             'get'=> function($var){
                include('view_board.php');
@@ -23,17 +24,38 @@
                 echo '<h1>delete page</h1>';
             }
         ],
-        '/board/([0-9]+)/delete'=>function($var){
-            include('delete_board.php');
-        },
-        '/exp1' =>function(){
-            include('EXP.php');
-        },
-        '/exp2' =>function(){
-            include('EXP2.php');
-        },
-        '/exp3' =>function(){
-            include('EXP3.php');
-        }
+        '/board/([0-9]+)/updateForm'=>[
+            'get'=>function(){
+                include('update_form');
+            }
+        ],
+        '/exp1' =>[
+            'get'=> function(){
+                include('EXP.php');
+            }
+        ],
+        '/exp2' =>[
+            'get'=> function(){
+                include('EXP2.php');
+            }
+        ],
+        '/exp3' =>[
+            'get'=> function(){
+                include('EXP3.php');
+            }
+        ],
+        '/login' => [
+            'get'=> function(){
+                include('login.php');
+            },
+            'post'=>function(){
+                include('login_post.php');
+            }
+        ],
+        '/logout' =>[
+            'post'=>function(){
+                include('logout.php');
+            }
+        ]
     ];
 ?>

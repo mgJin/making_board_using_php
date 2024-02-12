@@ -13,7 +13,7 @@
     //페이지가 2까지밖에 없는데 3으로 넘어오면(url에 적어서) 최대페이지로 넘어가게 하면 된다.   
     //dbuser 가 현재 사용중인 client의 id로 
     session_start();
-    include_once('log_inout_button.php');
+    include('log_inout_button.php');
     $currentpage = 1; //현재 페이지와 맨 처음 들어왔을 때 보여지는 페이지
     $DIVIDENUM = 1; //한 번에 몇 개의 게시글이 보여지는 가
     if (isset($_GET["page"])) {
@@ -116,6 +116,20 @@
     <!-- 상수들 합치기 -->
     <button onclick="location.href='posting.php'">글쓰기</button>
     
+    <script>
+        if(document.querySelector("#logoutBtn")){
+            document.querySelector("#logoutBtn").addEventListener(
+                "click",
+                function(){
+                    form = document.createElement("form");
+                    form.setAttribute("action","http://localhost:3000/logout");
+                    form.setAttribute("method","POST");
+                    document.body.appendChild(form);
+                    form.submit();
+                }
+            )
+        }
+    </script>
 </body>
 
 </html>

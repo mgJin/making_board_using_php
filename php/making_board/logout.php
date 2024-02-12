@@ -8,5 +8,5 @@
             $params["secure"],$params["httponly"]);
     }
     session_destroy();
-    header("LOCATION:http://localhost:3000/view_all_board.php");
+    header("LOCATION:http://localhost:3000/board");
 ?>
