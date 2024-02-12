@@ -104,17 +104,17 @@
         }
 
     ?>
-        <a href=<?php echo htmlspecialchars($_SERVER["PHP_SELF"]) . "?page=" . $barnum; ?>><?php echo $barnum; ?>&nbsp;</a>
+        <a href=<?php echo "http://localhost:3000/board"."?page=" . $barnum; ?>><?php echo $barnum; ?>&nbsp;</a>
 
     <?php } ?>
 
     <!-- 화살표로 숫자넘어가기 필요-->
-    <a href= <?php echo htmlspecialchars($_SERVER["PHP_SELF"])."?page=1";?>><<</a>
+    <a href= <?php echo "http://localhost:3000/board"."?page=1";?>><<</a>
     <a href= <?php echo "http://localhost:3000/board"."?page=".$prevpage;?>><</a>
     <a href= <?php echo "http://localhost:3000/board"."?page=".$nextpage;?>>></a>
-    <a href= <?php echo htmlspecialchars($_SERVER["PHP_SELF"])."?page=".$MAXNUM?>>>></a>
+    <a href= <?php echo "http://localhost:3000/board"."?page=".$MAXNUM?>>>></a>
     <!-- 상수들 합치기 -->
-    <button onclick="location.href='posting.php'">글쓰기</button>
+    <button onclick="location.href='http:\/\/localhost:3000/board/postForm'">글쓰기</button>
     
     <script>
         if(document.querySelector("#logoutBtn")){

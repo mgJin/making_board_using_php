@@ -8,14 +8,19 @@
         '/board' => [
             'get'=> function(){
                 include('view_all_board.php');
+            },
+            'post'=>function(){
+                echo '<h1>post page</h1>';
+            }
+        ],
+        '/board/postForm'=>[
+            'get'=>function(){
+                include('posting.php');
             }
         ],
         '/board/([0-9]+)'=>[
             'get'=> function($var){
                include('view_board.php');
-            },
-            'post'=>function(){
-                echo '<h1>post page</h1>';
             },
             'put'=>function(){
                 echo '<h1>put page</h1>';
@@ -29,6 +34,7 @@
                 include('update_form');
             }
         ],
+        
         '/exp1' =>[
             'get'=> function(){
                 include('EXP.php');
@@ -57,5 +63,6 @@
                 include('logout.php');
             }
         ]
+        
     ];
 ?>

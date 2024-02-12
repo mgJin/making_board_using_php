@@ -60,7 +60,7 @@
             // echo "서버연결성공"."<br>";
         }
     ?>
-    <form action = "<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post">
+    <form action = "http://localhost:3000/board" method="post">
         제목 : <input type = "text" name = "title">
         <?php echo $titleMsg;?>
         내용 : <input type = "text" name = "text">
