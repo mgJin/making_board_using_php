@@ -36,6 +36,8 @@
                 $permissionsArray = getRolesPermissions($connect,$role_id);
                 //지금 하는 행동에 대한 권한이 있는지 매치시키기
                 $method = strtolower($_SERVER["REQUEST_METHOD"]);
+                //여기서 method로 행동은 지정할 수 있는데 목적을 정하는 것을 url로 해야할지...
+                //put도 확인하려면 그것밖에 없지 않나.
                 if(in_array($_POST['cud-action'],$permissionsArray)){
                     $result = true;
                     $echoresult = ["mwResponse"=>$result];
