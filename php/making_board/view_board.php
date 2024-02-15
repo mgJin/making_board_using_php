@@ -86,13 +86,9 @@
                         }
                     });
                 }else if(action==="update"){
-                    let fullURL = baseURL + action;
-                    var id_hidden = $("<input>")
-                                        .attr("type","hidden")
-                                        .attr("name","id")
-                                        .val(e.data.id);
-                    $("#btn-form").append($(id_hidden));
-                    $("#btn-form").attr("method","post");
+                    let fullURL = boardURL + "/" + action+"Form";
+                   
+                    $("#btn-form").attr("method","get");
                     $("#btn-form").attr("action",fullURL);
                     $("#btn-form").submit();
                     // window.location.replace(url);

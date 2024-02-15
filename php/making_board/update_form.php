@@ -11,9 +11,9 @@
     <?php include_once '../making_board/front/html/modal.html'; ?>
     <?php
         $titleMsg = "";
-        $board_id = $_POST["id"];
+        global $connect;
         // 입력검증
-        require_once('config.php');
+        
         $sql = "SELECT title,text FROM board WHERE id = '$board_id'";
         try{
             $stmt = $connect->query($sql);
@@ -23,11 +23,12 @@
         }
         $title = $result["title"];
         $text = $result["text"];
+        print_r($text);
     ?> 
     <form class="upd-form">
-        제목 : <input type = "text" id="upd-title" name = "title" value=<?php echo $title?>>
+        제목 : <input type = "text" id="upd-title" name = "title" value=<?php echo htmlspecialchars($title);?> placeholder="제목을 입력해주세요">
         <p id="titleMsg"></p>
-        내용 : <input type = "text" id="upd-text" name = "text" value=<?php echo $text?>>
+        내용 : <input type = "text" id="upd-text" name = "text" value=<?php echo htmlspecialchars($text);?>>
         <input type="hidden" id= "upd-id" name="board_id" value = <?php echo $board_id?>>
         <input class="crdbtn" type = "button" value="수정">
     </form>
@@ -46,21 +47,22 @@
                     let title = $("#upd-title").val();
                     let text = $("#upd-text").val();
                     if(title){
+                        const baseURL = "http://localhost:3000/board" + "/"+ id;
                         $.ajax({
-                            type:"POST",
-                            url : "update_board.php",
+                            type:"PUT",
+                            url : baseURL,
                             data :{
                                 id : id,
                                 title : title,
                                 text : text
                             },
                             success : function(result){
+                                console.log(result);
                                 if(result==="1"){
                                     alert(beh + "되었습니다");
                                 }
-                                const baseURL = "http://localhost:3000/view_board.php";
-                                const fullURL = baseURL + "?id=" + id;
-                                window.location.replace(fullURL);
+                                const fullURL = baseURL;
+                                // window.location.replace(fullURL);
                             },
                             error : function(result,status,error){
                                 console.log(error);

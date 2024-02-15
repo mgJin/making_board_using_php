@@ -23,15 +23,15 @@
                include('view_board.php');
             },
             'put'=>function(){
-                echo '<h1>put page</h1>';
+                include('update_board.php');
             },
             'delete'=>function(){
                 echo '<h1>delete page</h1>';
             }
         ],
         '/board/([0-9]+)/updateForm'=>[
-            'get'=>function(){
-                include('update_form');
+            'get'=>function($board_id){
+                include('update_form.php');
             }
         ],
         

@@ -38,14 +38,22 @@
                 $method = strtolower($_SERVER["REQUEST_METHOD"]);
                 //여기서 method로 행동은 지정할 수 있는데 목적을 정하는 것을 url로 해야할지...
                 //put도 확인하려면 그것밖에 없지 않나.
-                if(in_array($_POST['cud-action'],$permissionsArray)){
-                    $result = true;
-                    $echoresult = ["mwResponse"=>$result];
-                    echo json_encode($echoresult,JSON_PRETTY_PRINT|JSON_UNESCAPED_UNICODE);
-                }else{
-                    $result = false;
-                    $echoresult = ["mwResponse"=>$result];
-                    echo json_encode($echoresult,JSON_PRETTY_PRINT|JSON_UNESCAPED_UNICODE);
+                $url = parse_url($_SERVER['REQUEST_URI']);
+                $url = $url['path'];
+
+                //게시판 관련 permissions
+                if(strpos($url,'/board')){
+                    switch($method){
+                        case "post":
+                            $result = canCreateBoard($permissionsArray);
+                            break;
+                        case "put":
+                            $result = canUpdateBoard($permissionsArray);
+                            break;
+                        case "delete":
+                            $result = canDeleteBoard($permissionsArray);
+                            break;
+                    }
                 }
 
             }

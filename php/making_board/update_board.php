@@ -1,8 +1,9 @@
 <?php 
-    require_once ('config.php');
-    $id = $_POST["id"];
-    $title = $_POST["title"];
-    $text = $_POST["text"];
+    global $connect;
+    parse_str(file_get_contents('php://input'),$result);
+    $id = $result['id'];
+    $title = $result["title"];
+    $text = $result["text"];
     
     $sql = "UPDATE board
                  SET
