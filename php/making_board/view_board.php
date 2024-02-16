@@ -36,8 +36,8 @@
         <span><?php echo $result["text"]?></span>
     </div>
     
-        <button class="crdbtn" id="updbtn" value=<?php echo $board_id?>>수정</button>
-        <button class="crdbtn" id="delbtn" value=<?php echo $board_id?>>삭제</button>
+        <button class="crdbtn" id="updbtn">수정</button>
+        <button class="crdbtn" id="delbtn">삭제</button>
     
     
     <script>
@@ -45,23 +45,20 @@
          $(".crdbtn").on("click",function(event){
             $("#chkp")[0].innerText = event.target.innerText + "하시겠습니까?";
             $("#modal-overlay").css({"display":"flex"});
-            $(".chkbtn").on("click",{action:event.target.innerText,id:event.target.value},function(e){ 
+            $(".chkbtn").on("click",{action:event.target.innerText},function(e){ 
             let chk = chkbool(e.target.value);
             e.preventDefault();
             if(chk){
                 let action = chkbeh(e.data.action);
-                console.log(action);
                 let board_id = <?php echo $var?>;
                 const baseURL = "http://localhost:3000/board";
                 const boardURL = baseURL + "/" + board_id;
+                
                 if(action==="delete"){
-                    let fullURL = boardURL + "/" + action;
+                    
                     $.ajax({
-                        type: "POST",
-                        url : fullURL,
-                        data : {
-                                'cud-action' : 'delete-board'
-                               },
+                        type: "DELETE",
+                        url : boardURL,
                         success : function(result){
                             let r = result.replace(/}{/g,',');
                             
