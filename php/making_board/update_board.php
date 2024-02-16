@@ -18,5 +18,8 @@
     }catch(PDOException $ex){
         echo $ex->getMessage();
     }
-    echo $count;
+    $resultArray = array(
+        'serverResponse'=>true
+    );
+    echo json_encode($resultArray,JSON_PRETTY_PRINT,JSON_UNESCAPED_UNICODE);
 ?>

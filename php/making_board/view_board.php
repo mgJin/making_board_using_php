@@ -64,7 +64,7 @@
                                },
                         success : function(result){
                             let r = result.replace(/}{/g,',');
-                            console.log(r);
+                            
                             let rp = JSON.parse(r);
                             const {mwResponse,serverResponse,exMsg} = rp;
                             console.log(mwResponse,serverResponse);

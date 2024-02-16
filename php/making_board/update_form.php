@@ -58,11 +58,22 @@
                             },
                             success : function(result){
                                 console.log(result);
-                                if(result==="1"){
-                                    alert(beh + "되었습니다");
+                                let r = result.replace(/}{/g,',');
+                                let rp = JSON.parse(r);
+                                const{mwResponse,deniedReason,serverResponse,exMsg}=rp;
+                                console.log(mwResponse,deniedReason,serverResponse);
+                                if(mwResponse){
+                                    if(serverResponse){
+                                        alert('수정되었습니다');
+                                        window.location.replace(baseURL);
+                                    }else{
+                                        alert('서버문제');
+                                    }
+                                }else{
+                                    console.log(deniedReason);
+                                    alert('권한이 없습니다');
                                 }
-                                const fullURL = baseURL;
-                                // window.location.replace(fullURL);
+                                
                             },
                             error : function(result,status,error){
                                 console.log(error);
