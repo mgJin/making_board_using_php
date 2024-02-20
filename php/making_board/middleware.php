@@ -42,7 +42,7 @@
                 //여기서 method로 행동은 지정할 수 있는데 목적을 정하는 것을 url로 해야할지...
                 //put도 확인하려면 그것밖에 없지 않나.
                 //게시판 관련 permissions
-                if(preg_match('/\/board/',$url)){
+                if(preg_match('/\/boards/',$url)){
                     switch($method){
                         case "post":
                             $result = canCreateBoard($permissionsArray);

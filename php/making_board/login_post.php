@@ -20,7 +20,7 @@
             
             $_SESSION["is_loggedin"] = True;
             $_SESSION["user"] = $result; //사용자의 정보 session에 묶어서 넘김
-            header("Location: http://localhost:3000/board");
+            header("Location: http://localhost:3000/boards");
         }else{
            echo "<script>alert('ID와 PW를 다시 확인해 주세요')</script>";
         

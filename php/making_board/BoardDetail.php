@@ -51,7 +51,7 @@
             if(chk){
                 let action = chkbeh(e.data.action);
                 let board_id = <?php echo $var?>;
-                const baseURL = "http://localhost:3000/board";
+                const baseURL = "http://localhost:3000/boards";
                 const boardURL = baseURL + "/" + board_id;
                 
                 if(action==="delete"){

@@ -47,7 +47,7 @@
                     let title = $("#upd-title").val();
                     let text = $("#upd-text").val();
                     if(title){
-                        const baseURL = "http://localhost:3000/board" + "/"+ id;
+                        const baseURL = "http://localhost:3000/boards" + "/"+ id;
                         $.ajax({
                             type:"PUT",
                             url : baseURL,
@@ -72,6 +72,7 @@
                                 }else{
                                     console.log(deniedReason);
                                     alert('권한이 없습니다');
+                                    //여기서 모달창 닫고 추가 작업해줘야함
                                 }
                                 
                             },

@@ -13,7 +13,7 @@
     session_start();
     
     if ((isset($_SESSION["is_loggedin"]) && $_SESSION["is_loggedin"])){
-        header("Location: http://localhost:3000/board");
+        header("Location: http://localhost:3000/boards");
     }    
     //로그인을 요청하면 userid와 userpw 를 입력했는지 확인 후 db에 select로 확인
     

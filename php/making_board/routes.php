@@ -5,22 +5,22 @@
                 echo '<h1>home page</h1>';
             }
         ],
-        '/board' => [
+        '/boards' => [
             'get'=> function(){
-                include('view_all_board.php');
+                include('Boards.php');
             },
             'post'=>function(){
-                echo '<h1>post page</h1>';
+                include('board_post');
             }
         ],
-        '/board/postForm'=>[
+        '/boards/postForm'=>[
             'get'=>function(){
                 include('posting.php');
             }
         ],
-        '/board/([0-9]+)'=>[
+        '/boards/([0-9]+)'=>[
             'get'=> function($var){
-               include('view_board.php');
+               include('BoardDetail.php');
             },
             'put'=>function(){
                 include('update_board.php');
@@ -29,7 +29,7 @@
                 echo '<h1>delete page</h1>';
             }
         ],
-        '/board/([0-9]+)/updateForm'=>[
+        '/boards/([0-9]+)/updateForm'=>[
             'get'=>function($board_id){
                 include('update_form.php');
             }
@@ -63,17 +63,29 @@
                 include('logout.php');
             }
         ],
-        '/user' =>[
+        '/me'=>[
             'get'=>function(){
                 echo "<h1>user 정보 페이지</h1>";
+                //여기 밑에다가 수정버튼을 누르면 수정 페이지가 뜨도록 하자
+                //애초에 정보는 다 나오잖아.
             },
+            'put'=>function(){
+                echo "<h1>user 정보 수정 페이지</h1>";
+            }
+        ],
+        // '/me/updateForm'=>[
+        //     'get'=>function(){
+        //         echo "<h1>user 정보 수정 기입 페이지</h1>";
+        //     }
+        // ],
+        '/user' =>[
             'post'=>function(){
                 echo "<h1>user 회원가입 back</h1>";
             }
         ],
         '/user/signUpForm'=>[
             'get'=>function(){
-                echo "<h1>user 회원가입 기입</h1>";
+                echo "<h1>user 회원가입 기입하는 곳</h1>";
             }
         ]
         
