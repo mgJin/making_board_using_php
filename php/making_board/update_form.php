@@ -23,12 +23,12 @@
         }
         $title = $result["title"];
         $text = $result["text"];
-        print_r($text);
+        
     ?> 
     <form class="upd-form">
-        제목 : <input type = "text" id="upd-title" name = "title" value=<?php echo htmlspecialchars($title);?> placeholder="제목을 입력해주세요">
+        제목 : <input type = "text" id="upd-title" name = "title" <?php echo 'value="'.htmlspecialchars($title).'"';?> placeholder="제목을 입력해주세요">
         <p id="titleMsg"></p>
-        내용 : <input type = "text" id="upd-text" name = "text" value=<?php echo htmlspecialchars($text);?>>
+        내용 : <input type = "text" id="upd-text" name = "text" <?php echo 'value="'.htmlspecialchars($text).'"';?>>
         <input type="hidden" id= "upd-id" name="board_id" value = <?php echo $board_id?>>
         <input class="crdbtn" type = "button" value="수정">
     </form>

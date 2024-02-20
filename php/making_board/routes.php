@@ -62,6 +62,19 @@
             'post'=>function(){
                 include('logout.php');
             }
+        ],
+        '/user' =>[
+            'get'=>function(){
+                echo "<h1>user 정보 페이지</h1>";
+            },
+            'post'=>function(){
+                echo "<h1>user 회원가입 back</h1>";
+            }
+        ],
+        '/user/signUpForm'=>[
+            'get'=>function(){
+                echo "<h1>user 회원가입 기입</h1>";
+            }
         ]
         
     ];
