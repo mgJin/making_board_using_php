@@ -1,9 +1,10 @@
 <?php 
-    $result = true;
-    $a = [
-        "mw"=>"ss",
-        "cc"=>$result?null:"faaaallse"
-    ];
-    print_r($a);
+   function af($z){
+        if($z==1){
+            return true;
+        }else{
+            return false;
+        }
+   }
 
 ?>

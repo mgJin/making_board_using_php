@@ -10,12 +10,12 @@
                 include('Boards.php');
             },
             'post'=>function(){
-                include('board_post');
+                include('boardPost.php');
             }
         ],
         '/boards/postForm'=>[
             'get'=>function(){
-                include('posting.php');
+                include('BoardPostForm.php');
             }
         ],
         '/boards/([0-9]+)'=>[
@@ -23,7 +23,7 @@
                include('BoardDetail.php');
             },
             'put'=>function(){
-                include('update_board.php');
+                include('boardUpdate.php');
             },
             'delete'=>function(){
                 echo '<h1>delete page</h1>';
@@ -31,7 +31,7 @@
         ],
         '/boards/([0-9]+)/updateForm'=>[
             'get'=>function($board_id){
-                include('update_form.php');
+                include('BoardUpdateForm.php');
             }
         ],
         

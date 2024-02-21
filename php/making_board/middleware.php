@@ -5,7 +5,10 @@
         function chk(){
             global $connect;
             //로그인이 되어있을 경우
-            $result = true;
+            $result = false;
+            if($_SERVER['REQUEST_METHOD']=="GET"){
+                $result = true;
+            }
             
             // 로그인이 필요한지 (이거 로그인도 막고 있음)
             //method 로 구분을 지을것
@@ -20,6 +23,7 @@
                 //로그인 요청은 통과시켜주기
                 $login_array = array('/login','/logout');
                 if(in_array($url,$login_array)){
+                    $result = true;
                     return $result;
                 }
                 //로그인 확인
@@ -43,17 +47,15 @@
                 //put도 확인하려면 그것밖에 없지 않나.
                 //게시판 관련 permissions
                 if(preg_match('/\/boards/',$url)){
-                    switch($method){
-                        case "post":
-                            $result = canCreateBoard($permissionsArray);
-                            break;
-                        case "put":
-                            $result = canUpdateBoard($permissionsArray);
-                            break;
-                        case "delete":
-                            $result = canDeleteBoard($permissionsArray);
-                            break;
-                    };
+                    
+                    $array_method = [
+                        "post"=>canCreateBoard($permissionsArray)
+                        ,
+                        "put"=>canUpdateBoard($permissionsArray)    
+                        ,
+                        "delete"=>canDeleteBoard($permissionsArray)
+                    ];
+                    $result = $array_method[$method];
                     
                     $echoresult = ["mwResponse"=>$result,"deniedReason"=>$result?null:"no permission"];
                     echo echojson($echoresult);
