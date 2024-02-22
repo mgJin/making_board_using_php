@@ -41,16 +41,18 @@
         //게시물 수정 권한 확인
         //여기다가 arg 로 boardid 랑 userid를 넣으면 될듯
         //boardid 는 middleware에서 url에서 받아오는 식으로하자
-        function canUpdateBoard($permissionsArray){
+        function canUpdateBoard($permissionsArray,$boardID,$user_id){
             if(in_array('update-board',$permissionsArray)){
                 //기본 골자select * from board b join member m on b.writer = m.user_id where b.id=8;
+                //select할 때 user id를 받은 후 
+                //아니다 sql에서 바로 찾을 수 있게 where 절에 user_id가 일치하는지 까지 넣어서 해보자
                 return true;
             }else{
                 return false;
             }
         }
         //게시물 삭제권한 확인
-        function canDeleteBoard($permissionsArray){
+        function canDeleteBoard($permissionsArray,$boardID,$user_id){
             if(in_array('delete-board',$permissionsArray)){
                 return true;
             }else{

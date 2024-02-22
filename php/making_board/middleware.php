@@ -46,15 +46,16 @@
                 //여기서 method로 행동은 지정할 수 있는데 목적을 정하는 것을 url로 해야할지...
                 //put도 확인하려면 그것밖에 없지 않나.
                 //게시판 관련 permissions
-                if(preg_match('/\/boards/',$url)){
-                    
+                if(preg_match('/\/boards\/*([0-9])*/',$url,$matches)){
+                    array_shift($matches);
                     $array_method = [
                         "post"=>canCreateBoard($permissionsArray)
                         ,
-                        "put"=>canUpdateBoard($permissionsArray)    
+                        "put"=>canUpdateBoard($permissionsArray,$matches,$user_id)    
                         ,
-                        "delete"=>canDeleteBoard($permissionsArray)
+                        "delete"=>canDeleteBoard($permissionsArray,$matches,$user_id)
                     ];
+
                     $result = $array_method[$method];
                     
                     $echoresult = ["mwResponse"=>$result,"deniedReason"=>$result?null:"no permission"];
