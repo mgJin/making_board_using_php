@@ -33,4 +33,7 @@ function run($url,$method,$routes){
     }
     
 }
+function jsonMaker($arr){
+    return json_encode($arr,JSON_PRETTY_PRINT|JSON_UNESCAPED_UNICODE);
+}
 ?>

@@ -1,10 +1,5 @@
 <?php
-        session_start();
-        if(!(isset($_SESSION["is_loggedin"]) && $_SESSION["is_loggedin"])){
-            echo "<script>alert('로그인을 해주세요');
-            location.href='login.php'</script>";
-        }
-
+        $result = [];
         $titleMsg = "";
         //입력검증
         if($_SERVER["REQUEST_METHOD"]=="POST"){
@@ -34,13 +29,14 @@
                     ";
                     $stmt = mysqli_prepare($mysqliconnect,$sql);
                     $exec = mysqli_stmt_execute($stmt);
-                    echo "<script>alert('글쓰기성공');
-                    location.href='Boards.php'</script>";
+                    $result = ["serverResponse"=>true];
+                    
                 }catch(mysqli_sql_exception $ex){
-                    echo "디비실패이유: ".$ex->getMessage();
+                    $result =["serverResponse="=>false,"deninedReason"=>$ex->getMessage()];
                 }catch(Exception $ex){
-                    echo "실패 이유 : ".$ex->getMessage();
+                    $result=["serverResponse="=>false,"deninedReason"=>$ex->getMessage()];
                 }
+                echo jsonMaker($result);
             }
             // $mysqliconnect = mysqli_connect($servername,$dbuser,$password,$dbname);
             // if(!$mysqliconnect){

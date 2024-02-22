@@ -31,7 +31,7 @@
                     //현재페이지로 다시 이동
                     $result = false;
                     $echoresult = ["mwResponse"=>$result,"deniedReason"=>"not login"];
-                    echo echojson($echoresult);
+                    echo jsonMaker($echoresult);
                     return $result;
                 }
                 
@@ -58,14 +58,11 @@
                     $result = $array_method[$method];
                     
                     $echoresult = ["mwResponse"=>$result,"deniedReason"=>$result?null:"no permission"];
-                    echo echojson($echoresult);
+                    echo jsonMaker($echoresult);
                 }
             }
             return $result;
         }
         //배열을 json으로 만들어 주는 함수
-        function echojson($arr){
-            return json_encode($arr,JSON_PRETTY_PRINT|JSON_UNESCAPED_UNICODE);
-        }
         
     ?>
