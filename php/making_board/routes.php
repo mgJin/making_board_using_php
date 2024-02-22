@@ -52,15 +52,15 @@
         ],
         '/login' => [
             'get'=> function(){
-                include('login.php');
+                include('LoginForm.php');
             },
             'post'=>function(){
-                include('login_post.php');
+                include('loginPost.php');
             }
         ],
         '/logout' =>[
             'post'=>function(){
-                include('logout.php');
+                include('logOut.php');
             }
         ],
         '/me'=>[

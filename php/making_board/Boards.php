@@ -13,7 +13,7 @@
     //페이지가 2까지밖에 없는데 3으로 넘어오면(url에 적어서) 최대페이지로 넘어가게 하면 된다.   
     //dbuser 가 현재 사용중인 client의 id로 
     session_start();
-    include('log_inout_button.php');
+    include('LogBtn.php');
     $currentpage = 1; //현재 페이지와 맨 처음 들어왔을 때 보여지는 페이지
     $DIVIDENUM = 1; //한 번에 몇 개의 게시글이 보여지는 가
     if (isset($_GET["page"])) {

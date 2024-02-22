@@ -24,6 +24,11 @@
             return $result;
             
         }
+        //해당 게시글의 writer를 가져오는 함수
+        function getWriter($connect,$boardID){
+            
+        }
+        
 
         //게시물 생성 권한 확인
         function canCreateBoard($permissionsArray){
@@ -34,8 +39,11 @@
             }
         }
         //게시물 수정 권한 확인
+        //여기다가 arg 로 boardid 랑 userid를 넣으면 될듯
+        //boardid 는 middleware에서 url에서 받아오는 식으로하자
         function canUpdateBoard($permissionsArray){
             if(in_array('update-board',$permissionsArray)){
+                //기본 골자select * from board b join member m on b.writer = m.user_id where b.id=8;
                 return true;
             }else{
                 return false;

@@ -45,7 +45,8 @@
                         alert(deniedReason);
                         return;
                     }
-                    console.log("success");
+                    alert('게시글이 등록되었습니다');
+                    window.location.replace("http://localhost:3000/boards");
                     //이제 다 통과 됐으니깐 실행해야할 것들 
                 },
                 error:function(result,status,error){

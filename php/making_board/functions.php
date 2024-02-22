@@ -1,5 +1,6 @@
 <?php
 
+//라우터 함수
 function run($url,$method,$routes){
     //라우터에 요청한 페이지가 있는지 여부에 대한 변수
     $matchFound = false;
@@ -33,7 +34,11 @@ function run($url,$method,$routes){
     }
     
 }
+
+//배열을 json으로 만들어주는 함수
 function jsonMaker($arr){
     return json_encode($arr,JSON_PRETTY_PRINT|JSON_UNESCAPED_UNICODE);
 }
+
+
 ?>

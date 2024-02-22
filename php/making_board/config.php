@@ -1,6 +1,8 @@
 <?php
+//유저한테 보이는 Form은 첫 글자부터 대문자
+//행동이 들어가면 첫글자는 소문자
 //PDO 방식
-//이걸 권한을 제한한 유저를 만든 다음 하는게 좋을듯?
+
     $servername = "localhost";
     $dbname = "phpboard";
     $user = "root";
