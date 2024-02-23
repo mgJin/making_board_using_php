@@ -51,7 +51,7 @@
                     $array_method = [
                         "post"=>canCreateBoard($permissionsArray)
                         ,
-                        "put"=>canUpdateBoard($permissionsArray,$matches,$user_id)    
+                        "put"=>canUpdateBoard($permissionsArray,$matches,$user_id,$connect)    
                         ,
                         "delete"=>canDeleteBoard($permissionsArray,$matches,$user_id)
                     ];
