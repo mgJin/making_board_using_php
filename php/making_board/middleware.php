@@ -43,23 +43,25 @@
                 $permissionsArray = getRolesPermissions($connect,$role_id);
                 //지금 하는 행동에 대한 권한이 있는지 매치시키기
                 $method = strtolower($_SERVER["REQUEST_METHOD"]);
-                //여기서 method로 행동은 지정할 수 있는데 목적을 정하는 것을 url로 해야할지...
-                //put도 확인하려면 그것밖에 없지 않나.
+               
                 //게시판 관련 permissions
-                if(preg_match('/\/boards\/*([0-9])*/',$url,$matches)){
+                //여기서 matches 의 첫번째 요소를 그냥 쓸 수는 없나 . 그냥 [0] 으로 지정하니깐 좀 그렇네
+                if(preg_match('/\/boards\/*([0-9]+)/',$url,$matches)){
                     array_shift($matches);
+                    $board_id = $matches[0];
                     $array_method = [
                         "post"=>canCreateBoard($permissionsArray)
                         ,
-                        "put"=>canUpdateBoard($permissionsArray,$matches,$user_id,$connect)    
+                        "put"=>canUpdateBoard($permissionsArray,$board_id,$user_id,$connect)    
                         ,
-                        "delete"=>canDeleteBoard($permissionsArray,$matches,$user_id)
+                        "delete"=>canDeleteBoard($permissionsArray,$board_id,$user_id)
                     ];
 
                     $result = $array_method[$method];
-                    
-                    $echoresult = ["mwResponse"=>$result,"deniedReason"=>$result?null:"no permission"];
-                    echo jsonMaker($echoresult);
+                    if(!$result){
+                        $echoresult = ["mwResponse"=>$result,"deniedReason"=>$result?null:"no permission"];
+                        echo jsonMaker($echoresult);
+                    }
                 }
             }
             return $result;

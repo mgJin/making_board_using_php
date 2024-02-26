@@ -1,11 +1,15 @@
 <?php 
     global $connect;
+    
+    $resultArray = [];
+    
     parse_str(file_get_contents('php://input'),$result);
+
     $id = $result['id'];
     $title = $result["title"];
     $text = $result["text"];
     
-    $sql = "UPDATE board
+    $sql = "UPDATE boards
                  SET
                     title = '$title',
                     text = '$text'
@@ -14,12 +18,14 @@
     try{
         $stmt = $connect -> prepare($sql);
         $stmt ->execute();
-        $count = $stmt->rowCount();
+        $resultArray = array(
+            'serverResponse'=>true
+        );
     }catch(PDOException $ex){
-        echo $ex->getMessage();
+        $resultArray = [
+            'serverResponse'=>false,'deniedReason'=>$ex->getMessage()
+        ];
     }
-    $resultArray = array(
-        'serverResponse'=>true
-    );
+    header('Content-Type: application/json');
     echo json_encode($resultArray,JSON_PRETTY_PRINT,JSON_UNESCAPED_UNICODE);
 ?>

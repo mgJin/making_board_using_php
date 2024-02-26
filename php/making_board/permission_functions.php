@@ -48,11 +48,14 @@
             //기본 골자select * from board b join member m on b.writer = m.user_id where b.id=8;
             //select할 때 user id를 받은 후 
             //아니다 sql에서 바로 찾을 수 있게 where 절에 user_id가 일치하는지 까지 넣어서 해보자
-            $sql = "SELECT user_id FROM board b JOIN member m on b.writer = m.user_id where b.id=:boardID";
+            $sql = "SELECT m.user_id FROM board b JOIN member m on b.writer = m.user_id where b.id=:boardID";
             $stmt=$connect->prepare($sql);
             $stmt->bindParam(':boardID',$boardID);
             $stmt->execute();
             $result = $stmt->fetch(PDO::FETCH_COLUMN);
+            if(!$result){
+                return false;
+            }
             if($result===$user_id){
                 return true;
             }else{

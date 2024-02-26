@@ -1,4 +1,7 @@
 <?php 
-    
-   echo $_POST["title"];
+   if($aad){
+
+   }else{
+      echo "dd";
+   }
 ?>

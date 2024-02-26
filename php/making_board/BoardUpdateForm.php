@@ -56,28 +56,31 @@
                                 title : title,
                                 text : text
                             },
-                            success : function(result){
-                                console.log(result);
-                                let r = result.replace(/}{/g,',');
-                                let rp = JSON.parse(r);
-                                const{mwResponse,deniedReason,serverResponse,exMsg}=rp;
+                            dataType:'json',
+                            success : function(result){      
+                                console.log(result);      
+                                // let rp = JSON.parse(result);
+                                
+                                const{mwResponse,deniedReason,serverResponse,exMsg}=result;
                                 console.log(mwResponse,deniedReason,serverResponse);
-                                if(mwResponse){
-                                    if(serverResponse){
-                                        alert('수정되었습니다');
-                                        window.location.replace(baseURL);
-                                    }else{
-                                        alert('서버문제');
-                                    }
-                                }else{
+                                if(mwResponse===false){
                                     console.log(deniedReason);
                                     alert('권한이 없습니다');
-                                    //여기서 모달창 닫고 추가 작업해줘야함
+                                    return;
+                                }
+                                if(serverResponse){
+                                    alert('수정되었습니다');
+                                    window.location.replace(baseURL);
+                                }else{
+                                    console.log(deniedReason);
+                                    alert('서버문제');
                                 }
                                 
                             },
-                            error : function(result,status,error){
-                                console.log(error);
+                            error : function(xhr,status,error){
+                                console.log("xhr: " + xhr);
+                                console.log("status: " +status);
+                                console.log("error :"+ error);
                             }
                         })
                     }else{

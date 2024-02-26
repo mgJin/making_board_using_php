@@ -3,6 +3,7 @@
 //라우터 함수
 function run($url,$method,$routes){
     //라우터에 요청한 페이지가 있는지 여부에 대한 변수
+    
     $matchFound = false;
     $url = parse_url($url);
     $requestURL = $url['path'];
@@ -32,6 +33,7 @@ function run($url,$method,$routes){
         echo "요청 URL :".$requestURL;
         echo "에러띄우기 ,없는 페이지";
     }
+    
     
 }
 
