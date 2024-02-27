@@ -32,18 +32,20 @@
                     title:$("input[name='title']").val(),
                     text:$("input[name='text']").val()
                 },
-                
+                dataType:'json',
                 success:function(result){
-                    
-                    const {mwResponse,deniedReason,serverResponse}= result;
-                    if(mwResponse===false){
-                            console.log(deniedReason);
-                            alert('권한이 없습니다');
-                            return;
-                        }
+                    console.log(result);
+                    const {mwResponse,deniedReason,serverResponse,boardID}= result;
+                    console.log(boardID);
+                    //mwResponse가 undefined일 때가 있으므로 ==false로  
+                    if(mwResponse==false){
+                        console.log(deniedReason);
+                        alert(deniedReason);
+                        return;
+                    }
                     if(serverResponse){
                         alert('게시되었습니다');
-                        window.location.replace(baseURL);
+                        window.location.replace(baseURL+"/"+boardID);
                     }else{
                         console.log(deniedReason);
                         alert('서버문제');

@@ -10,8 +10,8 @@
                 $result = true;
             }
             
-            // 로그인이 필요한지 (이거 로그인도 막고 있음)
-            //method 로 구분을 지을것
+            
+            
             //get으로 들어올 때 막는것 (예를 들어 관리자페이지)은 따로 해야할 듯?
             //create는 필요한것이 로그인 되어있나, 생성할 권한이 있냐에 따라 결정됨
             //update,delete는 로그인 + 권한 + 해당 게시물(board에 한해서)의 writer인지 알아볼 필요가있음
@@ -44,6 +44,12 @@
                 //지금 하는 행동에 대한 권한이 있는지 매치시키기
                 $method = strtolower($_SERVER["REQUEST_METHOD"]);
                 
+                //role 이 admin이면 바로 통과
+                //??이거를 나중에 admin화면으로 갈 때도 적용해야 할 거같은데 밖으로 뺄까?
+                if($role_id===1){
+                    $result = true;
+                    return $result;
+                }
                 //게시판 관련 permissions
                 //여기서 matches 의 첫번째 요소를 그냥 쓸 수는 없나 . 그냥 [0] 으로 지정하니깐 좀 그렇네
                 if(preg_match('/^\/boards(?:\/(\d+))?$/',$url,$matches)){

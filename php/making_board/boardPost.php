@@ -31,8 +31,15 @@
                     ";
                     $stmt = mysqli_prepare($mysqliconnect,$sql);
                     $exec = mysqli_stmt_execute($stmt);
-                    
-                    $result = ["serverResponse"=>true];
+                    if($exec){
+                        $lastInsert = $mysqliconnect->insert_id;
+                        $sql = "SELECT id FROM board WHERE id=$lastInsert";
+                        $mresult = $mysqliconnect->query($sql);
+                        if($mresult->num_rows>0){
+                            $lastBoardID = $mresult->fetch_assoc();
+                            $result = ["serverResponse"=>true,"boardID"=>$lastBoardID["id"]];
+                        }
+                    }
                     
                 }catch(mysqli_sql_exception $ex){
                     $result =["serverResponse="=>false,"deninedReason"=>$ex->getMessage()];
