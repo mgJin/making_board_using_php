@@ -18,8 +18,8 @@
     <?php 
         global $connect;
         //$var 는 route에서 받은 것
-        $board_id = $var;
-        $sql = "SELECT title,text,writer FROM board WHERE id = $board_id";
+        
+        $sql = "SELECT title,text,writer FROM board WHERE id = $boardID";
         $stmt = $connect->query($sql);
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
         if(!$result){
@@ -50,35 +50,36 @@
             e.preventDefault();
             if(chk){
                 let action = chkbeh(e.data.action);
-                let board_id = <?php echo $var?>;
+                let boardID = <?php echo $boardID?>;
                 const baseURL = "http://localhost:3000/boards";
-                const boardURL = baseURL + "/" + board_id;
+                const boardURL = baseURL + "/" + boardID;
                 
                 if(action==="delete"){
                     
                     $.ajax({
                         type: "DELETE",
                         url : boardURL,
+                        dataType:'json',
                         success : function(result){
-                            let r = result.replace(/}{/g,',');
-                            
-                            let rp = JSON.parse(r);
-                            const {mwResponse,serverResponse,exMsg} = rp;
-                            console.log(mwResponse,serverResponse);
-                            if(!mwResponse){
-                                alert("권한이 없습니다.");
-                                window.location.replace(boardURL);
-                            }else{
-                                if(!serverResponse){
-                                    console.log("문제 : " +exMsg);
-                                    alert('서버 문제');
-                                }else{
-                                    alert(event.target.innerText+"되었습니다.");
-                                    window.location.replace(baseURL);
+                            console.log(result);
+                            const {mwResponse,serverResponse,deninedReason} = result;
+                            console.log(mwResponse,serverResponse,deninedReason);
+                            if(mwResponse===false){
+                                    console.log(deniedReason);
+                                    alert('권한이 없습니다');
+                                    return;
                                 }
+                            if(serverResponse){
+                                alert('삭제되었습니다');
+                                window.location.replace(baseURL);
+                            }else{
+                                console.log(deniedReason);
+                                alert('서버문제');
                             }
                         },
                         error : function(request,status,error){
+                            console.log(request);
+                            console.log(status);
                             console.log(error);
                         }
                     });

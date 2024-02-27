@@ -19,18 +19,18 @@
             }
         ],
         '/boards/([0-9]+)'=>[
-            'get'=> function($var){
+            'get'=> function($boardID){
                include('BoardDetail.php');
             },
-            'put'=>function(){
+            'put'=>function($boardID){
                 include('boardUpdate.php');
             },
-            'delete'=>function(){
-                echo '<h1>delete page</h1>';
+            'delete'=>function($boardID){
+                include('boardDelete.php');
             }
         ],
         '/boards/([0-9]+)/updateForm'=>[
-            'get'=>function($board_id){
+            'get'=>function($boardID){
                 include('BoardUpdateForm.php');
             }
         ],

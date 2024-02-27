@@ -1,7 +1,9 @@
 <?php
+        
         $result = [];
         $titleMsg = "";
         //입력검증
+        
         if($_SERVER["REQUEST_METHOD"]=="POST"){
             $dbconnect= true;
             if(!$_POST["title"]){
@@ -29,6 +31,7 @@
                     ";
                     $stmt = mysqli_prepare($mysqliconnect,$sql);
                     $exec = mysqli_stmt_execute($stmt);
+                    
                     $result = ["serverResponse"=>true];
                     
                 }catch(mysqli_sql_exception $ex){
@@ -36,12 +39,9 @@
                 }catch(Exception $ex){
                     $result=["serverResponse="=>false,"deninedReason"=>$ex->getMessage()];
                 }
+                header('Content-Type: application/json');
                 echo jsonMaker($result);
             }
-            // $mysqliconnect = mysqli_connect($servername,$dbuser,$password,$dbname);
-            // if(!$mysqliconnect){
-            //     die("서버연결실패 : ".mysqli_connect_error());
-            // }
-            // echo "서버연결성공"."<br>";
+            
         }
 ?>

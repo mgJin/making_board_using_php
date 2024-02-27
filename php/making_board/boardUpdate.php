@@ -4,12 +4,12 @@
     $resultArray = [];
     
     parse_str(file_get_contents('php://input'),$result);
-
-    $id = $result['id'];
+    
+    $id = $boardID;
     $title = $result["title"];
     $text = $result["text"];
     
-    $sql = "UPDATE boards
+    $sql = "UPDATE board
                  SET
                     title = '$title',
                     text = '$text'

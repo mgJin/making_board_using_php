@@ -1,7 +1,8 @@
 <?php 
-   if($aad){
-
+   $a=[1];
+   if(count($a)){
+      echo "있따";
    }else{
-      echo "dd";
+      echo "없다";
    }
 ?>

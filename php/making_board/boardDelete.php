@@ -1,23 +1,22 @@
 <?php 
     global $connect;
     
-    $board_id = $var;
+    $board_id = $boardID;
     
     $sql = "DELETE FROM board WHERE id = '$board_id'";
     try{
         $stmt = $connect->prepare($sql);
         $stmt->execute();
         $count = $stmt->rowCount();
-    }catch(PDOException $ex){
-        
-        $resultArray = array(
-            'serverResponse' =>false,
-            'exMsg' => $ex->getMessage()
+        $resultArray= array(
+            'serverResponse'=>true
         );
-        echo json_encode($resultArray,JSON_PRETTY_PRINT|JSON_UNESCAPED_UNICODE);
+    }catch(PDOException $ex){
+        $resultArray = [
+            'serverResponse'=>false,'deniedReason'=>$ex->getMessage()
+        ];
     }
-    $resultArray= array(
-        'serverResponse'=>true
-    );
+    header('Content-Type: application/json');
+
     echo json_encode($resultArray,JSON_PRETTY_PRINT|JSON_UNESCAPED_UNICODE);
 ?>

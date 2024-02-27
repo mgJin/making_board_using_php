@@ -14,7 +14,7 @@
         global $connect;
         // 입력검증
         
-        $sql = "SELECT title,text FROM board WHERE id = '$board_id'";
+        $sql = "SELECT title,text FROM board WHERE id = '$boardID'";
         try{
             $stmt = $connect->query($sql);
             $result = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -29,7 +29,7 @@
         제목 : <input type = "text" id="upd-title" name = "title" <?php echo 'value="'.htmlspecialchars($title).'"';?> placeholder="제목을 입력해주세요">
         <p id="titleMsg"></p>
         내용 : <input type = "text" id="upd-text" name = "text" <?php echo 'value="'.htmlspecialchars($text).'"';?>>
-        <input type="hidden" id= "upd-id" name="board_id" value = <?php echo $board_id?>>
+        
         <input class="crdbtn" type = "button" value="수정">
     </form>
     
@@ -43,7 +43,8 @@
                 e.preventDefault();   
                 let chk = chkbool(e.target.value);
                 if(chk){
-                    let id = $("#upd-id").val();
+                    let id = <?php echo $boardID?>;
+                    
                     let title = $("#upd-title").val();
                     let text = $("#upd-text").val();
                     if(title){
@@ -52,7 +53,7 @@
                             type:"PUT",
                             url : baseURL,
                             data :{
-                                id : id,
+                                
                                 title : title,
                                 text : text
                             },
@@ -61,7 +62,7 @@
                                 console.log(result);      
                                 // let rp = JSON.parse(result);
                                 
-                                const{mwResponse,deniedReason,serverResponse,exMsg}=result;
+                                const{mwResponse,deniedReason,serverResponse}=result;
                                 console.log(mwResponse,deniedReason,serverResponse);
                                 if(mwResponse===false){
                                     console.log(deniedReason);

@@ -23,33 +23,35 @@
     <script>
         //글쓰기 클릭 시 ajax
         $("#posting-btn").on("click",function(event){
+            event.preventDefault();
+            const baseURL = "http://localhost:3000/boards";
             $.ajax({
                 type:"POST",
-                url:"http://localhost:3000/boards",
+                url: baseURL,
                 data:{
                     title:$("input[name='title']").val(),
                     text:$("input[name='text']").val()
                 },
+                
                 success:function(result){
-                    console.log(result);
-                    const r = result.replace(/}{/g,',');
-                    const rp = JSON.parse(r);
-                    const {mwResponse,deniedReason,serverResponse}= rp;
-                    if(!mwResponse){
-                        alert(deniedReason);
-                        return;
-                        //여기서 그냥 로그인 화면으로 이동하게 할까? 한번물어보고
-                        //아 근데 로그인 으로 이동하게 하려면 로그인을 또 걸러야함
+                    
+                    const {mwResponse,deniedReason,serverResponse}= result;
+                    if(mwResponse===false){
+                            console.log(deniedReason);
+                            alert('권한이 없습니다');
+                            return;
+                        }
+                    if(serverResponse){
+                        alert('게시되었습니다');
+                        window.location.replace(baseURL);
+                    }else{
+                        console.log(deniedReason);
+                        alert('서버문제');
                     }
-                    if(!serverResponse){
-                        alert(deniedReason);
-                        return;
-                    }
-                    alert('게시글이 등록되었습니다');
-                    window.location.replace("http://localhost:3000/boards");
-                    //이제 다 통과 됐으니깐 실행해야할 것들 
                 },
                 error:function(result,status,error){
+                    console.log(result);
+                    console.log(status);
                     console.log(error);
                 }
             })

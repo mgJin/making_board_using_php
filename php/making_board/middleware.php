@@ -43,21 +43,26 @@
                 $permissionsArray = getRolesPermissions($connect,$role_id);
                 //지금 하는 행동에 대한 권한이 있는지 매치시키기
                 $method = strtolower($_SERVER["REQUEST_METHOD"]);
-               
+                
                 //게시판 관련 permissions
                 //여기서 matches 의 첫번째 요소를 그냥 쓸 수는 없나 . 그냥 [0] 으로 지정하니깐 좀 그렇네
-                if(preg_match('/\/boards\/*([0-9]+)/',$url,$matches)){
+                if(preg_match('/^\/boards(?:\/(\d+))?$/',$url,$matches)){
+                    $board_id=null;
+                    
                     array_shift($matches);
-                    $board_id = $matches[0];
+                    if(count($matches)){
+                        $board_id = $matches[0];
+                    }
                     $array_method = [
                         "post"=>canCreateBoard($permissionsArray)
                         ,
                         "put"=>canUpdateBoard($permissionsArray,$board_id,$user_id,$connect)    
                         ,
-                        "delete"=>canDeleteBoard($permissionsArray,$board_id,$user_id)
+                        "delete"=>canDeleteBoard($permissionsArray,$board_id,$user_id,$connect)
                     ];
 
                     $result = $array_method[$method];
+                    
                     if(!$result){
                         $echoresult = ["mwResponse"=>$result,"deniedReason"=>$result?null:"no permission"];
                         echo jsonMaker($echoresult);
