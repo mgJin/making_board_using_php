@@ -34,9 +34,9 @@
                 },
                 dataType:'json',
                 success:function(result){
-                    console.log(result);
+                    
                     const {mwResponse,deniedReason,serverResponse,boardID}= result;
-                    console.log(boardID);
+                    
                     //mwResponse가 undefined일 때가 있으므로 ==false로  
                     if(mwResponse==false){
                         console.log(deniedReason);

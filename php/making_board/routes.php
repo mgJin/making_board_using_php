@@ -79,13 +79,20 @@
         //     }
         // ],
         '/user' =>[
+            'get'=>function(){
+                include('SignUp.php');
+            },
             'post'=>function(){
-                echo "<h1>user 회원가입 back</h1>";
+                include('SignUp.php');
             }
         ],
+        //이건 한 곳에서 다 처리해보기
         '/user/signUpForm'=>[
             'get'=>function(){
-                echo "<h1>user 회원가입 기입하는 곳</h1>";
+                include('SignUp.php');
+            },
+            'post'=>function(){
+                include('SignUp.php');
             }
         ]
         

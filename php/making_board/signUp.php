@@ -122,7 +122,8 @@
         var_dump($_REQUEST)."<br>";
     ?>
     <!--gender 의 datatype :  enum('male','female') -->
-    <form action = "<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method = "post">
+    <!--submit누르고 확인버튼 나오는 거랑, 회원가입이 성공하면 /boards 로 이동하게 -->
+    <form action = "http://localhost:3000/user" method = "post">
         ID : <input type = "text" name="id">
         <?php echo $IDMsg;?>
         이름 : <input type = "text" name = "name">
@@ -137,7 +138,7 @@
         <?php echo $EmailMsg;?>
         <input type="submit">
     </form>
-
+    
     
 </body>
 </html>
