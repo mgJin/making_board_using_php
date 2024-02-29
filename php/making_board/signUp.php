@@ -11,7 +11,7 @@
     <?php
         //필수인 것들 비었을 때의 메시지
         $NameMsg = $IDMsg = $PWMsg = $EmailMsg = "" ;
-        $dbconnect = true;
+        $dbconnect;
         //비어있는지와 제대로 입력되었는지 유효성검사(id, 이름, pw, email 은 필수)(gender와 birth는 선택)
         //더 제대로 된 검증이 필요한듯?
         
@@ -102,12 +102,15 @@
                                 birth = NULL,
                                 email = '$email'");
                     }
-                    $signUpConnect ->commit();
-                    //권한 부여
-                    $signUpConnect ->exec("CREATE USER '$id'@'localhost' IDENTIFIED BY '$password'");
-                    $signUpConnect ->exec("GRANT ALL PRIVILEGES ON phpboard.board To '$id'@'localhost'");
-                    $signUpConnect ->exec("GRANT UPDATE,DELETE ON phpboard.member TO '$id'@'localhost'");
-                    echo "유저생성성공";
+                    $result = $signUpConnect ->commit();
+                    //권한 부여 =>permissions table 로 대체
+                    // $signUpConnect ->exec("CREATE USER '$id'@'localhost' IDENTIFIED BY '$password'");
+                    // $signUpConnect ->exec("GRANT ALL PRIVILEGES ON phpboard.board To '$id'@'localhost'");
+                    // $signUpConnect ->exec("GRANT UPDATE,DELETE ON phpboard.member TO '$id'@'localhost'");
+                    if($result){
+                        echo "<script>alert('생성되었습니다')</script>";
+                        header("http://localhost:3000/boards");
+                    }
                 }catch(PDOException $ex){
                     $signUpConnect ->rollBack();
                     echo "유저생성실패 ". $ex->getMessage();
