@@ -1,12 +1,13 @@
+<?php use app\User\User; ?>
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>회원가입</title>
-</head>
-<body>
-    <!--유저 생성 권한만 있는 슈퍼유저가 필요할 듯? -->
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>회원가입</title>
+    </head>
+    <body>
+        <!--유저 생성 권한만 있는 슈퍼유저가 필요할 듯? -->
     <!--유저 생성 시 id가 unique 인 동시에 not null 이어야할듯-->
     <?php
         //필수인 것들 비었을 때의 메시지
@@ -16,62 +17,78 @@
         //더 제대로 된 검증이 필요한듯?
         
         if($_SERVER["REQUEST_METHOD"] == "POST"){
-            if(empty($_POST["id"])){
-                $IDMsg = "ID를 입력해주세요";
-                $dbconnect = false;
-            }else{
-                $id = $_POST["id"];
-            }
 
-            if(empty($_POST["name"])){
-                $NameMsg = "이름을 입력해주세요";
-                $dbconnect = false;
-            }else{
-                $name = $_POST["name"];
-            }
+            //validation
+            //일단 User를 만들때를 생각하고 해당 validation통과 못하면 false 반환하는 식으로?
+            //이것도 클래스로 만들어서 통과못하는 사유랑 msg를 같이 담아서 보낼 수 있도록할까?
+            // if(empty($_POST["id"])){
+            //     $IDMsg = "ID를 입력해주세요";
+            //     $dbconnect = false;
+            // }else{
+            //     $id = $_POST["id"];
+            // }
 
-            if(empty($_POST["password"])){
-                $PWMsg = "패스워드를 입력해주세요";
-                $dbconnect = false;
-            }else{
-                $password = $_POST["password"];
-            }
+            // if(empty($_POST["name"])){
+            //     $NameMsg = "이름을 입력해주세요";
+            //     $dbconnect = false;
+            // }else{
+            //     $name = $_POST["name"];
+            // }
+
+            // if(empty($_POST["password"])){
+            //     $PWMsg = "패스워드를 입력해주세요";
+            //     $dbconnect = false;
+            // }else{
+            //     $password = $_POST["password"];
+            // }
             
-            if(empty($_POST["email"])){
-                $EmailMsg = "이메일을 입력해주세요";
-                $dbconnect = false;
-            }else{
-                $email = $_POST["email"];
-                var_dump($email);
-                if(!filter_var($email, FILTER_VALIDATE_EMAIL)){
-                    $EmailMsg = "이메일을 정확하게 입력해 주세요";
-                }
-            }
+            // if(empty($_POST["email"])){
+            //     $EmailMsg = "이메일을 입력해주세요";
+            //     $dbconnect = false;
+            // }else{
+            //     $email = $_POST["email"];
+            //     var_dump($email);
+            //     if(!filter_var($email, FILTER_VALIDATE_EMAIL)){
+            //         $EmailMsg = "이메일을 정확하게 입력해 주세요";
+            //     }
+            // }
             
-            if(empty($_POST["gender"])){
-                $gender = null;
-            }else{
-                $gender = $_POST["gender"];
-            };
-            if(empty($_POST["birth"])||($_POST=="")){
-                $birth = NULL;
-                echo "생일이 비어있음";
-                echo "<br>"."생일의 값은 :";
-                var_dump($birth);
-            }else{
-                $birth = $_POST["birth"];
-            };
+            // if(empty($_POST["gender"])){
+            //     $gender = null;
+            // }else{
+            //     $gender = $_POST["gender"];
+            // };
+            // if(empty($_POST["birth"])||($_POST=="")){
+            //     $birth = NULL;
+            //     echo "생일이 비어있음";
+            //     echo "<br>"."생일의 값은 :";
+            //     var_dump($birth);
+            // }else{
+            //     $birth = $_POST["birth"];
+            // };
+            try{
+                $newUser = User::builder()
+                ->valID($_POST["id"])
+                ->valName($_POST["name"])
+                ->valPassword($_POST["password"])
+                ->valGender($_POST["gender"])
+                ->valEmail($_POST["email"])
+                ->valBirth($_POST["birth"])
+                ->build();
+            }catch(InvalidArgumentException $ex){
+                echo $ex->getMessage();
+            }
             
             //입력한 값들이 문제가 없다면 dbconnect = true;
             //db랑 연결 시작(insert)
-            if($dbconnect = true){
+            if($newUser->result){
                 $servername = "localhost";
                 $dbname = "phpboard";
-                $user = "root";
+                $dbuser = "root";
                 $dbpassword = "9094";
 
                 try{
-                    $signUpConnect = new PDO("mysql:host=$servername;dbname=$dbname",$user,$dbpassword);
+                    $signUpConnect = new PDO("mysql:host=$servername;dbname=$dbname",$dbuser,$dbpassword);
                     $signUpConnect -> setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
                     $signUpConnect ->setAttribute(PDO::ATTR_AUTOCOMMIT,false);
                     echo "서버 연결 성공"."<br>";   
@@ -83,10 +100,11 @@
                
                 $signUpConnect ->beginTransaction();
                 try{
-                    if(!empty($birth)){
+                    if(!empty($newUser->getBirth())){
+                        //sql 구문을 prepare로 넣고 뒤에 bindparam을 통해서 getID등을 넣자
                     $signUpConnect ->exec(
                         "INSERT INTO member
-                            set user_id = '$id',
+                            set user_id = :id,
                                 user_pw = '$password',
                                 name = '$name',
                                 gender = '$gender',
