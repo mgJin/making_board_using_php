@@ -1,8 +1,8 @@
 <?php 
    
-   namespace app\User;
+   
 
-use InvalidArgumentException;
+   // use InvalidArgumentException;
 
    class User{
 
@@ -59,6 +59,17 @@ use InvalidArgumentException;
       public function getBirth(){
          return $this->birth;
       }
+
+      public function getArrayProp(){
+         return [
+            ':id'=>$this->getID(),
+            ':name'=>$this->getName(),
+            ':password'=>$this->getPassword(),
+            ':gender'=>$this->getGender(),
+            ':birth'=>$this->getBirth(),
+            ':email'=>$this->getEmail()
+         ];
+      }
       
 
       public function display(){
@@ -104,9 +115,9 @@ use InvalidArgumentException;
          endif;
       }
      
-      public function valEmail($email){
+      public function valEmail($email=""){
          if(empty($email)):
-            return;
+            return $this;
          endif;
          if(filter_var($email,FILTER_VALIDATE_EMAIL)):
             $this->user->setEmail($email);
@@ -116,12 +127,20 @@ use InvalidArgumentException;
          endif;
       }
       
-      public function valGender($gender){
+      public function valGender($gender=""){
+         if(empty($gender)||$gender==""){
+            $this->user->setGender(null);
+            return $this;
+         }
          $this->user->setGender($gender);
          return $this;
       }
       
-      public function valBirth($birth){
+      public function valBirth($birth=""){
+         if(empty($birth)||$birth==""){
+            $this->user->setBirth(null);
+            return $this;
+         }
          $this->user->setBirth($birth);
          return $this;
       }
@@ -132,4 +151,5 @@ use InvalidArgumentException;
          return $this->user;
       }
    }
+   
 ?>

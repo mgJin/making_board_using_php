@@ -80,21 +80,14 @@
         // ],
         '/user' =>[
             'get'=>function(){
-                include('SignUp.php');
+                include('UserSignUpForm.php');
             },
             'post'=>function(){
-                include('SignUp.php');
+                include('userPost.php');
             }
         ],
-        //이건 한 곳에서 다 처리해보기
-        '/user/signUpForm'=>[
-            'get'=>function(){
-                include('SignUp.php');
-            },
-            'post'=>function(){
-                include('SignUp.php');
-            }
-        ]
+       
+        
         
     ];
 ?>
