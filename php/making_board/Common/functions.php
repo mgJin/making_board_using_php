@@ -42,5 +42,9 @@ function jsonMaker($arr){
     return json_encode($arr,JSON_PRETTY_PRINT|JSON_UNESCAPED_UNICODE);
 }
 
+function echoValue($value){
+    echo 'value="'.htmlspecialchars($value).'"';
+}
+
 
 ?>

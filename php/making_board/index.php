@@ -1,7 +1,5 @@
 <?php
 
-
-
 include_once (__DIR__.'/Common/functions.php');
 include_once (__DIR__.'/Common/middleware.php');
 $routes = include_once (__DIR__.'/Settings/routes.php');

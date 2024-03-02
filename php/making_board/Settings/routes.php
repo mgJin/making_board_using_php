@@ -57,20 +57,22 @@
                 echo "<h1>user 정보 수정 페이지</h1>";
             }
         ],
-        // '/me/updateForm'=>[
-        //     'get'=>function(){
-        //         echo "<h1>user 정보 수정 기입 페이지</h1>";
-        //     }
-        // ],
-        '/userSignup' =>[
+        '/me/UpdateForm'=>[
             'get'=>function(){
-                include(__DIR__.'/../User/UserSignUpForm.php');
+                include(__DIR__.'/../User/UserUpdateForm.php');
             },
-            'post'=>function(){
-                include(__DIR__.'/../User/userPost.php');
+            'put'=>function(){
+                echo "<h1>유저 수정</h1>";
             }
         ],
-       
+        '/SignUpForm'=>[
+            'get'=> function(){
+                include(__DIR__.'/../Login/LoginForm.php');
+            },
+            'post'=>function(){
+                include(__DIR__.'/../Login/loginPost.php');
+            }
+        ]
         
         
     ];

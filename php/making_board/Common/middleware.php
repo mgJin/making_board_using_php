@@ -21,7 +21,7 @@
                 $url = parse_url($_SERVER['REQUEST_URI']);
                 $url = $url['path'];
                 //로그인 요청,회원가입은 통과시켜주기
-                $login_array = array('/loginForm','/logout','/userSignup');
+                $login_array = array('/loginForm','/logout','/SignUpForm');
                 if(in_array($url,$login_array)){
                     $result = true;
                     return $result;
