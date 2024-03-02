@@ -19,7 +19,7 @@
     
     
 ?>
-    <form action = "http://localhost:3000/login" method = "POST">
+    <form action = "http://localhost:3000/loginForm" method = "POST">
         ID : <input type= "text" name = "userid">
         PW : <input type= "password" name = "userpw">
         <input type= "submit">

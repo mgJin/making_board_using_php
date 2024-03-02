@@ -49,7 +49,7 @@
 
         async function postJSON(data){
             try{
-                const response = await fetch("http://localhost:3000/user",{
+                const response = await fetch("http://localhost:3000/userSignup",{
                     method: "POST",
                     headers: {
                         "Content-Type":"application/json"

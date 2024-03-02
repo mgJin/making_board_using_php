@@ -1,4 +1,4 @@
-<?php require('config.php');?>
+<?php require(__DIR__.'/../Settings/config.php');?>
     <?php include('permission_functions.php');?>
     <?php
         //해당 url로 들어와도 되는지, 권한이 있는지 체크하는 미들웨어 함수
@@ -21,7 +21,7 @@
                 $url = parse_url($_SERVER['REQUEST_URI']);
                 $url = $url['path'];
                 //로그인 요청,회원가입은 통과시켜주기
-                $login_array = array('/login','/logout','/user');
+                $login_array = array('/loginForm','/logout','/userSignup');
                 if(in_array($url,$login_array)){
                     $result = true;
                     return $result;
