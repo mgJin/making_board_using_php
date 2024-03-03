@@ -55,14 +55,14 @@
             },
             'put'=>function(){
                 include(__DIR__.'/../User/userUpdate.php');
+            },
+            'delete'=>function(){
+                include(__DIR__.'/../User/userDelete.php');
             }
         ],
         '/me/updateform'=>[
             'get'=>function(){
                 include(__DIR__.'/../User/UserUpdateForm.php');
-            },
-            'put'=>function(){
-                echo "<h1>유저 수정</h1>";
             }
         ],
         '/signupform'=>[

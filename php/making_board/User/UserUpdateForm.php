@@ -51,6 +51,7 @@
         if(genderRadio){
             genderRadio.checked = true;
         }
+        
         const subbtn = document.querySelector("#subbtn");
         subbtn.addEventListener("click",function(){
             const pregender =document.querySelector("input[name='gender']:checked");
