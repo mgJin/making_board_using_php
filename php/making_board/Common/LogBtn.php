@@ -4,6 +4,7 @@
 if ((isset($_SESSION["is_loggedin"]) && $_SESSION["is_loggedin"])) {
     ?>
     <button id="logoutBtn" onclick="logInOutBtn()">로그아웃</button>
+    <button id="meBtn" onclick="meBtn()">내 정보</button>
     <?php
 } else {
     ?>
