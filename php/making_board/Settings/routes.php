@@ -54,10 +54,10 @@
                 //애초에 정보는 다 나오잖아.
             },
             'put'=>function(){
-                echo "<h1>user 정보 수정 페이지</h1>";
+                include(__DIR__.'/../User/userUpdate.php');
             }
         ],
-        '/me/UpdateForm'=>[
+        '/me/updateform'=>[
             'get'=>function(){
                 include(__DIR__.'/../User/UserUpdateForm.php');
             },
@@ -65,7 +65,7 @@
                 echo "<h1>유저 수정</h1>";
             }
         ],
-        '/SignUpForm'=>[
+        '/signupform'=>[
             'get'=> function(){
                 include(__DIR__.'/../Login/LoginForm.php');
             },

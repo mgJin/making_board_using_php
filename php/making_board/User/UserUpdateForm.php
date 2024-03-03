@@ -11,7 +11,7 @@
 
     <?php 
         global $connect;
-        session_start();
+        // session_start();//mw에서 이미 실행함
         $userID = $_SESSION["user"]["user_id"];
         $sql = "SELECT user_id,name,gender,birth,email FROM member WHERE user_id=:userID";
         try{
@@ -32,7 +32,7 @@
         ->build();
     ?>
     <!-- 비밀번호 바꾸는건 따로 페이지를 만들어서 하자-->
-    <form id="signform" onsubmit="return false">
+    <form id="updateform" onsubmit="return false">
         ID : <input type = "text" name="id" <?php echoValue($user->getID());?>>
         
         이름 : <input type = "text" name = "name" <?php echoValue($user->getName());?>>
@@ -50,6 +50,45 @@
         const genderRadio = document.querySelector('input[name="gender"][value="'+getGender+'"');
         if(genderRadio){
             genderRadio.checked = true;
+        }
+        const subbtn = document.querySelector("#subbtn");
+        subbtn.addEventListener("click",function(){
+            const pregender =document.querySelector("input[name='gender']:checked");
+            const regender = pregender?pregender.value:"";
+            const formData = {
+            id: document.querySelector("input[name='id']").value,
+            name: document.querySelector("input[name='name']").value,
+            gender: regender,
+            birth: document.querySelector("input[name='birth']").value,
+            email: document.querySelector("input[name='email']").value
+        };
+            handleSubmit("http://localhost:3000/me",formData);
+        })
+        
+        async function handleSubmit(url,data){
+            try{
+                const response = await fetch(url,{
+                    method:"PUT",
+                    headers:{
+                        "Content-Type":"application/json"
+                    },
+                    body:JSON.stringify(data)
+                })
+                const result = await response.json();
+                const {mwResponse,serverResponse,deniedReason}= result;
+                if(mwResponse==false){
+                    alert('권한이 없습니다');
+                    return;
+                }
+                if(!serverResponse){
+                    alert(deniedReason);
+                }else{
+                    alert('수정되었습니다');
+                    window.location.replace('http://localhost:3000/me');
+                }
+            }catch(error){
+                console.log(error);
+            }
         }
         
     </script>

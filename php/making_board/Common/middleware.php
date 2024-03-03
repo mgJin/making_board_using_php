@@ -6,9 +6,22 @@
             global $connect;
             //로그인이 되어있을 경우
             $result = false;
+            $url = parse_url($_SERVER['REQUEST_URI']);
+            $url = $url['path'];
+            //기본적으로 get요청은 모두 통과
             if($_SERVER['REQUEST_METHOD']=="GET"){
                 $result = true;
             }
+            //me나 admin은 여기서 막을 것
+            if(preg_match('/^\/me(\/.*)?$/',$url)):
+                session_start();
+                //login하지 않고 들어갈 시 mw에서 막힘
+                if(isset($_SESSION["is_loggedin"])):
+                    return $result = true;
+                else:
+                    return $result = false;
+                endif;
+            endif;
             
             
             
@@ -18,10 +31,8 @@
             if($_SERVER['REQUEST_METHOD']!="GET"){
                 
                 session_start();
-                $url = parse_url($_SERVER['REQUEST_URI']);
-                $url = $url['path'];
                 //로그인 요청,회원가입은 통과시켜주기
-                $login_array = array('/loginForm','/logout','/SignUpForm');
+                $login_array = array('/loginForm','/logout','/signupform');
                 if(in_array($url,$login_array)){
                     $result = true;
                     return $result;
