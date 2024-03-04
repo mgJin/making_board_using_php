@@ -2,6 +2,7 @@
     <?php include('permission_functions.php');?>
     <?php
         //해당 url로 들어와도 되는지, 권한이 있는지 체크하는 미들웨어 함수
+        //접근 권한이 없을 때에는 무조건 boards 페이지를 보게 한다던지 아니면 다른 수단이 필요할듯?
         function chk(){
             global $connect;
             //로그인이 되어있을 경우
@@ -12,6 +13,26 @@
             if($_SERVER['REQUEST_METHOD']=="GET"){
                 $result = true;
             }
+            
+            if(preg_match('/^\/admin(\/.*)?$/',$url)):
+                session_start();
+                if(!isset($_SESSION['is_loggedin'])):
+                    return $result=false;
+                endif;
+                $user_id = $_SESSION["user"]["user_id"];
+                
+                $role_id = getRoleId($connect,$user_id);
+                if($role_id==1):
+                    return $result=true;
+                else:
+                    $resultArray = [
+                        'mwResponse'=>false,'deniedReason'=>'not admin'
+                    ];
+                    echo jsonMaker($resultArray);
+                    return $result=false;
+                endif;
+            endif;
+                
             //me나 admin은 여기서 막을 것
             if(preg_match('/^\/me(\/.*)?$/',$url)):
                 session_start();

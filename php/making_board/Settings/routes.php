@@ -5,6 +5,11 @@
                 echo '<h1>home page</h1>';
             }
         ],
+        '/admin'=>[
+            'get'=>function(){
+                echo '<h1>admin page</h1>';
+            }
+        ],
         '/boards' => [
             'get'=> function(){
                 include(__DIR__.'/../Board/Boards.php');
