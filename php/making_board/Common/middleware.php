@@ -14,7 +14,7 @@
                 $result = true;
             }
             
-            if(preg_match('/^\/admin(\/.*)?$/',$url)):
+            if(preg_match('/^\/adminpage(\/.*)?$/',$url)):
                 session_start();
                 if(!isset($_SESSION['is_loggedin'])):
                     return $result=false;

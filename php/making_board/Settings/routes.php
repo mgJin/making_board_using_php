@@ -5,9 +5,9 @@
                 echo '<h1>home page</h1>';
             }
         ],
-        '/admin'=>[
+        '/adminpage'=>[
             'get'=>function(){
-                echo '<h1>admin page</h1>';
+                include(__DIR__.'/../Admin/admin.php');
             }
         ],
         '/boards' => [
