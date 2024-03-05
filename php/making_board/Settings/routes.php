@@ -10,6 +10,11 @@
                 include(__DIR__.'/../Admin/admin.php');
             }
         ],
+        '/adminpage/boardinfo/([0-9]+)'=>[
+            'get'=>function($boardID){
+                include(__DIR__.'/../Admin/BoardInfo.php');
+            }
+        ],
         '/adminpage/userinfo/([0-9]+)'=>[
             'get'=>function($user_pk){
                 include(__DIR__.'/../Admin/UserInfo.php');

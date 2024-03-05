@@ -58,7 +58,7 @@
         <aside>
             <ul class="managementList">
                 <li class="asideLI" onclick="onShow('Base')">Base</li>
-                <li class="asideLI" onclick="onShow('PermissionManagement')">Base</li>
+                <li class="asideLI" onclick="onShow('PermissionManagement')">PermissionManagement</li>
                 <li class="asideLI" onclick="onShow('UserManagement')">UserManagement</li>
                 <li class="asideLI" onclick="onShow('BoardManagement')">Board management</li>
             </ul>
@@ -84,7 +84,7 @@
                     <ul>    
                         <?php foreach($boardArrays as $boardInfo){?>
                             <li>
-                                <a class="infoA" href="">
+                                <a class="infoA" <?php echo "href='http://localhost:3000/adminpage/boardinfo/".$boardInfo['id']."'";?>>
                                     <?php echo $boardInfo["title"]?>
                                 </a>
                             </li>

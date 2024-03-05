@@ -10,7 +10,7 @@
     global $connect;
     //$var 는 route에서 받은 것
     
-    $sql = "SELECT title,text,writer FROM board WHERE id = $boardID";
+    $sql = "SELECT title,text,writer,created FROM board WHERE id = $boardID";
     $stmt = $connect->query($sql);
     $result = $stmt->fetch(PDO::FETCH_ASSOC);
     if(!$result){
@@ -23,6 +23,8 @@
 <div>
     <h2>제목 : <?php echo $result["title"] ?></h2>
     <span>작성자 : <?php echo $result["writer"]?></span>
+    <br>
+    <span>작성 날짜 : <?php echo $result["created"]?></span>
     <br>
     <span><?php echo $result["text"]?></span>
 </div>
