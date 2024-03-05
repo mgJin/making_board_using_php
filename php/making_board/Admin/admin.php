@@ -58,12 +58,14 @@
         <aside>
             <ul class="managementList">
                 <li class="asideLI" onclick="onShow('Base')">Base</li>
+                <li class="asideLI" onclick="onShow('PermissionManagement')">Base</li>
                 <li class="asideLI" onclick="onShow('UserManagement')">UserManagement</li>
                 <li class="asideLI" onclick="onShow('BoardManagement')">Board management</li>
             </ul>
         </aside>
         <article>
             <div id="Base"class="managements">Welcome Admin Page</div>
+            <div id="PermissionManagement"class="managements">Permission Admin Page</div>
             <div id="UserManagement" class="managements">
                 <nav>
                     <ul>    
