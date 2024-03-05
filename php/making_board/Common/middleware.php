@@ -4,6 +4,7 @@
         //해당 url로 들어와도 되는지, 권한이 있는지 체크하는 미들웨어 함수
         //접근 권한이 없을 때에는 무조건 boards 페이지를 보게 한다던지 아니면 다른 수단이 필요할듯?
         function chk(){
+            
             global $connect;
             //로그인이 되어있을 경우
             $result = false;
@@ -50,7 +51,7 @@
             //create는 필요한것이 로그인 되어있나, 생성할 권한이 있냐에 따라 결정됨
             //update,delete는 로그인 + 권한 + 해당 게시물(board에 한해서)의 writer인지 알아볼 필요가있음
             if($_SERVER['REQUEST_METHOD']!="GET"){
-                
+                // header('Content-Type:application/json');
                 session_start();
                 //로그인 요청,회원가입은 통과시켜주기
                 $login_array = array('/loginForm','/logout','/signupform');

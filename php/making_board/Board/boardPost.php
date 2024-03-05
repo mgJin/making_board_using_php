@@ -5,19 +5,22 @@
         //입력검증
         
         if($_SERVER["REQUEST_METHOD"]=="POST"){
+            $rawData = file_get_contents("php://input");
+            $data = json_decode($rawData);
+
             $dbconnect= true;
-            if(!$_POST["title"]){
+            if(!$data->title){
                 $titleMsg = "제목을 입력해주세요";
                 $dbconnect = false;
             }else{
-                $title = $_POST["title"];
+                $title = $data->title;
             }
-            $text = $_POST["text"];
+            $text = $data->text;
             if($dbconnect){
                 $writer = $_SESSION["user"]["user_id"];
                 $date = date("Y-m-d");
                 $servername = "localhost";
-                $dbuser = "root";//퍼블릭 유저로 바꾸기
+                $dbuser = "root";
                 $password = "9094";
                 $dbname = "phpboard";
                 try{
@@ -46,7 +49,7 @@
                 }catch(Exception $ex){
                     $result=["serverResponse="=>false,"deninedReason"=>$ex->getMessage()];
                 }
-                header('Content-Type: application/json');
+                header('Content-Type:application/json');
                 echo jsonMaker($result);
             }
             
