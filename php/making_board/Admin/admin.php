@@ -35,24 +35,61 @@
         .active{
             display:block;
         }
+        a.infoA{
+            font-weight: bold;
+            text-decoration: none;
+        }
     </style>
 </head>
 <body>
     <?php 
         global $connect;
+        $sql = "SELECT user_pk,user_id,role_id FROM member";
+        $stmt = $connect->prepare($sql);
+        $stmt->execute();
+        $userArrays = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        
+        $sql = "SELECT id,title,writer FROM board";
+        $stmt = $connect->prepare($sql);
+        $stmt->execute();
+        $boardArrays = $stmt->fetchAll(PDO::FETCH_ASSOC);
     ?>
     <section>
         <aside>
             <ul class="managementList">
                 <li class="asideLI" onclick="onShow('Base')">Base</li>
-                <li class="asideLI" onclick="onShow('UserManagement')">User management</li>
+                <li class="asideLI" onclick="onShow('UserManagement')">UserManagement</li>
                 <li class="asideLI" onclick="onShow('BoardManagement')">Board management</li>
             </ul>
         </aside>
         <article>
             <div id="Base"class="managements">Welcome Admin Page</div>
-            <div id="UserManagement" class="managements">1</div>
-            <div id="BoardManagement" class="managements">2</div>
+            <div id="UserManagement" class="managements">
+                <nav>
+                    <ul>    
+                        <?php foreach($userArrays as $userInfo){?>
+                            <li>
+                                <a class="infoA" <?php echo "href='http://localhost:3000/adminpage/userinfo/".$userInfo['user_pk']."'";?>>
+                                    <?php echo $userInfo["user_id"]?>
+                                </a>
+                            </li>
+                        <?php }; ?>
+                    </ul>
+                </nav>
+            </div>
+            <div id="BoardManagement" class="managements">
+                <nav>
+                    <ul>    
+                        <?php foreach($boardArrays as $boardInfo){?>
+                            <li>
+                                <a class="infoA" href="">
+                                    <?php echo $boardInfo["title"]?>
+                                </a>
+                            </li>
+                        <?php }; ?>
+                    </ul>
+                </nav>
+            </div>
         </article>
     </section>
     <?php ?>
