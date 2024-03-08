@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,12 +8,14 @@
     <style>
         .container {
             width: 400px;
-            
+
         }
-        form{
-            width:100%;
+
+        form {
+            width: 100%;
             display: flex;
         }
+
         .wrap-box {
             flex: 1;
             margin: 10px;
@@ -32,7 +35,8 @@
         li {
             margin: 5px 0;
         }
-        li:hover{
+
+        li:hover {
             background-color: #ddd;
         }
 
@@ -49,6 +53,7 @@
         }
     </style>
 </head>
+
 <body>
     <?php
     global $connect;
@@ -60,43 +65,50 @@
         <form id="rolepermission-form">
             <div class="wrap-box">
                 <p>Roles</p>
-                <ul class="role-box">
-                    <li>Admin</li>
-                    <li>Author</li>
-                    <li>Logger</li>
-                    <li>Child</li>
+                <ul id="role-box">
+                    <li>
+                        <label>
+                            <input type="radio" name="role" value="Admin"> Admin
+                        </label>
+                    </li>
+                    <li>
+                        <label>
+                            <input type="radio" name="role" value="Writer"> Writer
+                        </label>
+                    </li>
                 </ul>
+                <button id="addList-btn">+</button>
             </div>
             <div class="wrap-box">
                 <p>Permissions</p>
-                <ul class="permission-box">
-                    <li>canCreateUser<input type="checkbox" name="create-user"></li>
-                    <li>canUpdateUser<input type="checkbox" name="update-user"></li>
-                    <li>canDeleteUser<input type="checkbox"></li>
-                    <li>canCreateBoard<input type="checkbox"></li>
-                    <li>canUpdateBoard<input type="checkbox"></li>
-                    <li>canDeleteBoard<input type="checkbox"></li>
-                    <li>canCreateRole<input type="checkbox"></li>
-                    <li>canUpdateRole<input type="checkbox"></li>
-                    <li>canDeleteRole<input type="checkbox"></li>
+                <ul id="permission-box">
+                    <li>canCreateUser<input type="checkbox" name="permissions" value="create-user"></li>
+                    <li>canUpdateUser<input type="checkbox" name="permissions" value="update-user"></li>
+                    <li>canDeleteUser<input type="checkbox" name="permissions" value="delete-user"></li>
+                    <li>canCreateBoard<input type="checkbox" name="permissions" value="create-board"></li>
+                    <li>canUpdateBoard<input type="checkbox" name="permissions" value="update-board"></li>
+                    <li>canDeleteBoard<input type="checkbox" name="permissions" value="delete-board"></li>
+                    <li>canCreateRole<input type="checkbox" name="permissions" value="create-role"></li>
+                    <li>canUpdateRole<input type="checkbox" name="permissions" value="update-role"></li>
+                    <li>canDeleteRole<input type="checkbox" name="permissions" value="delete-role"></li>
                 </ul>
             </div>
         </form>
     </div>
     <div class="btn">
-        <button >+</button>
+
         <button id="upd-btn">update</button>
     </div>
     <script>
-        const pb = document.querySelector(".permission-box");
-        pb.addEventListener("click",function(event){
-            if(event.target.tagName=="LI"){
+        const pb = document.querySelector("#permission-box");
+        pb.addEventListener("click", function(event) {
+            if (event.target.tagName == "LI") {
                 let check = event.target.querySelector('input[type="checkbox"]');
                 check.checked = !check.checked;
             }
         })
         const updbtn = document.querySelector("#upd-btn");
-        updbtn.addEventListener("click",function(){
+        updbtn.addEventListener("click", function() {
 
             // formdata={
             //     ccu:document.querySelector("input[name='create-user']").value,
@@ -104,22 +116,57 @@
             // }
             const fo = document.querySelector("#rolepermission-form");
             let formdata = new FormData(fo);
+            let permissioncheckboxs = document.querySelectorAll("input[name='permissions']");
+            let pmvalues = Array.from(permissioncheckboxs).map(val => val.value);
+            formdata.set('permissionsArray', pmvalues);
             postform(formdata);
-            
+
         })
 
-        async function postform(data){
-            await fetch("http://localhost:3000/EXP.php",{
-                method:"POST",
-                body:data
+        const addListbtn = document.querySelector("#addList-btn");
+        addListbtn.addEventListener("click", function a(e) {
+            e.preventDefault();
+            const newinputtext = document.createElement("input");
+            newinputtext.setAttribute("type", "text");
+            newinputtext.classList.add("temptext");
+            const newlabel = document.createElement("label");
+            const newli = document.createElement("li");
+            // newlabel.appendChild(newinput);
+            newlabel.appendChild(newinputtext);
+            newli.appendChild(newlabel);
+            const ulbox = document.querySelector("#role-box");
+            ulbox.appendChild(newli);
+            
+        })
+        const newinputtext = document.querySelector(".temptext");
+        if(newinputtext){
+            addListbtn.removeEventListener("click",a);
+            newinputtext.addEventListener("keyup", function (event) {
+                if (event.key === "Enter") {
+                    console.log(event);
+                    event.preventDefault();
+                    const newinputradio = document.createElement("input");
+                    newinputradio.setAttribute("type", "radio");
+                    newinputradio.setAttribute("name", "role");
+                    newinputradio.setAttribute("value", event.target.value);
+                    newlabel.appendChild(newinputradio);
+                    newlabel.appendChild(document.createTextNode(event.target.value));
+                    newinputtext.remove();
+                }
             })
-            .then(response=>response.json())
-            .then(data=>console.log("성공",data))
-            .catch(error=>console.log(error));
-           
-        }   
-        
+        }
+
+        async function postform(data) {
+            await fetch("http://localhost:3000/EXP.php", {
+                    method: "POST",
+                    body: data
+                })
+                .then(response => response.json())
+                .then(data => console.log("성공", data)) //여기다가 추가로 성공 시 새로고침을 넣던가
+                .catch(error => console.log(error));
+
+        }
     </script>
 </body>
+
 </html>
-        
