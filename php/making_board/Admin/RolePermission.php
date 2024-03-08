@@ -124,8 +124,12 @@
         })
 
         const addListbtn = document.querySelector("#addList-btn");
-        addListbtn.addEventListener("click", function a(e) {
+        addListbtn.addEventListener("click", function(e) {
             e.preventDefault();
+            console.log(e);
+            if(e.pointerId<0){
+                return;
+            }
             const newinputtext = document.createElement("input");
             newinputtext.setAttribute("type", "text");
             newinputtext.classList.add("temptext");
@@ -136,12 +140,12 @@
             newli.appendChild(newlabel);
             const ulbox = document.querySelector("#role-box");
             ulbox.appendChild(newli);
-            
-        })
-        const newinputtext = document.querySelector(".temptext");
-        if(newinputtext){
-            addListbtn.removeEventListener("click",a);
-            newinputtext.addEventListener("keyup", function (event) {
+            // const newinputtext = document.querySelector(".temptext");
+            // console.log(newinputtext);
+            // if(newinputtext){
+
+            // addListbtn.removeEventListener("click",a);
+            newinputtext.addEventListener("keyup", function(event) {
                 if (event.key === "Enter") {
                     console.log(event);
                     event.preventDefault();
@@ -154,7 +158,9 @@
                     newinputtext.remove();
                 }
             })
-        }
+            // }
+
+        })
 
         async function postform(data) {
             await fetch("http://localhost:3000/EXP.php", {
