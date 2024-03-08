@@ -117,7 +117,28 @@
             const fo = document.querySelector("#rolepermission-form");
             let formdata = new FormData(fo);
             let permissioncheckboxs = document.querySelectorAll("input[name='permissions']");
-            let pmvalues = Array.from(permissioncheckboxs).map(val => val.value);
+            
+            let pmvalues = Array.from(permissioncheckboxs,
+                (chk) => {
+                    if (chk.checked) {
+                        return chk;
+                    }else{
+                        return null;
+                    }
+                }
+            ).filter(
+                (chk)=>{
+                    if(chk){
+                        return chk;
+                    }
+                }
+            ).map(
+                (chk)=>{
+                    return chk.value;
+                }
+            )
+
+           
             formdata.set('permissionsArray', pmvalues);
             postform(formdata);
 
@@ -127,7 +148,7 @@
         addListbtn.addEventListener("click", function(e) {
             e.preventDefault();
             console.log(e);
-            if(e.pointerId<0){
+            if (e.pointerId < 0) {
                 return;
             }
             const newinputtext = document.createElement("input");
