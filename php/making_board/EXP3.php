@@ -1,16 +1,5 @@
-<script>
-
-    element.addEventListener('click', function() {
-        console.log('Outer Event Handler');
-        if (someCondition) {
-            return;
-        }
-        element.addEventListener('keyup', function() {
-            console.log('Inner Event Handler');
-        });
-    });
+<?php 
+    $permissionsArray = ['user','board','dele'];
+    $result = implode(",",array_fill(0,count($permissionsArray),"?"));
     
-    // Outer Event 실행
-    
-    
-    </script>
+?>
