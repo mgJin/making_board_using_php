@@ -97,7 +97,7 @@
     </div>
     <div class="btn">
 
-        <button id="upd-btn">update</button>
+        <button id="add-btn">add</button>
     </div>
     <script>
         const pb = document.querySelector("#permission-box");
@@ -107,7 +107,7 @@
                 check.checked = !check.checked;
             }
         })
-        const updbtn = document.querySelector("#upd-btn");
+        const updbtn = document.querySelector("#add-btn");
         updbtn.addEventListener("click", function() {
 
             // formdata={
@@ -137,9 +137,10 @@
                     return chk.value;
                 }
             )
-
+            if(pmvalues.length>0){
+                formdata.set('permissionsArray', pmvalues);
+            };
            
-            formdata.set('permissionsArray', pmvalues);
             postform(formdata);
 
         })
@@ -147,7 +148,7 @@
         const addListbtn = document.querySelector("#addList-btn");
         addListbtn.addEventListener("click", function(e) {
             e.preventDefault();
-            console.log(e);
+            
             if (e.pointerId < 0) {
                 return;
             }
@@ -168,7 +169,7 @@
             // addListbtn.removeEventListener("click",a);
             newinputtext.addEventListener("keyup", function(event) {
                 if (event.key === "Enter") {
-                    console.log(event);
+                    
                     event.preventDefault();
                     const newinputradio = document.createElement("input");
                     newinputradio.setAttribute("type", "radio");
