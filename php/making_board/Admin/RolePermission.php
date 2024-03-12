@@ -1,3 +1,7 @@
+<?php 
+    require(__DIR__.'/../Settings/config.php');
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -56,7 +60,15 @@
 
 <body>
     <?php
-    global $connect;
+        $sql = "SELECT name FROM roles";
+        $stmt = $connect->prepare($sql);
+        $stmt->execute();
+        $roleArray = $stmt->fetchAll(PDO::FETCH_COLUMN);
+
+        $sql = "SELECT name FROM permissions ORDER BY id";
+        $stmt = $connect->prepare($sql);
+        $stmt->execute();
+        $permissionArray = $stmt->fetchAll(PDO::FETCH_COLUMN);
     //role name을 가져와서 그에 해당하는 설명과 가지고 있는 permission들을 보여주기
     //role을 추가할 수 있고 그에 맞는 permission들을 지정해서 한 번에 저장가능
     //permissions 들을 여럿 선택할 수 있고 그 선택한 것들이 바로 permission_role table에 저장
@@ -66,31 +78,30 @@
             <div class="wrap-box">
                 <p>Roles</p>
                 <ul id="role-box">
-                    <li>
-                        <label>
-                            <input type="radio" name="role" value="Admin"> Admin
-                        </label>
-                    </li>
-                    <li>
-                        <label>
-                            <input type="radio" name="role" value="Writer"> Writer
-                        </label>
-                    </li>
+                    <?php foreach($roleArray as $role):?>
+                        <li>
+                            <label>
+                                <input class="role-radio" type="radio" name="role" value="<?= $role ?>"> <?= $role ?>
+                            </label>
+                        </li>
+                    <?php endforeach;?>
                 </ul>
                 <button id="addList-btn">+</button>
             </div>
             <div class="wrap-box">
                 <p>Permissions</p>
                 <ul id="permission-box">
-                    <li>canCreateUser<input type="checkbox" name="permissions" value="create-user"></li>
-                    <li>canUpdateUser<input type="checkbox" name="permissions" value="update-user"></li>
-                    <li>canDeleteUser<input type="checkbox" name="permissions" value="delete-user"></li>
-                    <li>canCreateBoard<input type="checkbox" name="permissions" value="create-board"></li>
-                    <li>canUpdateBoard<input type="checkbox" name="permissions" value="update-board"></li>
-                    <li>canDeleteBoard<input type="checkbox" name="permissions" value="delete-board"></li>
-                    <li>canCreateRole<input type="checkbox" name="permissions" value="create-role"></li>
-                    <li>canUpdateRole<input type="checkbox" name="permissions" value="update-role"></li>
-                    <li>canDeleteRole<input type="checkbox" name="permissions" value="delete-role"></li>
+                    <?php foreach($permissionArray as $permission):
+                        $temp = explode("-",$permission);
+                        $tempArray = [];
+                        foreach($temp as $word):
+                            $tempWord=ucfirst($word);
+                            array_push($tempArray,$tempWord);
+                        endforeach;
+                        $tempString = implode($tempArray);
+                        ?>
+                        <li><?= "can".$tempString?><input type="checkbox" name="permissions" value="<?= $permission ?>"></li>
+                    <?php endforeach;?>
                 </ul>
             </div>
         </form>
@@ -100,6 +111,7 @@
         <button id="add-btn">add</button>
     </div>
     <script>
+        /*check box event*/
         const pb = document.querySelector("#permission-box");
         pb.addEventListener("click", function(event) {
             if (event.target.tagName == "LI") {
@@ -107,13 +119,9 @@
                 check.checked = !check.checked;
             }
         })
-        const updbtn = document.querySelector("#add-btn");
-        updbtn.addEventListener("click", function() {
-
-            // formdata={
-            //     ccu:document.querySelector("input[name='create-user']").value,
-            //     cuu:document.querySelector("input[name='update-user']").value
-            // }
+        /*add role event*/
+        const addbtn = document.querySelector("#add-btn");
+        addbtn.addEventListener("click", function() {
             const fo = document.querySelector("#rolepermission-form");
             let formdata = new FormData(fo);
             let permissioncheckboxs = document.querySelectorAll("input[name='permissions']");
@@ -144,7 +152,7 @@
             postform(formdata);
 
         })
-
+        /*add role-permission event*/
         const addListbtn = document.querySelector("#addList-btn");
         addListbtn.addEventListener("click", function(e) {
             e.preventDefault();
@@ -182,6 +190,28 @@
             })
             // }
 
+        })
+        /*click role event*/
+        const roleRadios = document.querySelectorAll(".role-radio");
+        roleRadios.forEach(function(roleRadio){
+            roleRadio.addEventListener("change",async function(e){
+                const fetchData ={
+                    role_name : e.target.value
+                };
+                await fetch("http://localhost:3000/EXP3.php",{
+                    method:"POST",
+                    body:JSON.stringify(fetchData)
+                })
+                .then(response=>response.json())
+                .then(data=>{
+                    console.log("성공");
+                    for(const permission1 in data){
+                        console.log(data[permission1]);
+                    }
+                    // document.querySelectorAll("input['value")
+                })
+                .catch(error=>console.log("실패",error));
+            })
         })
 
         async function postform(data) {

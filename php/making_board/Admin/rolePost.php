@@ -1,5 +1,5 @@
 <?php 
-    // file_get_contents("php://input");
+
 //insert 페이지
 //기존에 있던 role인지 확인 후 insert
 //admin 권한이 있는지는 admin페이지 자체에 있으니깐 권한 확인을 해야할까?
