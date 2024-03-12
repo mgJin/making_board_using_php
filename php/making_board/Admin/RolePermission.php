@@ -100,7 +100,7 @@
                         endforeach;
                         $tempString = implode($tempArray);
                         ?>
-                        <li><?= "can".$tempString?><input type="checkbox" name="permissions" value="<?= $permission ?>"></li>
+                        <li><?= "can".$tempString?><input type="checkbox" name="permissions" id="<?= $permission ?>" value="<?= $permission ?>"></li>
                     <?php endforeach;?>
                 </ul>
             </div>
@@ -205,10 +205,16 @@
                 .then(response=>response.json())
                 .then(data=>{
                     console.log("성공");
-                    for(const permission1 in data){
-                        console.log(data[permission1]);
+                    const checkboxs = document.querySelectorAll("input[type='checkbox']");
+                    checkboxs.forEach(function(checkbox){
+                        checkbox.checked = false;
+                    })
+                    
+                    for(let permission1 in data){
+                        
+                        let willCheckedBox = document.getElementById(data[permission1]);
+                        willCheckedBox.checked = true;
                     }
-                    // document.querySelectorAll("input['value")
                 })
                 .catch(error=>console.log("실패",error));
             })
