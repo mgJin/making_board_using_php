@@ -154,7 +154,7 @@
             postform(formdata);
 
         })
-        /*add role-permission event*/
+        /*add role-list event*/
         const addListbtn = document.querySelector("#addList-btn");
         addListbtn.addEventListener("click", function(e) {
             e.preventDefault();
@@ -221,6 +221,7 @@
                 .catch(error=>console.log("실패",error));
             })
         })
+        /*update role event*/
         const updbtn = document.querySelector("#upd-btn");
         updbtn.addEventListener("click",async function(e){
             const roles = document.querySelectorAll("input[name='role']");
@@ -264,7 +265,29 @@
             .catch((error)=>console.log("실패",error));
 
         })
-        
+        /*delete role event*/
+        const delbtn = document.querySelector("#del-btn");
+        delbtn.addEventListener("click",function(e){
+            const roles = document.querySelectorAll("input[name='role']");
+            let chkRole = null;
+            for(let i=0;i<roles.length;i++){
+                if(roles[i].checked){
+                    chkRole = roles[i].value;
+                    break;
+                }
+            }
+            const fetchData = {
+                checkedRole : chkRole
+            };
+            fetch("http://localhost:3000/EXP4.php",{
+                method:"DELETE",
+                body:JSON.stringify(fetchData)
+            })
+            .then((response)=>response.json())
+            .then((data)=>console.log("성공",data))
+            .catch(error=>console.log("실패",error));
+        })
+
         async function postform(data) {
             await fetch("http://localhost:3000/EXP.php", {
                     method: "POST",
