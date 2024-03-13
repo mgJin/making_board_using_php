@@ -109,6 +109,7 @@
     <div class="btn">
 
         <button id="add-btn">add</button>
+        <button id="upd-btn">update</button>
     </div>
     <script>
         /*check box event*/
@@ -204,7 +205,7 @@
                 })
                 .then(response=>response.json())
                 .then(data=>{
-                    console.log("성공");
+                    
                     const checkboxs = document.querySelectorAll("input[type='checkbox']");
                     checkboxs.forEach(function(checkbox){
                         checkbox.checked = false;
@@ -218,6 +219,49 @@
                 })
                 .catch(error=>console.log("실패",error));
             })
+        })
+        const updbtn = document.querySelector("#upd-btn");
+        updbtn.addEventListener("click",async function(e){
+            const roles = document.querySelectorAll("input[name='role']");
+            let chkRole = null;
+            for(let i=0;i<roles.length;i++){
+                if(roles[i].checked){
+                    chkRole = roles[i].value;
+                    break;
+                }
+            }
+            let permissioncheckboxs = document.querySelectorAll("input[name='permissions']");
+            let pmvalues = Array.from(permissioncheckboxs,
+                (chk) => {
+                    if (chk.checked) {
+                        return chk;
+                    }else{
+                        return null;
+                    }
+                }
+            ).filter(
+                (chk)=>{
+                    if(chk){
+                        return chk;
+                    }
+                }
+            ).map(
+                (chk)=>{
+                    return chk.value;
+                }
+            )
+             const formData = {
+                role : chkRole,
+                permissionsValues : pmvalues
+             }
+            await fetch("http://localhost:3000/EXP4.php",{
+                method:"PUT",
+                body:JSON.stringify(formData)
+            })
+            .then(response=>response.json())
+            .then((data)=>console.log("성공",data))
+            .catch((error)=>console.log("실패",error));
+
         })
 
         async function postform(data) {
