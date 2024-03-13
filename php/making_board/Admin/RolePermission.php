@@ -110,6 +110,7 @@
 
         <button id="add-btn">add</button>
         <button id="upd-btn">update</button>
+        <button id="del-btn">delete</button>
     </div>
     <script>
         /*check box event*/
@@ -263,7 +264,7 @@
             .catch((error)=>console.log("실패",error));
 
         })
-
+        
         async function postform(data) {
             await fetch("http://localhost:3000/EXP.php", {
                     method: "POST",
