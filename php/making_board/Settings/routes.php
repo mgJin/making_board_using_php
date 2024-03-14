@@ -13,6 +13,15 @@
         '/adminpage/roleinfo'=>[
             'get'=>function(){
                 include(__DIR__.'/../Admin/RolePermission.php');
+            },
+            'post'=>function(){
+                include(__DIR__.'/../Admin/rolePost.php');
+            },
+            'put'=>function(){
+                include(__DIR__.'/../Admin/roleUpdate.php');
+            },
+            'delete'=>function(){
+                include(__DIR__.'/../Admin/roleDelete.php');
             }
         ],
         '/adminpage/boardinfo/([0-9]+)'=>[
