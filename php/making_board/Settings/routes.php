@@ -10,9 +10,9 @@
                 include(__DIR__.'/../Admin/admin.php');
             }
         ],
-        '/adminpage/roleinfo'=>[
+        '/adminpage/rolemanagement'=>[
             'get'=>function(){
-                include(__DIR__.'/../Admin/RolePermission.php');
+                include(__DIR__.'/../Admin/RoleManagement.php');
             },
             'post'=>function(){
                 include(__DIR__.'/../Admin/rolePost.php');
@@ -24,14 +24,24 @@
                 include(__DIR__.'/../Admin/roleDelete.php');
             }
         ],
+        '/adminpage/boardmanagement'=>[
+            'get'=>function(){
+                include(__DIR__.'/../Admin/BoardManagement.php');
+            }
+        ],
         '/adminpage/boardinfo/([0-9]+)'=>[
             'get'=>function($boardID){
-                include(__DIR__.'/../Admin/BoardInfo.php');
+                include(__DIR__.'/../Admin/BoardInfoDetail.php');
+            }
+        ],
+        '/adminpage/usermanagement'=>[
+            'get'=>function(){
+                include(__DIR__.'/../Admin/UserManagement.php');
             }
         ],
         '/adminpage/userinfo/([0-9]+)'=>[
             'get'=>function($user_pk){
-                include(__DIR__.'/../Admin/UserInfo.php');
+                include(__DIR__.'/../Admin/UserInfoDetail.php');
             }
         ],
         '/boards' => [

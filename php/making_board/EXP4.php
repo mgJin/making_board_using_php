@@ -1,35 +1,30 @@
-<?php 
-    require(__DIR__.'/Settings/config.php');
-    $data = file_get_contents("php://input");
-    $jsonData = json_decode($data);
-    //선택했는지 확인
-    if(!$jsonData->checkedRole):
-        echo json_encode([
-            "serverResponse"=>false,"deniedReason"=>"not choice role"
-        ]);
-        return;
-    else:
-        $roleName = $jsonData->checkedRole;
-    endif;
-    $sql = "DELETE FROM roles WHERE id=(SELECT id FROM (SELECT id FROM roles WHERE name=:name) AS T);";
-    try{
-        $stmt = $connect->prepare($sql);
-        $stmt->bindParam(':name',$roleName);
-        $stmt->execute();
-        $rowCount = $stmt->rowCount();
-    }catch(PDOException $ex){
-        echo json_encode([
-            "serverResponse"=>false,"deniedReason"=>$ex->getMessage()
-        ]);
-        return;
-    }
-    if(!$rowCount):
-        echo json_encode([
-            "severResponse"=>false,"deniedReason"=>"not exist role"
-        ]);
-    else:
-        echo json_encode([
-            "serverResponse"=>true
-        ]);
-    endif;
-?>
+<article>
+                <div id="Base" class="managements">Welcome Admin Page</div>
+                <div id="RoleManagement" class="managements">Role Admin Page</div>
+                <div id="UserManagement" class="managements">
+                    <nav>
+                        <ul>
+                            <?php foreach ($userArrays as $userInfo) { ?>
+                                <li>
+                                    <a class="infoA" <?php echo "href='http://localhost:3000/adminpage/userinfo/" . $userInfo['user_pk'] . "'"; ?>>
+                                        <?php echo $userInfo["user_id"] ?>
+                                    </a>
+                                </li>
+                            <?php }; ?>
+                        </ul>
+                    </nav>
+                </div>
+                <div id="BoardManagement" class="managements">
+                    <nav>
+                        <ul>
+                            <?php foreach ($boardArrays as $boardInfo) { ?>
+                                <li>
+                                    <a class="infoA" <?php echo "href='http://localhost:3000/adminpage/boardinfo/" . $boardInfo['id'] . "'"; ?>>
+                                        <?php echo $boardInfo["title"] ?>
+                                    </a>
+                                </li>
+                            <?php }; ?>
+                        </ul>
+                    </nav>
+                </div>
+            </article>

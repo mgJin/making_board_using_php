@@ -1,14 +1,5 @@
-<?php 
-    require(__DIR__.'/../Settings/config.php');
-?>
-
-<!DOCTYPE html>
-<html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Role Management Page</title>
     <style>
         .container {
             width: 400px;
@@ -60,6 +51,7 @@
 
 <body>
     <?php
+        global $connect;
         $sql = "SELECT name FROM roles";
         $stmt = $connect->prepare($sql);
         $stmt->execute();
@@ -113,7 +105,7 @@
         <button id="del-btn">delete</button>
     </div>
     <script>
-        /*check box event*/
+        /*check box event (permission누를 때 checkbox도 되는것*/
         const pb = document.querySelector("#permission-box");
         pb.addEventListener("click", function(event) {
             if (event.target.tagName == "LI") {
@@ -121,40 +113,8 @@
                 check.checked = !check.checked;
             }
         })
-        /*add role event*/
-        const addbtn = document.querySelector("#add-btn");
-        addbtn.addEventListener("click", function() {
-            const fo = document.querySelector("#rolepermission-form");
-            let formdata = new FormData(fo);
-            let permissioncheckboxs = document.querySelectorAll("input[name='permissions']");
-            
-            let pmvalues = Array.from(permissioncheckboxs,
-                (chk) => {
-                    if (chk.checked) {
-                        return chk;
-                    }else{
-                        return null;
-                    }
-                }
-            ).filter(
-                (chk)=>{
-                    if(chk){
-                        return chk;
-                    }
-                }
-            ).map(
-                (chk)=>{
-                    return chk.value;
-                }
-            )
-            if(pmvalues.length>0){
-                formdata.set('permissionsArray', pmvalues);
-            };
-           
-            postform(formdata);
-
-        })
-        /*add role-list event*/
+        
+        /*add role-list event (+누를 때의 이벤트)*/
         const addListbtn = document.querySelector("#addList-btn");
         addListbtn.addEventListener("click", function(e) {
             e.preventDefault();
@@ -191,9 +151,9 @@
                 }
             })
             // }
-
+            
         })
-        /*click role event*/
+        /*click role event (각 role-radio 누를 때의 이벤트)*/
         const roleRadios = document.querySelectorAll(".role-radio");
         roleRadios.forEach(function(roleRadio){
             roleRadio.addEventListener("change",async function(e){
@@ -220,6 +180,39 @@
                 })
                 .catch(error=>console.log("실패",error));
             })
+        })
+        /*add role event*/
+        const addbtn = document.querySelector("#add-btn");
+        addbtn.addEventListener("click", function() {
+            const fo = document.querySelector("#rolepermission-form");
+            let formdata = new FormData(fo);
+            let permissioncheckboxs = document.querySelectorAll("input[name='permissions']");
+            
+            let pmvalues = Array.from(permissioncheckboxs,
+                (chk) => {
+                    if (chk.checked) {
+                        return chk;
+                    }else{
+                        return null;
+                    }
+                }
+            ).filter(
+                (chk)=>{
+                    if(chk){
+                        return chk;
+                    }
+                }
+            ).map(
+                (chk)=>{
+                    return chk.value;
+                }
+            )
+            if(pmvalues.length>0){
+                formdata.set('permissionsArray', pmvalues);
+            };
+           
+            postform(formdata);
+
         })
         /*update role event*/
         const updbtn = document.querySelector("#upd-btn");
@@ -256,7 +249,7 @@
                 role : chkRole,
                 permissionsValues : pmvalues
              }
-            await fetch("http://localhost:3000/EXP4.php",{
+            await fetch("http://localhost:3000/adminpage/roleinfo",{
                 method:"PUT",
                 body:JSON.stringify(formData)
             })
@@ -279,7 +272,7 @@
             const fetchData = {
                 checkedRole : chkRole
             };
-            fetch("http://localhost:3000/EXP4.php",{
+            fetch("http://localhost:3000/adminpage/roleinfo",{
                 method:"DELETE",
                 body:JSON.stringify(fetchData)
             })
@@ -289,7 +282,7 @@
         })
 
         async function postform(data) {
-            await fetch("http://localhost:3000/EXP.php", {
+            await fetch("http://localhost:3000/adminpage/roleinfo", {
                     method: "POST",
                     body: data
                 })
@@ -301,4 +294,3 @@
     </script>
 </body>
 
-</html>
