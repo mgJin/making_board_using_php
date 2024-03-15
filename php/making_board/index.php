@@ -33,7 +33,7 @@ if (preg_match('/^\/adminpage(\/.*)?$/', $url)) : ?>
 
             aside {
                 padding: 10px;
-                width: 20%;
+                width: 15%;
                 float: left;
             }
 
@@ -43,17 +43,25 @@ if (preg_match('/^\/adminpage(\/.*)?$/', $url)) : ?>
                 float: left;
             }
 
-            li {
+            
+            li:hover {
+                background-color: #f0f0f0;
+            }
+            .asideLI {
+                width:75px;
                 list-style: none;
                 padding: 10px;
                 border: 1px solid #ddd;
                 cursor: pointer;
+                overflow: hidden;
             }
-
-            li:hover {
-                background-color: #f0f0f0;
+            .list-li{
+                width:400px;
+                list-style: none;
+                padding:10px;
+                border: 1px solid #ddd;
+                cursor: pointer;
             }
-
             a.infoA {
                 font-weight: bold;
                 text-decoration: none;
@@ -69,9 +77,9 @@ if (preg_match('/^\/adminpage(\/.*)?$/', $url)) : ?>
             <aside>
                 <ul class="managementList">
                     <li class="asideLI" onclick="onShow('')">Base</li>
-                    <li class="asideLI" onclick="onShow('/rolemanagement')">RoleManagement</li>
-                    <li class="asideLI" onclick="onShow('/usermanagement')">UserManagement</li>
-                    <li class="asideLI" onclick="onShow('/boardmanagement')">Board management</li>
+                    <li class="asideLI" onclick="onShow('/rolemanagement')">Role</li>
+                    <li class="asideLI" onclick="onShow('/usermanagement')">User</li>
+                    <li class="asideLI" onclick="onShow('/boardmanagement')">Board</li>
                 </ul>
             </aside>
             <article>

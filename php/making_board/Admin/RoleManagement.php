@@ -20,13 +20,13 @@
             cursor: pointer;
         }
 
-        ul {
+        .role-ul {
             list-style: none;
             padding: 0;
             cursor: pointer;
         }
 
-        li {
+        .role-li {
             margin: 5px 0;
         }
 
@@ -68,7 +68,7 @@
         <form id="rolepermission-form">
             <div class="wrap-box">
                 <p>Roles</p>
-                <ul id="role-box">
+                <ul id="role-box" class="role-ul">
                     <?php foreach ($roleArray as $role) : ?>
                         <li class="role-li">
                             <label>
@@ -81,7 +81,7 @@
             </div>
             <div class="wrap-box">
                 <p>Permissions</p>
-                <ul id="permission-box">
+                <ul id="permission-box" class="role-ul">
                     <?php foreach ($permissionArray as $permission) :
                         $temp = explode("-", $permission);
                         $tempArray = [];
@@ -96,12 +96,12 @@
                 </ul>
             </div>
         </form>
-    </div>
-    <div class="btn">
-
-        <button id="add-btn">add</button>
-        <button id="upd-btn">update</button>
-        <button id="del-btn">delete</button>
+        <div class="btn">
+    
+            <button id="add-btn">add</button>
+            <button id="upd-btn">update</button>
+            <button id="del-btn">delete</button>
+        </div>
     </div>
     <script>
         /*check box event (permission누를 때 checkbox도 되는것*/
@@ -115,7 +115,8 @@
         /**click role hover event(각 role radio의 빈공간을 누를 때의 이벤트) */
         const roleLis = document.querySelectorAll(".role-li");
         roleLis.forEach(function(roleLi) {
-            roleLi.addEventListener("mousedown", function(e) {
+            roleLi.addEventListener("mouseup", function(e) {
+                console.log("lili");
                 let roleRadio = roleLi.querySelector(".role-radio");
                 roleRadio.checked = !roleRadio.checked;
                 if (roleRadio.checked) {

@@ -15,17 +15,15 @@
 </style>
 </head>
 <body>
-<!-- hover 영역을 표시하는 div 요소 -->
-<div id="hoverArea" class="hover-area">Hover Area</div>
+<select name="country">
 
-<script>
-// JavaScript로 hover 영역 클릭 이벤트 추가
-const hoverArea = document.getElementById('hoverArea');
+  <option value="usa">미국</option>
 
-hoverArea.addEventListener('mousedown', function(event) {
-    // 클릭 이벤트 발생 시 동작할 코드 작성
-    console.log('Clicked on hover area');
-});
+  <option value="canada">캐나다</option>
+
+  <option value="uk">영국</option>
+
+</select>
 </script>
 </body>
 </html>
