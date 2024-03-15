@@ -24,6 +24,11 @@
                 include(__DIR__.'/../Admin/roleDelete.php');
             }
         ],
+        '/adminpage/rolemanagement/event'=>[
+            'post'=>function(){
+                include(__DIR__.'/../Admin/roleRadioClickEvent.php');
+            }
+        ],
         '/adminpage/boardmanagement'=>[
             'get'=>function(){
                 include(__DIR__.'/../Admin/BoardManagement.php');

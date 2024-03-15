@@ -3,8 +3,8 @@
 //insert 페이지
 //기존에 있던 role인지 확인 후 insert
 //admin 권한이 있는지는 admin페이지 자체에 있으니깐 권한 확인을 해야할까?
-require(__DIR__.'/Settings/config.php');
-include(__DIR__.'/Common/functions.php');
+require(__DIR__.'/../Settings/config.php');
+
 use function PHPSTORM_META\type;
     // role은 무조건 선택해야함.
     // permissions 는 선택 안해도 됨 => 선택했을때에만 explode가 작동하게

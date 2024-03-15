@@ -1,5 +1,5 @@
 <?php 
-    require(__DIR__.'/Settings/config.php');
+    require(__DIR__.'/../Settings/config.php');
     $data = file_get_contents("php://input");
     $jsonData = json_decode($data);
     //선택했는지 확인
