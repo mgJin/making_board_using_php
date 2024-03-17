@@ -40,6 +40,7 @@ $userArrays = $stmt->fetchAll(PDO::FETCH_ASSOC);
         </nav>
     </div>
     <script>
+        //이거 수정하면 된다. 아. 힘내자 내일 부터 화이팅
         function delfetch(data){
             fetch("http://localhost:3000/adminpage/usermanagement");
         }
