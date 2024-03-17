@@ -74,7 +74,23 @@
         <div>
             <label>생일</label> <?php echo $userInfo["birth"];?>
         </div>
-        <button class="delete-button" onclick="deletePost(1)">삭제</button>
+        <button class="delete-button" onclick="delfetch('<?= $userInfo['user_id']?>')">삭제</button>
     </div>
+    <script>
+        
+        function delfetch(data){
+            const formdata = {
+                user_id : data,
+                admin : true
+            }
+            fetch("http://localhost:3000/adminpage/usermanagement",{
+                method:"DELETE",
+                body:JSON.stringify(formdata)
+            })
+            .then(response=>response.json())
+            .then(data=>console.log(data))
+            .catch(error=>console.log(error));
+        }
+    </script>
 </body>
 </html>

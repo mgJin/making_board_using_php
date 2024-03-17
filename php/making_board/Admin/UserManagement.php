@@ -40,9 +40,19 @@ $userArrays = $stmt->fetchAll(PDO::FETCH_ASSOC);
         </nav>
     </div>
     <script>
-        //이거 수정하면 된다. 아. 힘내자 내일 부터 화이팅
+        
         function delfetch(data){
-            fetch("http://localhost:3000/adminpage/usermanagement");
+            const formdata = {
+                user_id : data,
+                admin : true
+            }
+            fetch("http://localhost:3000/adminpage/usermanagement",{
+                method:"DELETE",
+                body:JSON.stringify(formdata)
+            })
+            .then(response=>response.json())
+            .then(data=>console.log(data))
+            .catch(error=>console.log(error));
         }
     </script>
 </body>

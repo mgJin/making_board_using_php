@@ -42,6 +42,9 @@
         '/adminpage/usermanagement'=>[
             'get'=>function(){
                 include(__DIR__.'/../Admin/UserManagement.php');
+            },
+            'delete'=>function(){
+                include(__DIR__.'/../User/userDelete.php');
             }
         ],
         '/adminpage/userinfo/([0-9]+)'=>[
@@ -111,10 +114,10 @@
         ],
         '/signupform'=>[
             'get'=> function(){
-                include(__DIR__.'/../Login/LoginForm.php');
+                include(__DIR__.'/../User/UserSignUpForm.php');
             },
             'post'=>function(){
-                include(__DIR__.'/../Login/loginPost.php');
+                include(__DIR__.'/../User/userPost.php');
             }
         ]
         

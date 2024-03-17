@@ -1,8 +1,22 @@
 <?php 
+    try{
+        $data = file_get_contents("php://input");
+        $jsonData = json_decode($data);
+        $user_id = $jsonData->user_id;
+        if(isset($jsonData->admin)):
+            $adminAction = true;
+        else:
+            $adminAction = false;
+        endif;
+        
+        
+        
 
-    $data = file_get_contents("php://input");
-    $jsonData = json_decode($data);
-    $user_id = $jsonData->user_id;
+    }catch(Exception $ex){
+        $resultArray = ['serverResponse'=>false,'deninedReason'=>$ex->getMessage()];
+        echo jsonMaker($resultArray);
+        return;
+    }
 
     global $connect;
     try{
@@ -25,9 +39,15 @@
         $rowCount = $stmt->rowCount();
     }catch(PDOException $ex){
         $resultArray = ['serverResponse'=>false,'deninedReason'=>$ex->getMessage()];
+        echo jsonMaker($resultArray);
+        return;
     }
-    if($rowCount){
+    if($rowCount):
         $resultArray = ['serverResponse'=>true];
+    else:
+        $resultArray = ['serverResponse'=>false,'deninedReason'=>'not exist'];
+    endif;
+    if(!$adminAction):
         // session_start();
         $_SESSION = array();
         if(ini_get("session.use_cookies")){//ini 파일에서 cookies 사용하고 있는지 묻는 것
@@ -37,7 +57,9 @@
                 $params["secure"],$params["httponly"]);
         }
         session_destroy();
-    }
-    echo jsonMaker($resultArray);
+        echo jsonMaker($resultArray);
+    else:
+        echo jsonMaker($resultArray);
+    endif;
     return;
 ?>
