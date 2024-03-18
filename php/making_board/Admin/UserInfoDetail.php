@@ -21,17 +21,25 @@
         .info label {
             font-weight: bold;
         }
-        
-        .delete-button {
-            background-color: #dc3545;
+        .btn{
             color: #fff;
             padding: 5px 10px;
             cursor: pointer;
             border: none;
             border-radius: 4px;
+           
+        }
+        #upd-btn{
+            background-color: #f9a3a4;
+            
+        }
+        .delete-button {
+            background-color: #dc3545;
             position: absolute;
             bottom: 5px;
             right: 5px;
+            
+           
         }
     </style>
 </head>
@@ -88,8 +96,8 @@
         <div>
             <label>생일</label> <?= $userInfo["birth"];?>
         </div>
-        <button id="upd-btn">권한 수정</button>
-        <button class="delete-button" onclick="delfetch('<?= $userInfo['user_id']?>')">삭제</button>
+        <button id="upd-btn" class="btn">권한 수정</button>
+        <button class="delete-button btn" onclick="delfetch('<?= $userInfo['user_id']?>')">삭제</button>
     </div>
     <script>
         const options = document.querySelectorAll(".option-role");
