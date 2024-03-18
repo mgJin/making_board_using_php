@@ -50,6 +50,9 @@
         '/adminpage/userinfo/([0-9]+)'=>[
             'get'=>function($user_pk){
                 include(__DIR__.'/../Admin/UserInfoDetail.php');
+            },
+            'put'=>function($user_pk){
+                include(__DIR__.'/../Admin/userInfoUpdate.php');
             }
         ],
         '/boards' => [

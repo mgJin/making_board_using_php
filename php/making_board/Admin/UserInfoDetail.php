@@ -53,31 +53,70 @@
             $roleInfo = $stmt->fetch(PDO::FETCH_ASSOC);
         endif;
 
+        try{
+            $sql = "SELECT name FROM roles";
+            $stmt = $connect->prepare($sql);
+            $stmt->execute();
+            $roleNames = $stmt->fetchAll(PDO::FETCH_COLUMN);
+        }catch(PDOException $ex){
+            echo $ex->getMessage();
+        }
+
         // print_r($userInfo);  
     ?>
     <div class="info">
         <div>
-            <label>ID:</label> <?php echo $userInfo["user_id"];?>
+            <label>ID:</label> <?= $userInfo["user_id"];?>
         </div>
         <div>
-            <label>권한</label> <?php echo $userInfo["role_id"]?$roleInfo["role_name"]:"";?>
+            <label>권한</label> 
+            <select>
+                <?php foreach($roleNames as $roleName):?>
+                    <option class="option-role" value="<?= $roleName?>"><?= $roleName?></option>
+                <?php endforeach;?>
+            </select>
         </div>
         <div>
-            <label>이름</label> <?php echo $userInfo["name"];?>
+            <label>이름</label> <?= $userInfo["name"];?>
         </div>
         <div>
-            <label>성별</label> <?php echo $userInfo["gender"];?>
+            <label>성별</label> <?= $userInfo["gender"];?>
         </div>
         <div>
-            <label>이메일</label> <?php echo $userInfo["email"];?>
+            <label>이메일</label> <?= $userInfo["email"];?>
         </div>
         <div>
-            <label>생일</label> <?php echo $userInfo["birth"];?>
+            <label>생일</label> <?= $userInfo["birth"];?>
         </div>
+        <button id="upd-btn">권한 수정</button>
         <button class="delete-button" onclick="delfetch('<?= $userInfo['user_id']?>')">삭제</button>
     </div>
     <script>
-        
+        const options = document.querySelectorAll(".option-role");
+        options.forEach(function(option,index){
+            if(option.value=='<?= isset($roleInfo["role_name"])?($roleInfo["role_name"]):""?>'){
+                option.selected = true;
+            }
+        })
+        const updbtn = document.querySelector("#upd-btn");
+        updbtn.addEventListener("click",async function(){
+            for(var i=0;i<options.length;i++){
+                if(options[i].selected){
+                    let formData = {
+                        optionValue : options[i].value
+                    }
+                    await fetch("http://localhost:3000/adminpage/userinfo/"+<?= $user_pk?>,{
+                        method:"PUT",
+                        body:JSON.stringify(formData)
+                    })
+                    .then(response=>response.json())
+                    .then(data=>console.log(data))
+                    .catch(error=>console.log(error));
+
+                    break;
+                }
+            }
+        });
         function delfetch(data){
             const formdata = {
                 user_id : data,
