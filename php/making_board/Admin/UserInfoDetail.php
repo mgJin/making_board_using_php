@@ -103,7 +103,7 @@
             for(var i=0;i<options.length;i++){
                 if(options[i].selected){
                     let formData = {
-                        optionValue : options[i].value
+                        roleName : options[i].value
                     }
                     await fetch("http://localhost:3000/adminpage/userinfo/"+<?= $user_pk?>,{
                         method:"PUT",
