@@ -51,7 +51,16 @@ $userArrays = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 body:JSON.stringify(formdata)
             })
             .then(response=>response.json())
-            .then(data=>console.log(data))
+            .then(data=>{
+                console.log(data);
+                const {serverResponse,deniedReason}= data;
+                if(serverResponse){
+                    window.location.reload;
+                }else{
+                    alert(deniedReason);
+                }
+            }
+            )
             .catch(error=>console.log(error));
         }
     </script>

@@ -2,7 +2,7 @@
 <!--세션에 is_login 이 묶여있다면 로그아웃 버튼 보이게 -->
 <!--서버를 스탑했다가 다시 시작할 때 로그인이 유지가 되는 문제 -->
 <?php
-session_start();
+
 
 if ((isset($_SESSION["is_loggedin"]) && $_SESSION["is_loggedin"])){
     header("Location: http://localhost:3000/boards");

@@ -1,9 +1,7 @@
 
-<!DOCTYPE html>
-<html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
     <title>Indivisual User Page</title>
     <style>
         .info {
@@ -118,7 +116,16 @@
                         body:JSON.stringify(formData)
                     })
                     .then(response=>response.json())
-                    .then(data=>console.log(data))
+                    .then(data=>{
+                        console.log(data);
+                        const {serverResponse,deniedReason} = data;
+                        if(serverResponse){
+                            alert('업데이트 되었습니다');
+                            window.location.reload;
+                        }else{
+                            alert(deniedReason);
+                        }
+                    })
                     .catch(error=>console.log(error));
 
                     break;
@@ -135,7 +142,14 @@
                 body:JSON.stringify(formdata)
             })
             .then(response=>response.json())
-            .then(data=>console.log(data))
+            .then(data=>{
+                console.log(data);
+                const {serverResponse,deniedReason} = data;
+                if(serverResponse){
+                    window.location.replace("http://localhost:3000/adminpage/usermanagement");
+                }
+            }
+            )
             .catch(error=>console.log(error));
         }
     </script>
