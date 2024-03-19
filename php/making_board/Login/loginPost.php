@@ -3,7 +3,7 @@
         $userID = $_POST["userid"];
         $userPW = $_POST["userpw"];
      //DB 연결시작
-        require(__DIR__.'/../Settings/config.php');
+        require(__DIR__.'/../Settings/dbconfig.php');
             //로그인 성공 시 connect 도 userid 로 된 것을 만들어서 전역변수처럼?
             //원래 실험하고 싶었던 것은 여기서 connect를 만들고 다른 곳에서 전역변수처럼 사용할 수 있나?
 

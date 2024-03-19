@@ -1,5 +1,5 @@
 <?php 
-    require(__DIR__.'/../Settings/config.php');
+    require(__DIR__.'/../Settings/dbconfig.php');
     $data =file_get_contents("php://input");
     $formData = json_decode($data);     
     //role을 선택하지 않았다면 return

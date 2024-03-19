@@ -1,5 +1,5 @@
 <?php 
-    require(__DIR__.'/../Settings/config.php');
+    require(__DIR__.'/../Settings/dbconfig.php');
 
     $data= file_get_contents("php://input");
     $jsonData = json_decode($data);

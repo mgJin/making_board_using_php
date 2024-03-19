@@ -1,4 +1,4 @@
-<?php require(__DIR__.'/../Settings/config.php');?>
+<?php require(__DIR__.'/../Settings/dbconfig.php');?>
     <?php include('permission_functions.php');?>
     <?php
         //해당 url로 들어와도 되는지, 권한이 있는지 체크하는 미들웨어 함수

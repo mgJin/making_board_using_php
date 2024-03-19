@@ -74,7 +74,7 @@ if (preg_match('/^\/adminpage(\/.*)?$/', $url)) : ?>
 
     <body>
         <?php
-        require(__DIR__ . '/Settings/config.php');
+        require(__DIR__ . '/Settings/dbconfig.php');
         ?>
         <section>
             <aside>

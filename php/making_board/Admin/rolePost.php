@@ -3,7 +3,7 @@
 //insert 페이지
 //기존에 있던 role인지 확인 후 insert
 //admin 권한이 있는지는 admin페이지 자체에 있으니깐 권한 확인을 해야할까?
-require(__DIR__.'/../Settings/config.php');
+require(__DIR__.'/../Settings/dbconfig.php');
 
 use function PHPSTORM_META\type;
     // role은 무조건 선택해야함.
