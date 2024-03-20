@@ -1,0 +1,11 @@
+.header-li {
+    list-style: none;
+}
+
+.header-li a {
+    text-decoration: none;
+}
+
+footer {
+    clear: both;
+}

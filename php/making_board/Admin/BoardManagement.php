@@ -6,20 +6,7 @@
     $boardArrays = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
 <head>
-    <style>
-        .management-li{
-            display:block;
-        }
-        .del-btn{
-            background-color: #dc3545;
-            float: right;
-            color: #fff;
-            padding: 5px 10px;
-            cursor: pointer;
-            border: none;
-            border-radius: 4px;
-        }
-    </style>
+    <link rel='stylesheet' href='/front/css/management.css' type='text/css'>
 </head>
 
 <div id="BoardManagement" class="managements">

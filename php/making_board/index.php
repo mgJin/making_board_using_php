@@ -26,50 +26,7 @@ if (preg_match('/^\/adminpage(\/.*)?$/', $url)) : ?>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>관리자 페이지</title>
-        <style>
-            section {
-                padding: 10px;
-            }
-
-            aside {
-                padding: 10px;
-                width: 15%;
-                float: left;
-            }
-
-            article {
-                padding: 10px;
-                width: 70%;
-                float: left;
-            }
-
-
-            li:hover {
-                background-color: #f0f0f0;
-            }
-
-            .asideLI {
-                width: 75px;
-                list-style: none;
-                padding: 10px;
-                border: 1px solid #ddd;
-                cursor: pointer;
-                overflow: hidden;
-            }
-
-            .list-li {
-                width: 400px;
-                list-style: none;
-                padding: 10px;
-                border: 1px solid #ddd;
-                cursor: pointer;
-            }
-
-            a.infoA {
-                font-weight: bold;
-                text-decoration: none;
-            }
-        </style>
+        <link rel='stylesheet' href='/front/css/adminpage.css' type='text/css'>
     </head>
 
     <body>
@@ -130,19 +87,7 @@ else :
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Index</title>
         <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
-        <style>
-            .header-li {
-                list-style: none;
-            }
-
-            .header-li a {
-                text-decoration: none;
-            }
-
-            footer {
-                clear: both;
-            }
-        </style>
+        <link rel='stylesheet' href='/front/css/boards.css' type="text/css">
     </head>
 
     <body>
