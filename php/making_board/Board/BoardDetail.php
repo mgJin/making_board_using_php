@@ -44,7 +44,7 @@
         if(chk){
             let action = chkbeh(e.data.action);
             let boardID = <?php echo $boardID?>;
-            const baseURL = "http://localhost:3000/boards";
+            const baseURL = "<?= BASE_URL?>/boards";
             const boardURL = baseURL + "/" + boardID;
             
             if(action==="delete"){

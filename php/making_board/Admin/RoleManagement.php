@@ -241,7 +241,7 @@
                 role: chkRole,
                 permissionsValues: pmvalues
             }
-            await fetch("http://localhost:3000/adminpage/rolemanagement", {
+            await fetch("<?= BASE_URL?>/adminpage/rolemanagement", {
                     method: "PUT",
                     body: JSON.stringify(formData)
                 })
@@ -275,7 +275,7 @@
             const fetchData = {
                 checkedRole: chkRole
             };
-            fetch("http://localhost:3000/adminpage/rolemanagement", {
+            fetch("<?= BASE_URL?>/adminpage/rolemanagement", {
                     method: "DELETE",
                     body: JSON.stringify(fetchData)
                 })
@@ -293,7 +293,7 @@
         })
 
         async function postform(data) {
-            await fetch("http://localhost:3000/adminpage/rolemanagement", {
+            await fetch("<?= BASE_URL?>/adminpage/rolemanagement", {
                     method: "POST",
                     body: data
                 })
@@ -316,7 +316,7 @@
             const fetchData = {
                 role_name: value
             };
-            await fetch("http://localhost:3000/adminpage/rolemanagement/event", {
+            await fetch("<?= BASE_URL?>/adminpage/rolemanagement/event", {
                     method: "POST",
                     body: JSON.stringify(fetchData)
                 })

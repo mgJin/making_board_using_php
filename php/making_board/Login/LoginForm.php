@@ -5,13 +5,13 @@
 
 
 if ((isset($_SESSION["is_loggedin"]) && $_SESSION["is_loggedin"])){
-    header("Location: http://localhost:3000/boards");
+    header("Location:".BASE_URL."/boards");
 }    
 //로그인을 요청하면 userid와 userpw 를 입력했는지 확인 후 db에 select로 확인
 
 
 ?>
-<form action = "http://localhost:3000/loginForm" method = "POST">
+<form action = "<?= BASE_URL?>/loginForm" method = "POST">
     ID : <input type= "text" name = "userid">
     PW : <input type= "password" name = "userpw">
     <input type= "submit">

@@ -70,7 +70,7 @@
     </div>
     <script>
         async function deletePost(data) {
-            await fetch("http://localhost:3000/boards/" + data, {
+            await fetch("<?= BASE_URL?>/boards/" + data, {
                     method: "DELETE",
                 })
                 .then(response => response.json())
@@ -78,7 +78,7 @@
                     console.log(data);
                     const {serverResponse,deniedReason} = data;
                     if(serverResponse){
-                        window.location.replace("http://localhost:3000/adminpage/boardmanagement");
+                        window.location.replace("<?= BASE_URL?>/adminpage/boardmanagement");
                     }else{
                         alert(deniedReason);
                     }

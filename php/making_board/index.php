@@ -1,5 +1,5 @@
 <?php
-
+include(__DIR__.'/Settings/config.php');
 include_once(__DIR__ . '/Common/functions.php');
 include_once(__DIR__ . '/Common/middleware.php');
 $routes = include_once(__DIR__ . '/Settings/routes.php');
@@ -108,7 +108,8 @@ if (preg_match('/^\/adminpage(\/.*)?$/', $url)) : ?>
             // })
 
             function onShow(selected) {
-                let url = "http://localhost:3000/adminpage" + selected
+                let url = "<?= BASE_URL?>"+"/adminpage"+selected;
+                
                 window.location.replace(url);
             }
         </script>
@@ -152,11 +153,11 @@ else :
                     <ul>
                         <?php     
                             if (!(isset($_SESSION["is_loggedin"]) && $_SESSION["is_loggedin"])): ?>
-                            <li class="header-li"><a href="http://localhost:3000/loginForm">로그인</a></li>
-                            <li class="header-li"><a href="http://localhost:3000/signupform">회원가입</a></li>
+                            <li class="header-li"><a href="<?= BASE_URL?>/loginForm">로그인</a></li>
+                            <li class="header-li"><a href="<?= BASE_URL?>/signupform">회원가입</a></li>
                         <?php else : ?>
                             <li class="header-li"><a id="logout-a" href="#">로그아웃</a>
-                            <li class="header-li"><a  href="http://localhost:3000/me">내 정보</a>
+                            <li class="header-li"><a  href="<?= BASE_URL?>/me">내 정보</a>
                         <?php endif; ?>
                         
                     </ul>
@@ -174,10 +175,10 @@ else :
             if(logoutA){
                 logoutA.addEventListener("click",function(e){
                     e.preventDefault();
-                    fetch("http://localhost:3000/logout",{
+                    fetch("<?= BASE_URL?>/logout",{
                         method:"POST"
                     })
-                    .then(()=>window.location.replace("http://localhost:3000/boards"));
+                    .then(()=>window.location.replace("<?= BASE_URL?>/boards"));
                 })
             }
         </script>

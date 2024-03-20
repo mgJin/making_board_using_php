@@ -52,7 +52,7 @@
         birth: document.querySelector("input[name='birth']").value,
         email: document.querySelector("input[name='email']").value
     };
-        handleSubmit("http://localhost:3000/me",formData);
+        handleSubmit("<?= BASE_URL?>/me",formData);
     })
     
     async function handleSubmit(url,data){
@@ -74,7 +74,7 @@
                 alert(deniedReason);
             }else{
                 alert('수정되었습니다');
-                window.location.replace('http://localhost:3000/me');
+                window.location.replace('<?= BASE_URL?>/me');
             }
         }catch(error){
             console.log(error);

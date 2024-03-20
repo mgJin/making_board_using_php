@@ -27,7 +27,7 @@
         <ul>
             <?php foreach ($boardArrays as $boardInfo) { ?>
                 <li class="management-li list-li">
-                    <a class="infoA" <?php echo "href='http://localhost:3000/adminpage/boardinfo/" . $boardInfo['id'] . "'"; ?>>
+                    <a class="infoA" href='<?= BASE_URL."/adminpage/boardinfo/" . $boardInfo['id']?>'>
                         <?php echo $boardInfo["title"] ?>
                     </a>
                     <button class="del-btn">X</button>

@@ -65,7 +65,7 @@ try {
 //a태그 부분 좀 더 깔끔하게 안될까?
 //세로로 배열필요
 foreach ($results as $result) {
-    $baseurl = "http://localhost:3000/boards";
+    $baseurl = BASE_URL."/boards";
     $url = $baseurl . "/" . $result["id"];
 ?>
     <a href=<?php echo $url ?>><?php echo $result["title"] ?></a>
@@ -95,14 +95,14 @@ for ($i = 0; $i < $BARRANGE; $i++) {
     }
 
 ?>
-    <a href=<?php echo "http://localhost:3000/boards"."?page=" . $barnum; ?>><?php echo $barnum; ?>&nbsp;</a>
+    <a href="<?= BASE_URL."/boards"."?page=" . $barnum; ?>"><?php echo $barnum; ?>&nbsp;</a>
 
 <?php } ?>
 
 <!-- 화살표로 숫자넘어가기 필요-->
-<a href= <?php echo "http://localhost:3000/boards"."?page=1";?>><<</a>
-<a href= <?php echo "http://localhost:3000/boards"."?page=".$prevpage;?>><</a>
-<a href= <?php echo "http://localhost:3000/boards"."?page=".$nextpage;?>>></a>
-<a href= <?php echo "http://localhost:3000/boards"."?page=".$MAXNUM?>>>></a>
+<a href= '<?= BASE_URL."/boards"."?page=1";?>'><<</a>
+<a href=  "<?= BASE_URL."/boards"."?page=".$prevpage;?>"><</a>
+<a href= '<?= BASE_URL."/boards"."?page=".$nextpage;?>'>></a>
+<a href=  "<?= BASE_URL."/boards"."?page=".$MAXNUM?>">>></a>
 <!-- 상수들 합치기 -->
 <button onclick="location.href='http:\/\/localhost:3000/boards/postForm'">글쓰기</button>

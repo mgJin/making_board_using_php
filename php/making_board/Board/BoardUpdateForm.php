@@ -39,7 +39,7 @@
                 let title = $("#upd-title").val();
                 let text = $("#upd-text").val();
                 if(title){
-                    const baseURL = "http://localhost:3000/boards" + "/"+ id;
+                    const baseURL = "<?= BASE_URL?>/boards" + "/"+ id;
                     $.ajax({
                         type:"PUT",
                         url : baseURL,

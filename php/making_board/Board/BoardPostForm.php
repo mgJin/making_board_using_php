@@ -15,7 +15,8 @@
     //글쓰기 클릭 시 ajax
     $("#posting-btn").on("click",function(event){
         event.preventDefault();
-        const baseURL = "http://localhost:3000/boards";
+        const baseURL = "<?= BASE_URL?>/boards";
+        
         $.ajax({
             type:"POST",
             url: baseURL,

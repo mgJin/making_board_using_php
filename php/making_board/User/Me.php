@@ -24,7 +24,7 @@
 <script>
     const updBtn = document.querySelector("#updBtn");
     updBtn.addEventListener("click",function(){
-        window.location.replace("http://localhost:3000/me/updateform");
+        window.location.replace("<?= BASE_URL?>/me/updateform");
     })
     const delBtn = document.querySelector("#delBtn");
     delBtn.addEventListener("click",function(){
@@ -41,7 +41,7 @@
                     user_id:<?php echo json_encode($user_id);?>
                 };
                 console.log(data);
-                const baseURL = "http://localhost:3000/me";
+                const baseURL = "<?= BASE_URL?>/me";
                 delJSON(baseURL,data);
             }else{
                 modalOverlay.style.display="none";
@@ -77,7 +77,7 @@
                     return;
                 }else{
                     alert('탈퇴되었습니다');
-                    window.location.replace("http://localhost:3000/boards");
+                    window.location.replace("<?= BASE_URL?>/boards");
                 }
 
             }}

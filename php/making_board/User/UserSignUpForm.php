@@ -42,7 +42,7 @@
 
     async function postJSON(data){
         try{
-            const response = await fetch("http://localhost:3000/signupform",{
+            const response = await fetch("<?= BASE_URL?>/signupform",{
                 method: "POST",
                 headers: {
                     "Content-Type":"application/json"
@@ -54,7 +54,7 @@
             const {serverResponse,deninedReason} = result;
             if(serverResponse){
                 alert('가입되었습니다');        
-                window.location.replace("http://localhost:3000/boards");
+                window.location.replace("<?= BASE_URL?>/boards");
             }else{
                 alert(deninedReason);
             }

@@ -111,7 +111,7 @@
                     let formData = {
                         roleName : options[i].value
                     }
-                    await fetch("http://localhost:3000/adminpage/userinfo/"+<?= $user_pk?>,{
+                    await fetch("<?= BASE_URL?>/adminpage/userinfo/"+<?= $user_pk?>,{
                         method:"PUT",
                         body:JSON.stringify(formData)
                     })
@@ -137,7 +137,7 @@
                 user_id : data,
                 admin : true
             }
-            fetch("http://localhost:3000/adminpage/usermanagement",{
+            fetch("<?= BASE_URL?>/adminpage/usermanagement",{
                 method:"DELETE",
                 body:JSON.stringify(formdata)
             })
@@ -146,7 +146,7 @@
                 console.log(data);
                 const {serverResponse,deniedReason} = data;
                 if(serverResponse){
-                    window.location.replace("http://localhost:3000/adminpage/usermanagement");
+                    window.location.replace("<?= BASE_URL?>/adminpage/usermanagement");
                 }
             }
             )

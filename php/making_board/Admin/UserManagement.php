@@ -30,7 +30,7 @@ $userArrays = $stmt->fetchAll(PDO::FETCH_ASSOC);
             <ul>
                 <?php foreach ($userArrays as $userInfo) { ?>
                     <li class="management-li list-li">
-                        <a class="infoA" <?php echo "href='http://localhost:3000/adminpage/userinfo/" . $userInfo['user_pk'] . "'"; ?>>
+                        <a class="infoA" href='<?= BASE_URL."/adminpage/userinfo/" . $userInfo['user_pk']?>'>
                             <?php echo $userInfo["user_id"] ?>
                         </a>
                         <button class="del-btn" onclick="delfetch('<?= $userInfo['user_id']; ?>')">X</button>
@@ -46,7 +46,7 @@ $userArrays = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 user_id : data,
                 admin : true
             }
-            fetch("http://localhost:3000/adminpage/usermanagement",{
+            fetch("<?= BASE_URL?>/adminpage/usermanagement",{
                 method:"DELETE",
                 body:JSON.stringify(formdata)
             })
