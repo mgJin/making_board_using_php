@@ -1,12 +1,50 @@
-
+<style>
+    .container{
+        max-width: 800px;
+        margin:20px auto;
+        padding:20px;
+        border: 1px solid #f9f9f9;
+        border-radius: 5px;
+        box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    .boardDetail{
+        background-color: #f9f9f9;
+        padding:10px;
+        margin-bottom: 10px;
+        border-radius: 5px;   
+    }
+    .boardDetail a{
+        text-decoration: none;
+    }
+    .pagination{
+        display: flex;
+        justify-content: space-between;
+        text-align: center;
+        margin-top:20px;
+    }
+    .pagination a{
+        /* display :inline-block; */
+        padding:5px 10px;
+        margin:0 5px;
+        text-decoration: none;
+        color:#808080;      
+    }
+    .post-btn{
+        
+        margin-bottom: 20px;
+        border: 1px solid #f9f9f9;
+        cursor: pointer;
+        background-color: #f9f9f9;
+        color:coral;
+    }
+</style>
 <!-- 게시글 목록 보여주기-->
 <?php
-//페이지가 2까지밖에 없는데 3으로 넘어오면(url에 적어서) 최대페이지로 넘어가게 하면 된다.   
-//dbuser 가 현재 사용중인 client의 id로 
-// session_start();
 
 $currentpage = 1; //현재 페이지와 맨 처음 들어왔을 때 보여지는 페이지
-$DIVIDENUM = 1; //한 번에 몇 개의 게시글이 보여지는 가
+$DIVIDENUM = 3; //한 번에 몇 개의 게시글이 보여지는 가
+
+//현재 페이지에 대한 정보를 받지 못하면 첫번째 페이지로
 if (isset($_GET["page"])) {
     $currentpage = $_GET["page"];
 }
@@ -26,6 +64,7 @@ try{
     echo "디비실패 ".$ex->getMessage();
 }
 $count = $count_results->fetch_row();
+
 
 //게시판 글 수를 한번에 보여줘야할 수로 나누어서 maxbar 계산
 //전체 게시판 글 수
@@ -60,21 +99,28 @@ try {
 ?>
 
 <!-- 게시글 목록만들기 -->
+<div class="container">
 <?php
 //게시글 목록에서 클릭 시 게시글에 연결
-//a태그 부분 좀 더 깔끔하게 안될까?
+
 //세로로 배열필요
 foreach ($results as $result) {
     $baseurl = BASE_URL."/boards";
     $url = $baseurl . "/" . $result["id"];
 ?>
-    <a href=<?php echo $url ?>><?php echo $result["title"] ?></a>
+    <div class="boardDetail">
+        <a href=<?php echo $url ?>><?php echo $result["title"] ?></a>
+    </div>
 <?php } ?>
 
 <!-- 이제 페이지 넘기기-->
+<div class="pagination">
+
+    <a href= '<?= BASE_URL."/boards"."?page=1";?>'><<</a>
+    <a href=  "<?= BASE_URL."/boards"."?page=".$prevpage;?>"><</a>
 <?php
 
-$BARRANGE = 2; //한 번에 보여줄 BARNUMBER의 개수
+$BARRANGE = 5; //한 번에 보여줄 BARNUMBER의 개수
 
 if(!($MAXBOARD%$DIVIDENUM===0)){
     $MAXNUM+=1;
@@ -100,9 +146,11 @@ for ($i = 0; $i < $BARRANGE; $i++) {
 <?php } ?>
 
 <!-- 화살표로 숫자넘어가기 필요-->
-<a href= '<?= BASE_URL."/boards"."?page=1";?>'><<</a>
-<a href=  "<?= BASE_URL."/boards"."?page=".$prevpage;?>"><</a>
+
 <a href= '<?= BASE_URL."/boards"."?page=".$nextpage;?>'>></a>
 <a href=  "<?= BASE_URL."/boards"."?page=".$MAXNUM?>">>></a>
+<button class="post-btn" onclick="location.href='http:\/\/localhost:3000/boards/postForm'">글쓰기</button>
+</div>
+
 <!-- 상수들 합치기 -->
-<button onclick="location.href='http:\/\/localhost:3000/boards/postForm'">글쓰기</button>
+</div>

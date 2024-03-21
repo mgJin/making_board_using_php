@@ -88,6 +88,7 @@ else :
         <title>Index</title>
         <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
         <link rel='stylesheet' href='/front/css/boards.css' type="text/css">
+        
     </head>
 
     <body>
