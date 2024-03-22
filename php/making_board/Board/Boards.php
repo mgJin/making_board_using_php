@@ -13,6 +13,10 @@
         margin-bottom: 10px;
         border-radius: 5px;   
     }
+    .boardDetail:hover{
+        background-color: #808080;
+        cursor: pointer;
+    }
     .boardDetail a{
         text-decoration: none;
     }
@@ -34,10 +38,13 @@
         margin-bottom: 20px;
         border: 1px solid #f9f9f9;
         cursor: pointer;
-        background-color: #f9f9f9;
-        color:coral;
+        background-color: coral;
+        color:#fff;
         /* overflow: hidden; */
         white-space: nowrap;
+    }
+    .post-btn:hover{
+        background-color: #ffab91;
     }
 </style>
 <!-- 게시글 목록 보여주기-->

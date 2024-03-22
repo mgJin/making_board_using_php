@@ -1,5 +1,38 @@
 <link rel=stylesheet href='/front/css/modal.css'>
-
+<style>
+    .info{
+        border: 1px solid #ddd;
+        padding: 10px;
+        margin-top: 20px;
+        width: 50%;
+        position: relative;
+    }
+    .info div{
+        margin-bottom: 10px;
+    }
+    .info label{
+        font-weight: bold;
+    }
+    .btn{
+        color: #fff;
+            padding: 5px 10px;
+            cursor: pointer;
+            border: none;
+            border-radius: 4px;
+    }
+    #upd-btn{
+        background-color: coral;
+    }
+    #upd-btn:hover{
+        background-color: #ffAB91;
+    }
+    #del-btn{
+        background-color: #dc3545;
+    }
+    #del-btn:hover{
+        background-color: #EF9A9A;
+    }
+</style>
 <?php
     // session_start(); //mw에서 이미 세션을 실행하고 거기서 이어졌기 때문에 필요없음
     $user_id = $_SESSION["user"]["user_id"];
@@ -16,17 +49,25 @@
     }
     include(__DIR__.'/../front/html/modal.html');
 ?>
-<h1><?php echo $result["user_id"]?></h1>
-<span><?php echo $result["name"]?></span>
-<button id="updBtn">수정</button>
-<button id="delBtn">탈퇴</button>
-
+<div class="info">
+    <div>
+        <label>ID:</label>
+        <?php echo $result["user_id"]?>
+    </div>
+    <div>
+        <label>Name:</label>
+        <?php echo $result["name"]?>
+    </div>
+    <button id="upd-btn" class="btn">수정</button>
+    <button id="del-btn" class="btn">탈퇴</button>
+</div>
+<!-- -->
 <script>
-    const updBtn = document.querySelector("#updBtn");
+    const updBtn = document.querySelector("#upd-btn");
     updBtn.addEventListener("click",function(){
         window.location.replace("<?= BASE_URL?>/me/updateform");
     })
-    const delBtn = document.querySelector("#delBtn");
+    const delBtn = document.querySelector("#del-btn");
     delBtn.addEventListener("click",function(){
         const chkp = document.querySelector("#chkp");
         chkp.innerText = '탈퇴하시겠습니까?';

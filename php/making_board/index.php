@@ -87,7 +87,7 @@ else :
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Index</title>
         <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
-        <link rel='stylesheet' href='/front/css/boards.css' type="text/css">
+        <link rel='stylesheet' href='/front/css/index.css' type="text/css">
         <link rel='stylesheet' href='/front/css/main_header.css' type="text/css">
         
     </head>
@@ -105,8 +105,8 @@ else :
                             <li class="header-li"><a href="<?= BASE_URL?>/loginForm">로그인</a></li>
                             <li class="header-li"><a href="<?= BASE_URL?>/signupform">회원가입</a></li>
                         <?php else : ?>
-                            <li class="header-li"><a id="logout-a" href="#">로그아웃</a>
                             <li class="header-li"><a  href="<?= BASE_URL?>/me">내 정보</a>
+                            <li class="header-li"><a id="logout-a" href="#">로그아웃</a>
                         <?php endif; ?>
                         
                     </ul>

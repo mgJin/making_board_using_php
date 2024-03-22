@@ -46,13 +46,13 @@ if ((isset($_SESSION["is_loggedin"]) && $_SESSION["is_loggedin"])){
         transition: background-color 0.3s ease;
     }
     .btn-login:hover {
-        background-color: #ff9f20;
+        background-color: #FFAB91;
     }
 </style>
 <form action = "<?= BASE_URL?>/loginForm" method = "POST">
         <div class="form-group">
-            <label for="userid">Username:</label>
-            <input type="text" id="userid" name="userid" placeholder="Enter your username">
+            <label for="userid">Userid:</label>
+            <input type="text" id="userid" name="userid" placeholder="Enter your userid">
         </div>
         <div class="form-group">
             <label for="password">Password:</label>
