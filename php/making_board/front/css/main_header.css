@@ -1,0 +1,13 @@
+.header-nav{
+    display: inline-block;
+    
+}
+.header-li {
+    list-style: none;
+    display: inline-block;
+    margin-right:20px;
+}
+
+.header-li a {
+    text-decoration: none;
+}

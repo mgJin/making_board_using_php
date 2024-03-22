@@ -18,8 +18,8 @@
     }
     .pagination{
         display: flex;
-        justify-content: space-between;
-        text-align: center;
+        margin-right: 20px;
+        justify-content: center;
         margin-top:20px;
     }
     .pagination a{
@@ -36,6 +36,8 @@
         cursor: pointer;
         background-color: #f9f9f9;
         color:coral;
+        /* overflow: hidden; */
+        white-space: nowrap;
     }
 </style>
 <!-- 게시글 목록 보여주기-->
@@ -114,14 +116,7 @@ foreach ($results as $result) {
 <?php } ?>
 
 <!-- 이제 페이지 넘기기-->
-<div class="pagination">
-
-    <a href= '<?= BASE_URL."/boards"."?page=1";?>'><<</a>
-    <a href=  "<?= BASE_URL."/boards"."?page=".$prevpage;?>"><</a>
 <?php
-
-$BARRANGE = 5; //한 번에 보여줄 BARNUMBER의 개수
-
 if(!($MAXBOARD%$DIVIDENUM===0)){
     $MAXNUM+=1;
 }
@@ -129,14 +124,22 @@ $prevpage = $currentpage - 1;
 $nextpage = $currentpage + 1;
 if($nextpage>=$MAXNUM){
     $nextpage = $MAXNUM;
-}
+}?>
+
+<div class="pagination">
+
+    <a href= '<?= BASE_URL."/boards"."?page=1";?>'><<</a>
+    <a href=  "<?= BASE_URL."/boards"."?page=".$prevpage;?>"><</a>
+<?php 
+$BARRANGE = 5; //한 번에 보여줄 BARNUMBER의 개수
+
 //최대값 넘어가면 최대값으로 고정
 $SHARE = (int)($CALNUM / $BARRANGE);
 //barnum 보여주는 반복문
 for ($i = 0; $i < $BARRANGE; $i++) {
     $barnum = $BARRANGE * $SHARE + $i + 1;
     if ($MAXNUM < $barnum) {
-        echo "최대값을 넘어가려함";
+        
         break;
     }
 

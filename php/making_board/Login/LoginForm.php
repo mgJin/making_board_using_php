@@ -11,9 +11,53 @@ if ((isset($_SESSION["is_loggedin"]) && $_SESSION["is_loggedin"])){
 
 
 ?>
+<style>
+    .login-container {
+        background-color: #fff;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+        width: 300px;
+    }
+    .login-container h2 {
+        text-align: center;
+    }
+    .form-group {
+        margin-bottom: 20px;
+    }
+    .form-group label {
+        display: block;
+        margin-bottom: 5px;
+    }
+    .form-group input {
+        width: 100%;
+        padding: 8px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+    }
+    .btn-login {
+        width: 100%;
+        padding: 10px;
+        background-color: coral;
+        color: #fff;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+    .btn-login:hover {
+        background-color: #ff9f20;
+    }
+</style>
 <form action = "<?= BASE_URL?>/loginForm" method = "POST">
-    ID : <input type= "text" name = "userid">
-    PW : <input type= "password" name = "userpw">
-    <input type= "submit">
-</form>
+        <div class="form-group">
+            <label for="userid">Username:</label>
+            <input type="text" id="userid" name="userid" placeholder="Enter your username">
+        </div>
+        <div class="form-group">
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="userpw" placeholder="Enter your password">
+        </div>
+        <button type="submit" class="btn-login">Login</button>
+    </form>
 

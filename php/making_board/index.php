@@ -88,13 +88,16 @@ else :
         <title>Index</title>
         <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
         <link rel='stylesheet' href='/front/css/boards.css' type="text/css">
+        <link rel='stylesheet' href='/front/css/main_header.css' type="text/css">
         
     </head>
 
     <body>
         <header>
-            <h1>Header Area</h1>
-            <div>
+            <div class="header-nav">
+                <h1><a class="home-a" href="<?=BASE_URL?>/boards">HOME</a></h1>
+            </div>
+            <div class="header-nav">
                 <nav>
                     <ul>
                         <?php     
