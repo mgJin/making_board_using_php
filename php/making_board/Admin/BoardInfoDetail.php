@@ -22,7 +22,7 @@
             font-weight: bold;
         }
 
-        .delete-button {
+        .del-btn {
             background-color: #dc3545;
             color: #fff;
             padding: 5px 10px;
@@ -32,6 +32,9 @@
             position: absolute;
             bottom: 5px;
             right: 5px;
+        }
+        .del-btn:hover{
+        background-color: #EF9A9A;
         }
     </style>
 </head>
@@ -66,7 +69,7 @@
         <div>
             <label>Created:</label> <?php echo $boardInfo["created"]; ?>
         </div>
-        <button class="delete-button" onclick="deletePost('<?= $boardID ?>')">삭제</button>
+        <button class="del-btn" onclick="deletePost('<?= $boardID ?>')">삭제</button>
     </div>
     <script>
         async function deletePost(data) {

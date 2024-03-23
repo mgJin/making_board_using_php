@@ -1,4 +1,5 @@
 <link rel=stylesheet href='/front/css/modal.css' type='text/css'>
+<link rel=stylesheet href='/front/css/boardDetail.css' type='text/css'>
 
 <!--권한 제한된 유저를 만들어서 그놈이 보는걸로 -->
 <!--삭제 버튼 누를 때 권한 확인 필요-->
@@ -20,17 +21,22 @@
     }
 ?>
 
-<div>
-    <h2>제목 : <?php echo $result["title"] ?></h2>
-    <span>작성자 : <?php echo $result["writer"]?></span>
-    <br>
-    <span>작성 날짜 : <?php echo $result["created"]?></span>
-    <br>
-    <span><?php echo $result["text"]?></span>
+
+<div class="article">
+    <h1 class="article-title">
+        <?= $result["title"] ?>
+    </h1>
+  <p class="author"><?= $result["writer"]?></p>
+  <p class="divider">|</p>
+  <p class="date"><?= $result["created"]?></p>
+  <div class="content">
+    <p><?= $result["text"]?></p>
+  </div>
 </div>
 
-    <button class="crdbtn" id="updbtn">수정</button>
-    <button class="crdbtn" id="delbtn">삭제</button>
+
+    <button class="crdbtn upd-btn btn">수정</button>
+    <button class="crdbtn del-btn btn">삭제</button>
 
 
 <script>

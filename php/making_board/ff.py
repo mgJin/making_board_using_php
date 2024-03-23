@@ -1,6 +1,5 @@
-for i in range(3):
-    for j in range(6,10):
-        if(j==8):
-            break
-        print(j)
-    print(i)
+a = "spring is be"
+b = a.split()
+a= 7
+b = a**4
+print(b)

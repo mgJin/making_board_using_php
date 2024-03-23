@@ -1,0 +1,57 @@
+.article {
+    max-width: 600px; /* 기사의 최대 너비 */
+    margin: 0 auto; /* 가운데 정렬 */
+    padding: 20px; /* 내부 여백 */
+    border: 1px solid #ccc; /* 테두리 */
+    border-radius: 8px; /* 테두리 모서리 둥글게 */
+    position: relative;
+  }
+  
+.article-title {
+    font-size: 24px; /* 제목의 글꼴 크기 */
+    margin-bottom: 10px; /* 제목과 작성자, 날짜 사이 간격 */
+  }
+  
+  
+.author, .date {
+    display: inline-block;
+    font-style: italic;
+    font-size: 14px;
+    margin-top: 5px; /* 작성자와 날짜 사이의 간격 */
+  }
+  
+  .divider {
+    display: inline-block; /* 인라인 블록 요소로 배치 */
+    
+    margin: 10px 0; /* 위아래 여백 */
+    
+  }
+  
+  
+  .content {
+    line-height: 1.6; /* 텍스트 줄간격 */
+  }
+
+.del-btn:hover{
+    background-color: #EF9A9A;
+}
+.btn{
+    color: #fff;
+    padding: 5px 10px;
+    cursor: pointer;
+    border: none;
+    border-radius: 4px;
+}
+.upd-btn{
+background-color: coral;
+}
+.upd-btn:hover{
+background-color: #ffAB91;
+}
+.del-btn{
+    background-color: #dc3545;
+    float: right;
+}
+.del-btn:hover{
+background-color: #EF9A9A;
+}

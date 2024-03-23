@@ -14,7 +14,7 @@
         font-weight: bold;
     }
     .btn{
-        color: #fff;
+            color: #fff;
             padding: 5px 10px;
             cursor: pointer;
             border: none;
