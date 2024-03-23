@@ -26,17 +26,23 @@
     <h1 class="article-title">
         <?= $result["title"] ?>
     </h1>
-  <p class="author"><?= $result["writer"]?></p>
-  <p class="divider">|</p>
-  <p class="date"><?= $result["created"]?></p>
+    <div class="divide"></div>
+    <div class="article-info">
+        <p class="author"><?= $result["writer"]?></p>
+        <p class="divider-sentence">|</p>
+        <p class="date"><?= $result["created"]?></p>
+    </div>
+    <div class="divide"></div>
   <div class="content">
     <p><?= $result["text"]?></p>
+  </div>
+  <div class="box-btn">
+      <button class="crdbtn upd-btn btn">수정</button>
+      <button class="crdbtn del-btn btn">삭제</button>
   </div>
 </div>
 
 
-    <button class="crdbtn upd-btn btn">수정</button>
-    <button class="crdbtn del-btn btn">삭제</button>
 
 
 <script>

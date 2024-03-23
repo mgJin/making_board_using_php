@@ -12,15 +12,24 @@
     margin-bottom: 10px; /* 제목과 작성자, 날짜 사이 간격 */
   }
   
-  
+.article-info{
+    border-width:10px 0px 10px 0px;
+
+}  
 .author, .date {
     display: inline-block;
     font-style: italic;
     font-size: 14px;
     margin-top: 5px; /* 작성자와 날짜 사이의 간격 */
+}
+.divide {
+    display: inline-block;
+    width: 40%; /* 구분선 너비 조정 */
+    height: 1px; /* 구분선 높이 설정 */
+    background-color: #ccc; /* 구분선 색상 지정 */
+    margin: 0 ; /* 구분선 간격 조정 */
   }
-  
-  .divider {
+  .divider-sentence {
     display: inline-block; /* 인라인 블록 요소로 배치 */
     
     margin: 10px 0; /* 위아래 여백 */
@@ -32,8 +41,10 @@
     line-height: 1.6; /* 텍스트 줄간격 */
   }
 
-.del-btn:hover{
-    background-color: #EF9A9A;
+.box-btn{
+    position:absolute;
+    bottom:5px;
+    right:10px;
 }
 .btn{
     color: #fff;
@@ -44,13 +55,14 @@
 }
 .upd-btn{
 background-color: coral;
+    
 }
 .upd-btn:hover{
 background-color: #ffAB91;
 }
 .del-btn{
     background-color: #dc3545;
-    float: right;
+    
 }
 .del-btn:hover{
 background-color: #EF9A9A;

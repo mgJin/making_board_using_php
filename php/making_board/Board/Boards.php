@@ -46,6 +46,9 @@
     .post-btn:hover{
         background-color: #ffab91;
     }
+    .currentpage{
+        font-weight: bold;
+    }
 </style>
 <!-- 게시글 목록 보여주기-->
 <?php
@@ -151,7 +154,11 @@ for ($i = 0; $i < $BARRANGE; $i++) {
     }
 
 ?>
-    <a href="<?= BASE_URL."/boards"."?page=" . $barnum; ?>"><?php echo $barnum; ?>&nbsp;</a>
+    <a 
+        <?php if($barnum==$currentpage):?>
+            class="currentpage" 
+        <?php endif;?>
+        href="<?= BASE_URL."/boards"."?page=" . $barnum; ?>"><?php echo $barnum; ?></a>
 
 <?php } ?>
 
@@ -159,8 +166,14 @@ for ($i = 0; $i < $BARRANGE; $i++) {
 
 <a href= '<?= BASE_URL."/boards"."?page=".$nextpage;?>'>></a>
 <a href=  "<?= BASE_URL."/boards"."?page=".$MAXNUM?>">>></a>
-<button class="post-btn" onclick="location.href='http:\/\/localhost:3000/boards/postForm'">글쓰기</button>
+<button class="post-btn" onclick="getPage('/boards/postForm')">글쓰기</button>
 </div>
 
 <!-- 상수들 합치기 -->
 </div>
+<script>
+    function getPage(url){
+        url = '<?= BASE_URL?>'+url
+        window.location.replace(url);
+    }
+</script>
