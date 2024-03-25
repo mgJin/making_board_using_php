@@ -1,0 +1,91 @@
+.container {
+    width: 400px;
+    justify-content: space-around;
+}
+
+form {
+    width: 100%;
+    display: flex;
+}
+
+.wrap-box {
+    width: 200px;
+    flex: 1;
+    margin: 10px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    float: left;
+    /* text-align: center; */
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s ease;
+}
+
+.wrap-box:hover {
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.wrap-box p {
+    font-size: 17px;
+    font-weight: bold;
+    border-bottom: 1px solid #ddd;
+    margin-bottom: 10px;
+}
+.p-box{
+    text-align: center;
+}
+
+.role-ul {
+    list-style: none;
+    padding: 0;
+    cursor: pointer;
+}
+
+.role-li {
+    margin: 5px 0;
+}
+
+li:hover {
+    background-color: #ddd;
+}
+
+.box-btn {
+    clear: both;
+    text-align: center;
+    margin-top: 10px;
+}
+
+.btns {
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#add-btn {
+    background-color: #007bff;
+}
+
+#add-btn:hover {
+    background-color: #009fff;
+}
+
+#upd-btn {
+    background-color: coral;
+}
+
+#upd-btn:hover {
+    background-color: #ffAB91;
+}
+
+#del-btn {
+    background-color: #dc3545;
+
+}
+
+#del-btn:hover {
+    background-color: #EF9A9A;
+}

@@ -32,6 +32,7 @@
             position: absolute;
             bottom: 5px;
             right: 5px;
+            transition:background-color 0.3s ease
         }
         .del-btn:hover{
         background-color: #EF9A9A;
@@ -54,9 +55,6 @@
     <h1>게시물 정보</h1>
 
     <div class="info">
-        <div>
-            <label>ID:</label> <?php echo $boardInfo["id"]; ?>
-        </div>
         <div>
             <label>Title:</label> <?php echo $boardInfo["title"]; ?>
         </div>

@@ -4,7 +4,7 @@ section {
 
 aside {
     padding: 10px;
-    width: 15%;
+    width: 21%;
     float: left;
 }
 
@@ -20,12 +20,14 @@ li:hover {
 }
 
 .asideLI {
-    width: 75px;
+    width: 60px;
     list-style: none;
     padding: 10px;
     border: 1px solid #ddd;
     cursor: pointer;
     overflow: hidden;
+    font-weight: bold;
+    
 }
 
 .list-li {

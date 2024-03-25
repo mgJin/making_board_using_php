@@ -1,51 +1,5 @@
 <head>
-    <style>
-        .container {
-            width: 400px;
-
-        }
-
-        form {
-            width: 100%;
-            display: flex;
-        }
-
-        .wrap-box {
-            flex: 1;
-            margin: 10px;
-            padding: 10px;
-            border: 1px solid #ddd;
-            float: left;
-            text-align: center;
-            cursor: pointer;
-        }
-
-        .role-ul {
-            list-style: none;
-            padding: 0;
-            cursor: pointer;
-        }
-
-        .role-li {
-            margin: 5px 0;
-        }
-
-        li:hover {
-            background-color: #ddd;
-        }
-
-        .btn {
-            clear: both;
-            text-align: center;
-            margin-top: 10px;
-        }
-
-        /* Border for <p> tags */
-        .wrap-box p {
-            border-bottom: 1px solid #ddd;
-            margin-bottom: 10px;
-        }
-    </style>
+    <link rel='stylesheet' href='/front/css/rolembox.css' type='text/css'>
 </head>
 
 <body>
@@ -67,7 +21,9 @@
     <div class="container">
         <form id="rolepermission-form">
             <div class="wrap-box">
-                <p>Roles</p>
+                <div class="p-box">
+                    <p>Roles</p>
+                </div>
                 <ul id="role-box" class="role-ul">
                     <?php foreach ($roleArray as $role) : ?>
                         <li class="role-li">
@@ -80,7 +36,9 @@
                 <button id="addList-btn">+</button>
             </div>
             <div class="wrap-box">
-                <p>Permissions</p>
+                <div class="p-box">
+                    <p>Permissions</p>
+                </div>
                 <ul id="permission-box" class="role-ul">
                     <?php foreach ($permissionArray as $permission) :
                         $temp = explode("-", $permission);
@@ -91,16 +49,16 @@
                         endforeach;
                         $tempString = implode($tempArray);
                     ?>
-                        <li><?= "can" . $tempString ?><input type="checkbox" name="permissions" id="<?= $permission ?>" value="<?= $permission ?>"></li>
+                        <li><input type="checkbox" name="permissions" id="<?= $permission ?>" value="<?= $permission ?>"><?= "can" . $tempString ?></li>
                     <?php endforeach; ?>
                 </ul>
             </div>
         </form>
-        <div class="btn">
-    
-            <button id="add-btn">add</button>
-            <button id="upd-btn">update</button>
-            <button id="del-btn">delete</button>
+        <div class="box-btn">
+
+            <button class="btns" id="add-btn">add</button>
+            <button class="btns" id="upd-btn">update</button>
+            <button class="btns" id="del-btn">delete</button>
         </div>
     </div>
     <script>
@@ -121,7 +79,7 @@
                 roleRadio.checked = !roleRadio.checked;
                 if (roleRadio.checked) {
                     eventfunction(roleRadio.value);
-                }else{
+                } else {
                     const checkboxs = document.querySelectorAll("input[type='checkbox']");
                     checkboxs.forEach(function(checkbox) {
                         checkbox.checked = false;
@@ -160,19 +118,19 @@
                     newlabel.appendChild(newinputradio);
                     newlabel.appendChild(document.createTextNode(event.target.value));
                     newinputtext.remove();
-                    newli.addEventListener("mousedown",function(e){
+                    newli.addEventListener("mousedown", function(e) {
                         let roleRadio = newli.querySelector(".role-radio");
                         roleRadio.checked = !roleRadio.checked;
-                
-            })
+
+                    })
                 }
             })
-            
+
             // }
 
         })
-        
-        
+
+
         /*add role event*/
         const addbtn = document.querySelector("#add-btn");
         addbtn.addEventListener("click", function() {
@@ -241,7 +199,7 @@
                 role: chkRole,
                 permissionsValues: pmvalues
             }
-            await fetch("<?= BASE_URL?>/adminpage/rolemanagement", {
+            await fetch("<?= BASE_URL ?>/adminpage/rolemanagement", {
                     method: "PUT",
                     body: JSON.stringify(formData)
                 })
@@ -275,7 +233,7 @@
             const fetchData = {
                 checkedRole: chkRole
             };
-            fetch("<?= BASE_URL?>/adminpage/rolemanagement", {
+            fetch("<?= BASE_URL ?>/adminpage/rolemanagement", {
                     method: "DELETE",
                     body: JSON.stringify(fetchData)
                 })
@@ -293,7 +251,7 @@
         })
 
         async function postform(data) {
-            await fetch("<?= BASE_URL?>/adminpage/rolemanagement", {
+            await fetch("<?= BASE_URL ?>/adminpage/rolemanagement", {
                     method: "POST",
                     body: data
                 })
@@ -316,7 +274,7 @@
             const fetchData = {
                 role_name: value
             };
-            await fetch("<?= BASE_URL?>/adminpage/rolemanagement/event", {
+            await fetch("<?= BASE_URL ?>/adminpage/rolemanagement/event", {
                     method: "POST",
                     body: JSON.stringify(fetchData)
                 })
