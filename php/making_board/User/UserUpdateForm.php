@@ -1,3 +1,6 @@
+<link rel='stylesheet' href='/front/css/formdesign.css' type='text/css'>
+<link rel='stylesheet' href='/front/css/formdesign_radio.css' type='text/css'>
+
 <?php 
     global $connect;
     // session_start();//mw에서 이미 실행함
@@ -21,19 +24,44 @@
     ->build();
 ?>
 <!-- 비밀번호 바꾸는건 따로 페이지를 만들어서 하자-->
-<form id="updateform" onsubmit="return false">
-    ID : <input type = "text" name="id" <?php echoValue($user->getID());?>>
-    
-    이름 : <input type = "text" name = "name" <?php echoValue($user->getName());?>>
-    
-    Gender : <input type= "radio" name= "gender" value='male'>남자
-                <input type= "radio" name= "gender" value='female'>여자
-    birth : <input type = "date" name= "birth" <?php echoValue($user->getBirth());?>>
-    
-    email : <input type = "text" name="email" <?php echoValue($user->getEmail());?>>
-    
-    <button id="subbtn">수정</button>
+
+<form class="form-container" id="updateform" onsubmit="return false">
+    <div class="form-group">
+        <label for="id">ID</label>
+        <input type = "text" name="id" <?php echoValue($user->getID());?>>
+    </div>
+    <div class="form-group">
+        <label for="name">이름</label>
+        <input type = "text" name = "name" <?php echoValue($user->getName());?>>
+    </div>
+    <div class="form-group1">
+        <label class="radio-label">성별</label>
+        <div class="radio-container">
+
+            <div class="radio-box">
+                <p class="radio-content1">남성</p>
+                <input type= "radio" class="radio-content" name= "gender" value='male'>
+            </div>
+            
+            <div class="radio-box">
+                <p class="radio-content2">여성</p>    
+                <input type= "radio" class="radio-content" name= "gender" value='female'>
+            </div>
+        </div>  
+    </div>
+    <div class="form-group">
+        <label for="birth">생일</label>
+        <input type = "date" name= "birth" <?php echoValue($user->getBirth());?>>
+    </div>
+    <div class="form-group">
+        <label for="email">이메일</label>
+        <input type = "text" name="email" <?php echoValue($user->getEmail());?>>
+    </div>
+    <div class="btn-container">
+        <button class="submit-btn" id="subbtn">수정</button>
+    </div>
 </form>
+
 <script>
     const getGender = "<?php echo htmlspecialchars($user->getGender());?>";
     const genderRadio = document.querySelector('input[name="gender"][value="'+getGender+'"');

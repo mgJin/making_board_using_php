@@ -3,15 +3,7 @@
 <!--gender 의 datatype :  enum('male','female') -->
 <!--submit누르고 확인버튼 나오는 거랑, 회원가입이 성공하면 /boards 로 이동하게 -->
 <link rel="stylesheet" href='/front/css/formdesign.css' type='text/css'>
-<style>
-    .form-container{
-        width:500px;
-    }
-    .radio-input p{
-        float:left;
-    }
-    .radio-input input{}
-</style>
+<link rel='stylesheet' href='/front/css/formdesign_radio.css' type='text/css'>
 <form class="form-container" id="signform" onsubmit="return false">
     <div class="form-group">
         <label for="id">ID</label>
@@ -25,16 +17,20 @@
         <label for="password">PassWord</label>
         <input type = "password" name= "password">
     </div>
-    <div class="form-group">
-        <label for="gender">성별</label>
-            <div class="radio-input">
-                <p>남성</p>
-                <input type= "radio" name= "gender" value='male'>
+    <div class="form-group1">
+        <label class="radio-label">성별</label>
+        <div class="radio-container">
+
+            <div class="radio-box">
+                <p class="radio-content1">남성</p>
+                <input type= "radio" class="radio-content" name= "gender" value='male'>
             </div>
-            <div class="radio-input">
-                <p>여성</p>
-                <input type= "radio" name= "gender" value='female'>
+            
+            <div class="radio-box">
+                <p class="radio-content2">여성</p>    
+                <input type= "radio" class="radio-content" name= "gender" value='female'>
             </div>
+        </div>
         
     </div>
     <div class="form-group">

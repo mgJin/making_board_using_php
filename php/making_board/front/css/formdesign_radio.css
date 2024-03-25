@@ -1,0 +1,24 @@
+.form-container{
+    width:500px;
+}
+.form-group1{
+    margin-bottom:20px;
+}
+.radio-container{
+
+    display:flex;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+.radio-box{
+    align-items: center;
+    margin-right: 10px;
+    margin-top:10px;
+}
+.radio-content1{
+    display:inline-block;
+}
+.radio-content2{
+    display:inline-block;
+}
