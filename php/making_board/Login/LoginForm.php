@@ -19,9 +19,7 @@ if ((isset($_SESSION["is_loggedin"]) && $_SESSION["is_loggedin"])){
         padding: 20px;
         width: 300px;
     }
-    .login-container h2 {
-        text-align: center;
-    }
+    
     .form-group {
         margin-bottom: 20px;
     }
@@ -49,15 +47,17 @@ if ((isset($_SESSION["is_loggedin"]) && $_SESSION["is_loggedin"])){
         background-color: #FFAB91;
     }
 </style>
-<form action = "<?= BASE_URL?>/loginForm" method = "POST">
-        <div class="form-group">
-            <label for="userid">Userid:</label>
-            <input type="text" id="userid" name="userid" placeholder="Enter your userid">
-        </div>
-        <div class="form-group">
-            <label for="password">Password:</label>
-            <input type="password" id="password" name="userpw" placeholder="Enter your password">
-        </div>
-        <button type="submit" class="btn-login">Login</button>
+<div class="login-container">
+    <form action = "<?= BASE_URL?>/loginForm" method = "POST">
+            <div class="form-group">
+                <label for="userid">Userid:</label>
+                <input type="text" id="userid" name="userid" placeholder="Enter your userid">
+            </div>
+            <div class="form-group">
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="userpw" placeholder="Enter your password">
+            </div>
+            <button type="submit" class="btn-login">Login</button>
     </form>
+</div>
 

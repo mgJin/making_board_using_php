@@ -1,4 +1,10 @@
 <link rel=stylesheet href='/front/css/modal.css' type='text/css'>
+<linK rel=stylesheet href='/front/css/formdesign.css' type='text/css'>
+<style>
+    .form-container{
+        width:500px;
+    }
+</style>
 <?php include_once '../making_board/front/html/modal.html'; ?>
 <?php
     $titleMsg = "";
@@ -16,14 +22,20 @@
     $text = $result["text"];
     
 ?> 
-<form class="upd-form">
-    제목 : <input type = "text" id="upd-title" name = "title" <?php echo 'value="'.htmlspecialchars($title).'"';?> placeholder="제목을 입력해주세요">
-    <p id="titleMsg"></p>
-    내용 : <input type = "text" id="upd-text" name = "text" <?php echo 'value="'.htmlspecialchars($text).'"';?>>
-    
-    <input class="crdbtn" type = "button" value="수정">
-</form>
 
+<div class="form-container upd-form">
+    <form id="posting-form" onsubmit="return false">
+        <div class="form-group">
+            <label for="title">Title</label>
+            <input type = "text" id="upd-title" name = "title" <?php echo 'value="'.htmlspecialchars($title).'"';?> placeholder="제목을 입력해주세요">
+        </div>
+        <div class="form-group">
+            <label for="text">Textarea</label>
+            <textarea rows="10" cols="68" id="upd-text" name = "text" ><?php echo htmlspecialchars($text);?></textarea>
+        </div>
+        <input class="submit-btn crdbtn" id="posting-btn" type="button" value="수정">
+    </form>
+</div>
 <script>
     $(".crdbtn").on("click",function(event){
         event.preventDefault();

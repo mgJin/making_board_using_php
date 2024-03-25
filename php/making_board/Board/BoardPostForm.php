@@ -1,13 +1,26 @@
 
 <!--user_id 를 유니크로 만들고 글을 작성 시 writer 에 user_id를 넣는 식으로 -->
 <!--로그인을 안하고 들어왔다면 로그인으로 가게하기 -->
-
-<form id="posting-form" onsubmit="return false">
-    제목 : <input type = "text" name = "title" required>
+<link rel='stylesheet' href='/front/css/formdesign.css'>
+<style>
+    .post-form{
+        width:500px;
+    }
     
-    내용 : <input type = "text" name = "text">
-    <input id="posting-btn" type="button" value="글쓰기">
-</form>
+</style>
+<div class="form-container post-form">
+    <form id="posting-form" onsubmit="return false">
+        <div class="form-group">
+            <label for="title">Title</label>
+            <input type = "text" name = "title" required>
+        </div>
+        <div class="form-group">
+            <label for="text">Textarea</label>
+            <textarea name = "text" rows="10" cols="68" required></textarea>
+        </div>
+        <input class="submit-btn" id="posting-btn" type="button" value="글쓰기">
+    </form>
+</div>
 <!--form action을 jquery로 작동을 하게 한다.
     제목이 비었을 시 버튼을 눌러도 작동을 하지 않게 하고 동시에 경고문을 띄우도록
 -->

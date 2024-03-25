@@ -1,27 +1,53 @@
-<!--이거 결국 안쓸거 같은데 지울까? -->
-<!--나중에 이거 쓸 수 있을 수도? -->
-<?php 
-    $NameMsg = $IDMsg = $PWMsg = $EmailMsg = "" ;
-?>
-    <!--유저 생성 권한만 있는 슈퍼유저가 필요할 듯? -->
-<!--유저 생성 시 id가 unique 인 동시에 not null 이어야할듯-->
+
 
 <!--gender 의 datatype :  enum('male','female') -->
 <!--submit누르고 확인버튼 나오는 거랑, 회원가입이 성공하면 /boards 로 이동하게 -->
-<form id="signform" onsubmit="return false">
-    ID : <input type = "text" name="id">
-    <?php echo $IDMsg;?>
-    이름 : <input type = "text" name = "name">
-    <?php echo $NameMsg;?>
-    PW : <input type = "password" name= "password">
-    <?php echo $PWMsg;?>
-    Gender : <input type= "radio" name= "gender" value='male'>남자
-                <input type= "radio" name= "gender" value='female'>여자
-    birth : <input type = "date" name= "birth">
-    <br>
-    email : <input type = "text" name="email">
-    <?php echo $EmailMsg;?>
-    <button id="subbtn">가입</button>
+<link rel="stylesheet" href='/front/css/formdesign.css' type='text/css'>
+<style>
+    .form-container{
+        width:500px;
+    }
+    .radio-input p{
+        float:left;
+    }
+    .radio-input input{}
+</style>
+<form class="form-container" id="signform" onsubmit="return false">
+    <div class="form-group">
+        <label for="id">ID</label>
+        <input type = "text" name="id">
+    </div>
+    <div class="form-group">
+        <label for="name">이름</label>
+        <input type = "text" name = "name">
+    </div>
+    <div class="form-group">
+        <label for="password">PassWord</label>
+        <input type = "password" name= "password">
+    </div>
+    <div class="form-group">
+        <label for="gender">성별</label>
+            <div class="radio-input">
+                <p>남성</p>
+                <input type= "radio" name= "gender" value='male'>
+            </div>
+            <div class="radio-input">
+                <p>여성</p>
+                <input type= "radio" name= "gender" value='female'>
+            </div>
+        
+    </div>
+    <div class="form-group">
+        <label for="birth">생일</label>
+        <input type = "date" name= "birth">
+    </div>
+    <div class="form-group">
+        <label for="email">이메일</label>
+        <input type = "text" name="email">
+    </div>
+    <div class="btn-container">
+        <button class="submit-btn" id="subbtn">가입</button>
+    </div>
 </form>
 <script>
     

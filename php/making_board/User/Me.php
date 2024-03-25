@@ -13,6 +13,14 @@
     .info label{
         font-weight: bold;
     }
+    .btn-container{
+        
+    position:absolute;
+    margin-top:10px;
+    bottom:0px;
+    right:10px;
+
+    }
     .btn{
             color: #fff;
             padding: 5px 10px;
@@ -58,8 +66,10 @@
         <label>Name:</label>
         <?php echo $result["name"]?>
     </div>
-    <button id="upd-btn" class="btn">수정</button>
-    <button id="del-btn" class="btn">탈퇴</button>
+    <div class="btn-container">
+        <button id="upd-btn" class="btn">수정</button>
+        <button id="del-btn" class="btn">탈퇴</button>
+    </div>
 </div>
 <!-- -->
 <script>
