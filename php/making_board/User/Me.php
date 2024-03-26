@@ -22,7 +22,9 @@
     .nav-li:hover{
         font-weight: bold;
     }
-    
+    #non-result{
+        text-align: center;
+    }
     .board a{
         text-decoration: none;
     }
@@ -112,16 +114,24 @@
     </div>
 </div>
 <div id="posts" class="info">
-    <div class="boards-box">
-        <?php foreach($boardResults as $index=>$contents):?>
-            <div class="board">
-                <a href="<?= BASE_URL.'/boards/'.$contents['id']?>">
-                    <?= $contents['title']?>
-                </a>
-                <span><?= $contents['created']?></span>
-            </div>
-        <?php endforeach;?>
-    </div>
+    <?php if(count($boardResults)>0):?>
+        <div class="boards-box">
+            <?php foreach($boardResults as $index=>$contents):?>
+                <div class="board">
+                    <a href="<?= BASE_URL.'/boards/'.$contents['id']?>">
+                        <?= $contents['title']?>
+                    </a>
+                    <span><?= $contents['created']?></span>
+                </div>
+            <?php endforeach;?>
+        </div>
+    <?php else:?>
+        <div class="boards-box">
+            <p id="non-result">
+                게시물이 없습니다.
+            </p>
+        </div>
+    <?php endif;?>
 </div>
 
 <!-- -->
