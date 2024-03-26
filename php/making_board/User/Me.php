@@ -13,12 +13,28 @@
     .info label{
         font-weight: bold;
     }
+    .nav-li{
+        padding:5px;
+        list-style: none;
+        display: inline-block;
+        cursor: pointer;
+    }
+    .nav-li:hover{
+        font-weight: bold;
+    }
+    
+    .board a{
+        text-decoration: none;
+    }
+    .board span{
+        float:right;
+    }
     .btn-container{
         
-    position:absolute;
-    margin-top:10px;
-    bottom:0px;
-    right:10px;
+        position:absolute;
+        margin-top:10px;
+        bottom:0px;
+        right:10px;
 
     }
     .btn{
@@ -40,6 +56,9 @@
     #del-btn:hover{
         background-color: #EF9A9A;
     }
+    .disabled{
+        display:none;
+    }
 </style>
 <?php
     // session_start(); //mw에서 이미 세션을 실행하고 거기서 이어졌기 때문에 필요없음
@@ -55,9 +74,30 @@
     }catch(PDOException $ex){
         echo $ex->getMessage();
     }
+    $sql = "SELECT id,title,text,created FROM board WHERE writer=:userID";
+    try{
+        $stmt=$connect->prepare($sql);
+        $stmt->bindParam(':userID',$user_id);
+        $stmt->execute();
+        $boardResults = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }catch(PDOException $ex){
+        echo $ex->getMessage();
+    }
     include(__DIR__.'/../front/html/modal.html');
 ?>
-<div class="info">
+<div>
+    <nav>
+        <ol class="Me-ol">
+            <li class="nav-li" onclick="navclick('#profile')">
+                프로필    
+            </li>
+            <li class="nav-li" onclick="navclick('#posts')">
+                내 게시글
+            </li>
+        </ol>
+    </nav>
+</div>
+<div id="profile" class="info">
     <div>
         <label>ID:</label>
         <?php echo $result["user_id"]?>
@@ -71,12 +111,40 @@
         <button id="del-btn" class="btn">탈퇴</button>
     </div>
 </div>
+<div id="posts" class="info">
+    <div class="boards-box">
+        <?php foreach($boardResults as $index=>$contents):?>
+            <div class="board">
+                <a href="<?= BASE_URL.'/boards/'.$contents['id']?>">
+                    <?= $contents['title']?>
+                </a>
+                <span><?= $contents['created']?></span>
+            </div>
+        <?php endforeach;?>
+    </div>
+</div>
+
 <!-- -->
 <script>
+    //새로고침 시 프로필 화면이 뜨도록
+    window.addEventListener('DOMContentLoaded',function(){
+        navclick("#profile");
+    })
+    //navclick 시 해당 정보만 뜨는 함수
+    function navclick(target){
+        document.querySelectorAll(".info").forEach(function(element){
+            element.classList.add("disabled");
+        })
+        let infoclass = document.querySelector(target);
+        infoclass.classList.remove("disabled");
+    }
+    //update버튼 이벤트
+    //updateform 으로 이동
     const updBtn = document.querySelector("#upd-btn");
     updBtn.addEventListener("click",function(){
         window.location.replace("<?= BASE_URL?>/me/updateform");
     })
+    //delete버튼 이벤트
     const delBtn = document.querySelector("#del-btn");
     delBtn.addEventListener("click",function(){
         const chkp = document.querySelector("#chkp");
@@ -104,7 +172,7 @@
         });
         
     })
-    
+    //delete 요청
     async function delJSON(url,data){
         try{
             const response = await fetch(url,{

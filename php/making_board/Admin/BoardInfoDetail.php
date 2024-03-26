@@ -42,15 +42,12 @@
 
 <body>
     <?php
-    global $connect;
-
-    $sql = "SELECT id,title,text,writer,created FROM board WHERE id=:boardID LIMIT 1";
-    $stmt = $connect->prepare($sql);
-    $stmt->bindParam(':boardID', $boardID);
-    $stmt->execute();
-    $boardInfo = $stmt->fetch(PDO::FETCH_ASSOC);
-
-    // print_r($boardInfo);  
+        global $connect;
+        $sql = "SELECT id,title,text,writer,created FROM board WHERE id=:boardID LIMIT 1";
+        $stmt = $connect->prepare($sql);
+        $stmt->bindParam(':boardID', $boardID);
+        $stmt->execute();
+        $boardInfo = $stmt->fetch(PDO::FETCH_ASSOC);
     ?>
     <h1>게시물 정보</h1>
 

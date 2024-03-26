@@ -1,9 +1,9 @@
 <?php
-global $connect;
-$sql = "SELECT user_pk,user_id,role_id FROM member";
-$stmt = $connect->prepare($sql);
-$stmt->execute();
-$userArrays = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    global $connect;
+    $sql = "SELECT user_pk,user_id,role_id FROM member";
+    $stmt = $connect->prepare($sql);
+    $stmt->execute();
+    $userArrays = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
 
 <head>

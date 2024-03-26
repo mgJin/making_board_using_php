@@ -50,32 +50,30 @@
 
 <body>
     <?php
-    global $connect;
+        global $connect;
 
-    $sql = "SELECT user_pk,user_id,name,gender,email,birth,role_id FROM member WHERE user_pk=:userPK LIMIT 1";
-    $stmt = $connect->prepare($sql);
-    $stmt->bindParam(':userPK', $user_pk);
-    $stmt->execute();
-    $userInfo = $stmt->fetch(PDO::FETCH_ASSOC);
-
-    if (isset($userInfo["role_id"])) :
-        $sql = "SELECT name as role_name FROM roles WHERE id=:roleID";
+        $sql = "SELECT user_pk,user_id,name,gender,email,birth,role_id FROM member WHERE user_pk=:userPK LIMIT 1";
         $stmt = $connect->prepare($sql);
-        $stmt->bindParam(':roleID', $userInfo["role_id"]);
+        $stmt->bindParam(':userPK', $user_pk);
         $stmt->execute();
-        $roleInfo = $stmt->fetch(PDO::FETCH_ASSOC);
-    endif;
+        $userInfo = $stmt->fetch(PDO::FETCH_ASSOC);
 
-    try {
-        $sql = "SELECT name FROM roles";
-        $stmt = $connect->prepare($sql);
-        $stmt->execute();
-        $roleNames = $stmt->fetchAll(PDO::FETCH_COLUMN);
-    } catch (PDOException $ex) {
-        echo $ex->getMessage();
-    }
+        if (isset($userInfo["role_id"])) :
+            $sql = "SELECT name as role_name FROM roles WHERE id=:roleID";
+            $stmt = $connect->prepare($sql);
+            $stmt->bindParam(':roleID', $userInfo["role_id"]);
+            $stmt->execute();
+            $roleInfo = $stmt->fetch(PDO::FETCH_ASSOC);
+        endif;
 
-    // print_r($userInfo);  
+        try {
+            $sql = "SELECT name FROM roles";
+            $stmt = $connect->prepare($sql);
+            $stmt->execute();
+            $roleNames = $stmt->fetchAll(PDO::FETCH_COLUMN);
+        } catch (PDOException $ex) {
+            echo $ex->getMessage();
+        }
     ?>
     <div class="info">
         <div>
