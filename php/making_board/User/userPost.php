@@ -14,56 +14,6 @@
     if($_SERVER["REQUEST_METHOD"] == "POST"){
         $continueBuild = false;
         
-        
-        //validation
-        //일단 User를 만들때를 생각하고 해당 validation통과 못하면 false 반환하는 식으로?
-        //이것도 클래스로 만들어서 통과못하는 사유랑 msg를 같이 담아서 보낼 수 있도록할까?
-        // if(empty($_POST["id"])){
-        //     $IDMsg = "ID를 입력해주세요";
-        //     $dbconnect = false;
-        // }else{
-        //     $id = $_POST["id"];
-        // }
-
-        // if(empty($_POST["name"])){
-        //     $NameMsg = "이름을 입력해주세요";
-        //     $dbconnect = false;
-        // }else{
-        //     $name = $_POST["name"];
-        // }
-
-        // if(empty($_POST["password"])){
-        //     $PWMsg = "패스워드를 입력해주세요";
-        //     $dbconnect = false;
-        // }else{
-        //     $password = $_POST["password"];
-        // }
-        
-        // if(empty($_POST["email"])){
-        //     $EmailMsg = "이메일을 입력해주세요";
-        //     $dbconnect = false;
-        // }else{
-        //     $email = $_POST["email"];
-        //     var_dump($email);
-        //     if(!filter_var($email, FILTER_VALIDATE_EMAIL)){
-        //         $EmailMsg = "이메일을 정확하게 입력해 주세요";
-        //     }
-        // }
-        
-        // if(empty($_POST["gender"])){
-        //     $gender = null;
-        // }else{
-        //     $gender = $_POST["gender"];
-        // };
-        // if(empty($_POST["birth"])||($_POST=="")){
-        //     $birth = NULL;
-        //     echo "생일이 비어있음";
-        //     echo "<br>"."생일의 값은 :";
-        //     var_dump($birth);
-        // }else{
-        //     $birth = $_POST["birth"];
-        // };
-        // header('Content-Type: application/json');
         $data = file_get_contents('php://input');
         $jsondata = json_decode($data);
 
@@ -72,7 +22,7 @@
             $newUser = User::builder()
             ->valID($jsondata->id)
             ->valName($jsondata->name)
-            ->valPassword($jsondata->password)
+            ->valPassword(password_hash($jsondata->password,PASSWORD_DEFAULT))
             ->valGender($jsondata->gender)
             ->valEmail($jsondata->email)
             ->valBirth($jsondata->birth)
@@ -84,8 +34,8 @@
             ];
             echo jsonMaker($resultArray);
         }        
-
-        //db랑 연결 시작(insert)
+        
+        // db랑 연결 시작(insert)
         if($continueBuild){
             global $connect;
             
@@ -121,8 +71,7 @@
                 $connect ->rollBack();
                 $resultArray=[
                     'serverResponse'=>false,'deninedReason'=>$ex->getMessage()
-                ];
-                echo jsonMaker($resultArray);
+                ];   
             }
             echo jsonMaker($resultArray)  ;
         }

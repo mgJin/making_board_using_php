@@ -96,6 +96,10 @@
             <li class="nav-li" onclick="navclick('#posts')">
                 내 게시글
             </li>
+            <li class="nav-li" onclick="navclick('#password')">
+                비밀번호 변경
+            </li>
+            
         </ol>
     </nav>
 </div>
@@ -132,6 +136,26 @@
             </p>
         </div>
     <?php endif;?>
+</div>
+<div id="password" class="info">
+    <form>
+        <fieldset>
+            <legend>현재 비밀번호</legend>
+            <input id="currentPW" name="currentPW" type="password">
+        </fieldset>
+        <fieldset>
+            <legend>변경할 비밀번호</legend>
+            <label for="nextPW">
+                비밀번호
+            </label>
+            <input name="nextPW" type="password">
+            <label for="checkPW">
+                비밀번호 확인
+            </label>
+                <input name="checkPW" type="password">
+        </fieldset>
+        <button type="submit">변경</button>
+    </form>
 </div>
 
 <!-- -->

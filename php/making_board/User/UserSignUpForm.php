@@ -71,6 +71,7 @@
                 },
                 body:JSON.stringify(data)
             });
+            console.log("결과",response.text());
             const result = await response.json();
             console.log("성공",result);
             const {serverResponse,deninedReason} = result;
@@ -80,7 +81,7 @@
             }else{
                 alert(deninedReason);
             }
-            //이거 자동으로 로그인까지 되게 하던가 아니면 그냥 두던가
+            // //이거 자동으로 로그인까지 되게 하던가 아니면 그냥 두던가
             }catch(error){
             console.log("실패",error);
             } 
