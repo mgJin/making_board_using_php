@@ -48,22 +48,6 @@ if (preg_match('/^\/adminpage(\/.*)?$/', $url)) : ?>
         </section>
         <?php ?>
         <script>
-            // document.addEventListener('DOMContentLoaded', function() {
-            //     let lastIndex = localStorage.getItem('lastShowContentIndex');
-            //     if (lastIndex !== null) {
-            //         let Managements = document.querySelectorAll(".managements");
-            //         if (Managements[lastIndex]) {
-            //             Managements[lastIndex].classList.add('active');
-            //         }
-            //     }
-            //     let lis = document.querySelectorAll(".asideLI");
-            //     lis.forEach(function(element, index) {
-            //         element.addEventListener("click", function() {
-            //             localStorage.setItem('lastShowContentIndex', index);
-            //         })
-            //     })
-            // })
-
             function onShow(selected) {
                 let url = "<?= BASE_URL?>"+"/adminpage"+selected;
                 

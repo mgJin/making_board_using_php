@@ -1,5 +1,5 @@
 <?php
-        
+        global $connect;
         $result = [];
         $titleMsg = "";
         //입력검증
@@ -17,14 +17,12 @@
             }
             $text = $data->text;
             if($dbconnect){
+                
                 $writer = $_SESSION["user"]["user_id"];
                 $date = date("Y-m-d");
-                $servername = "localhost";
-                $dbuser = "root";
-                $password = "9094";
-                $dbname = "phpboard";
+                
                 try{
-                    $mysqliconnect = mysqli_connect($servername,$dbuser,$password,$dbname);
+                    
                     $sql = 
                     "INSERT INTO board
                         set title = '$title',
@@ -32,19 +30,19 @@
                             created = '$date',
                             writer = '$writer'
                     ";
-                    $stmt = mysqli_prepare($mysqliconnect,$sql);
-                    $exec = mysqli_stmt_execute($stmt);
+                    $stmt = $connect->prepare($sql);
+                    $exec = $stmt->execute();
                     if($exec){
-                        $lastInsert = $mysqliconnect->insert_id;
+                        $lastInsert = $connect->lastInsertId();
                         $sql = "SELECT id FROM board WHERE id=$lastInsert";
-                        $mresult = $mysqliconnect->query($sql);
-                        if($mresult->num_rows>0){
-                            $lastBoardID = $mresult->fetch_assoc();
+                        $mresult = $connect->query($sql);
+                        if($mresult->rowCount()>0){
+                            $lastBoardID = $mresult->fetch(PDO::FETCH_ASSOC);
                             $result = ["serverResponse"=>true,"boardID"=>$lastBoardID["id"]];
                         }
                     }
                     
-                }catch(mysqli_sql_exception $ex){
+                }catch(PDOException $ex){
                     $result =["serverResponse="=>false,"deninedReason"=>$ex->getMessage()];
                 }catch(Exception $ex){
                     $result=["serverResponse="=>false,"deninedReason"=>$ex->getMessage()];

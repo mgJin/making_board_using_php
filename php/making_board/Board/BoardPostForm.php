@@ -36,7 +36,7 @@
             contentType:'application/json',
             data:JSON.stringify({
                 title:$("input[name='title']").val(),
-                text:$("input[name='text']").val()
+                text:$("textarea[name='text']").val()
             }),
 
             dataType:'json',

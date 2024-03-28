@@ -85,6 +85,7 @@
                 <?php foreach ($roleNames as $roleName) : ?>
                     <option class="option-role" value="<?= $roleName ?>"><?= $roleName ?></option>
                 <?php endforeach; ?>
+                <option class="option-role" value="">권한없음</option>
             </select>
         </div>
         <div>
