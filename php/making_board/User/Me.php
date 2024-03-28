@@ -138,7 +138,7 @@
     <?php endif;?>
 </div>
 <div id="password" class="info">
-    <form>
+    <form id="pwchange-form" onsubmit="return false">
         <fieldset>
             <legend>현재 비밀번호</legend>
             <input id="currentPW" name="currentPW" type="password">
@@ -154,7 +154,7 @@
             </label>
                 <input name="checkPW" type="password">
         </fieldset>
-        <button type="submit">변경</button>
+        <button id="change-btn" type="submit">변경</button>
     </form>
 </div>
 
@@ -172,8 +172,7 @@
         let infoclass = document.querySelector(target);
         infoclass.classList.remove("disabled");
     }
-    //update버튼 이벤트
-    //updateform 으로 이동
+    //update버튼 이벤트,updateform 으로 이동
     const updBtn = document.querySelector("#upd-btn");
     updBtn.addEventListener("click",function(){
         window.location.replace("<?= BASE_URL?>/me/updateform");
@@ -245,5 +244,21 @@
             return false;
         }
     }
+    document.querySelector("#change-btn").addEventListener("click",async function(e){
+        const pwform = document.querySelector("#pwchange-form");
+        const formData ={
+            user_id : "<?= $result['user_id']?>",
+            currentPW : document.querySelector("input[name='currentPW']").value,
+            nextPW : document.querySelector("input[name='nextPW']").value,
+            checkPW : document.querySelector("input[name='checkPW']").value            
+        }
+        await fetch('<?= BASE_URL."/me"?>',{
+            method:"PUT",
+            body:JSON.stringify(formData)
+        })
+        .then(response=>response.text())
+        .then(data=>console.log(data))
+        .catch(error=>console.log(error));
+    })
 </script>
 

@@ -80,7 +80,7 @@
         birth: document.querySelector("input[name='birth']").value,
         email: document.querySelector("input[name='email']").value
     };
-        handleSubmit("<?= BASE_URL?>/me",formData);
+        handleSubmit("<?= BASE_URL?>/updateform",formData);
     })
     
     async function handleSubmit(url,data){

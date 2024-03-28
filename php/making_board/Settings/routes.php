@@ -104,7 +104,7 @@
                 //애초에 정보는 다 나오잖아.
             },
             'put'=>function(){
-                include(__DIR__.'/../User/userUpdate.php');
+                include(__DIR__.'/../EXP2.php');
             },
             'delete'=>function(){
                 include(__DIR__.'/../User/userDelete.php');
@@ -113,6 +113,9 @@
         '/me/updateform'=>[
             'get'=>function(){
                 include(__DIR__.'/../User/UserUpdateForm.php');
+            },
+            'put'=>function(){
+                include(__DIR__.'/../User/userUpdate.php');
             }
         ],
         '/signupform'=>[

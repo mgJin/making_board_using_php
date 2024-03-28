@@ -26,3 +26,7 @@
     }
     echo json_encode($permissions);
 ?>
+
+$2y$10$ubummtekl4Otgx7HfWgiY.OdPWSMBUlvR2y8ZiCUosQMM4BovuD5W
+$2y$10$ubummtekl4Otgx7HfWgiY.OdPWSMBUlvR2y8ZiCUosQMM4BovuD5W
+$2y$10$/G/ZyHT.IAo1OBqVZQcXk.CmDSTqfqlSwjogdL3TO8Qsw/LVqfCDi
