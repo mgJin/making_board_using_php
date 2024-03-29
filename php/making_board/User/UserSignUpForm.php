@@ -71,7 +71,7 @@
                 },
                 body:JSON.stringify(data)
             });
-            console.log("결과",response.text());
+            
             const result = await response.json();
             console.log("성공",result);
             const {serverResponse,deninedReason} = result;
