@@ -1,5 +1,5 @@
 
-<!--user_id 를 유니크로 만들고 글을 작성 시 writer 에 user_id를 넣는 식으로 -->
+
 <!--로그인을 안하고 들어왔다면 로그인으로 가게하기 -->
 <link rel='stylesheet' href='/front/css/formdesign.css'>
 <style>

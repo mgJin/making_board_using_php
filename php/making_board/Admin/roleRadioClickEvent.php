@@ -4,12 +4,6 @@
     $data= file_get_contents("php://input");
     $jsonData = json_decode($data);
     $roleName = $jsonData->role_name;
-
-    // $sql = "SELECT id FROM roles WHERE name=:name";
-    // $stmt = $connect->prepare($sql);
-    // $stmt->bindParam(':name',$roleName);
-    // $stmt->execute();
-    // $roleID = $stmt->fetch(PDO::FETCH_COLUMN);
     
     try{
         $sql = "SELECT p.name as permission FROM permission_role pr JOIN permissions p ON pr.permission_id = p.id  WHERE pr.role_id=(SELECT id FROM roles WHERE name=:name) ";

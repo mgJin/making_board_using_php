@@ -106,8 +106,4 @@ use function PHPSTORM_META\type;
     endif;
     //permissions_role table에 추가
     // echo json_encode($resultArray);
-    
-    
-    
-    //update와 insert를 구분하기 위해서 이미 있던 role인지 구분하는게 필요
 ?>
